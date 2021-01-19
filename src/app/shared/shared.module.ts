@@ -12,6 +12,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [SharedComponent],
@@ -27,7 +30,10 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     MatProgressSpinnerModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
+    MatButtonModule,
+    HttpClientModule,
+    MatSnackBarModule
   ],
   exports : [
     CommonModule,
@@ -41,7 +47,10 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     MatProgressSpinnerModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
+    MatButtonModule,
+    HttpClientModule,
+    MatSnackBarModule
   ]
 })
 export class SharedModule { }

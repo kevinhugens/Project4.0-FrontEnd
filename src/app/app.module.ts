@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { PollsModule } from './polls/polls.module';
 import { RoomsModule } from './rooms/rooms.module';
-
+import { SecurityModule } from './security/security.module'
 @NgModule({
   declarations: [
     AppComponent
@@ -20,7 +20,8 @@ import { RoomsModule } from './rooms/rooms.module';
     BrowserAnimationsModule,
     SharedModule,
     PollsModule,
-    RoomsModule
+    RoomsModule,
+    SecurityModule
   ],
   providers: [],
   bootstrap: [AppComponent]

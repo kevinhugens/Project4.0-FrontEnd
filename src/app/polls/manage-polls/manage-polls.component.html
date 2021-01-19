@@ -1,0 +1,41 @@
+<h1>Beheer polls</h1>
+<h3>Overzicht</h3>
+<hr/>
+
+<form (ngSubmit)="addPoll()">
+    <mat-form-field>
+        <input matInput name="newoption" placeholder="Question?" [(ngModel)]="newPoll.question"/>
+    </mat-form-field>
+    
+    <button type="submit" class="ml-2" mat-raised-button>
+        <mat-icon>add_circle_outline</mat-icon>
+        Voeg toe
+    </button>
+</form>
+<mat-card *ngFor="let item of beheerPolls; let i = index" class="mb-3">
+    
+    <mat-card-title name="itemcontent">{{item.question}}</mat-card-title>
+    <mat-card-content>
+        <mat-action-list *ngIf="item.antwoorden.length > 0; else geenopties">
+            <mat-list-item *ngFor="let option of item.antwoorden; let y = index">
+                {{option.content}}
+                <button mat-icon-button class="ml-5" (click)="editOption(i,y)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button class="ml-2" (click)="deleteOption(i,y)">
+                    <mat-icon>delete_forever</mat-icon>
+                </button>
+            </mat-list-item>
+        </mat-action-list>
+        <ng-template #geenopties>
+            <p>Geen opties toegevoegd aan deze poll!</p>
+        </ng-template>
+    </mat-card-content>
+    
+    <mat-card-actions>
+        <button mat-icon-button (click)="addOption(i)"><mat-icon>add_circle</mat-icon></button>
+        <button mat-icon-button class="ml-2" (click)="deletePoll(i)"><mat-icon>delete</mat-icon></button>
+    </mat-card-actions>
+</mat-card>
+
+<button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>

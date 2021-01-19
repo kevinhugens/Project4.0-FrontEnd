@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-12 text-center mt-5">
+      <h1>Aanmelden</h1>
+      <!-- <p>User: {{userLogin|json}}</p> -->
+    </div>
+  </div>
+
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="row text-center mt-1 mt-md-3">
+
+    <!-- Email -->
+    <div class="col-10 offset-1">
+      <mat-form-field>
+        <input matInput placeholder="E-mail" type="email" required name="email" [(ngModel)]="userLogin.email" />
+      </mat-form-field>
+    </div>
+
+    <!-- Password -->
+    <div class="col-10 offset-1">
+      <mat-form-field>
+         <input matInput placeholder="Wachtwoord" type="password" required name="password" [(ngModel)]="userLogin.password"/> 
+      </mat-form-field>
+    </div>
+
+    <!-- Submit -->
+    <div class="col-10 offset-1">
+      <button mat-raised-button color="primary" type="submit"
+        [disabled]="!loginForm.form.valid">Aanmelden</button>
+    </div>
+
+  </form>
