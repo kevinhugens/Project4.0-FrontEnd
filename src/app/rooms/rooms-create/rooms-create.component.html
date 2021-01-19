@@ -1,0 +1,56 @@
+<div class="card">
+  <h4 class="card-header">Room aanmaken</h4>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Naam</label>
+        <input type="text" formControlName="name" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+          <div *ngIf="f.name.errors.required">Name is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Moderator</label>
+        <input type="text" formControlName="moderator" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && f.moderator.errors }" />
+        <div *ngIf="submitted && f.moderator.errors" class="invalid-feedback">
+          <div *ngIf="f.moderator.errors.required">Moderator is required ???</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Startdatum</label>
+        <input type="date" formControlName="startDate" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && f.startDate.errors }" />
+        <div *ngIf="submitted && f.startDate.errors" class="invalid-feedback">
+          <div *ngIf="f.startDate.errors.required">Start Date is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Einddatum</label>
+        <input type="date" formControlName="endDate" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && f.endDate.errors }" />
+        <div *ngIf="submitted && f.endDate.errors" class="invalid-feedback">
+          <div *ngIf="f.endDate.errors.required">Start Date is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Aanmaken
+        </button>
+        <a routerLink="/login" class="btn btn-link">Annuleren</a>
+      </div>
+
+    </form>
+  </div>
+</div>
