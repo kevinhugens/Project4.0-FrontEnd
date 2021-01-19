@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { PollsModule } from './polls/polls.module';
 import { RoomsModule } from './rooms/rooms.module';
+import 'jquery';
 @NgModule({
   declarations: [
     AppComponent
