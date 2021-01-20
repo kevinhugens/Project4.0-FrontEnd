@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UserLogin } from 'src/app/shared/models/user-login.model';
 import { User } from 'src/app/shared/models/user.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class AuthenticateService {
   private userLogged = new BehaviorSubject(this.getCurrentUser());
   loggedUser = this.userLogged.asObservable();
   currentUser: User;
+  apiUrl = environment.apiLink;
 
   logUser(user: User) {
     this.userLogged.next(user);
@@ -38,6 +40,6 @@ export class AuthenticateService {
   authenticate(userLogin: UserLogin): Observable<User> {
     console.log("Authenticate");
     console.log(userLogin)
-    return this._httpClient.post<User>("https://localhost:5001/api/User/authenticate", userLogin);
+    return this._httpClient.post<User>(this.apiUrl + "api/User/authenticate", userLogin);
   }
 }

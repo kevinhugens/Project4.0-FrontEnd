@@ -1,18 +1,25 @@
 <div class="row">
-    <div class="col col-md-6">
-        <h1>Geplande</h1>
-    </div>
-    <div class="col col-md-6" style="text-align: right;">
-        <button class="btn btn-primary">Create new room</button>
-    </div>
+  <div class="col col-md-6">
+    <h1>Geplande</h1>
+  </div>
+  <div class="col col-md-6" style="text-align: right;">
+    <button class="btn btn-primary">Create new room</button>
+  </div>
 </div>
-<div class="card" style="width: 18rem;">
+<div class="row" *ngIf="rooms">
+  <div class="card mr-2" style="width: 18rem;" *ngFor="let room of rooms">
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <h5 class="card-title">{{room.name}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{room.startStream | date:'dd/MM/yyyy HH:mm'}} - {{room.endStream | date:'HH:mm'}}</h6>
+      <p class="card-text">{{room.description}}</p>
+      <a href="#" class="btn btn-primary mr-2">Edit</a>
+      <a href="#" class="btn btn-danger">Delete</a>
+      <a href="#" class="btn btn-secondary ml-5">Polls</a>
     </div>
   </div>
-<hr/>
+</div>
+
+<hr />
+
+
 <h1>Live</h1>
-  
