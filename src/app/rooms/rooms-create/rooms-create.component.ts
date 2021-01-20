@@ -16,6 +16,7 @@ export class RoomsCreateComponent implements OnInit {
   model;
   loading = false;
   submitted = false;
+  errors=[]
 
 
   constructor(private formBuilder: FormBuilder,
@@ -30,6 +31,8 @@ export class RoomsCreateComponent implements OnInit {
 
 
   onSubmit () {
+    this.submitted = true;
+    
     this.roomService.addRoom(this.model)
     .subscribe({
       next: () => {

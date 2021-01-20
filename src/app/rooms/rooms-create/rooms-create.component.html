@@ -1,31 +1,42 @@
 <div>
   <p>{{ model | json }}</p>
-<form (ngSubmit)="onSubmit()" >
+<form #roomsForm="ngForm" (ngSubmit)="onSubmit()" >
+<div>
+  <mat-form-field class="example-full-width">
+    <input matInput required
+    [(ngModel)]="model.Name" name="name" placeholder="Room naam">
+  </mat-form-field>
+</div>
+<div>
+  <mat-form-field class="example-full-width">
+    <input matInput required
+    [(ngModel)]="model.Password" name="password" placeholder="passwoord">
+  </mat-form-field>
+</div>
+<div>
   <mat-form-field class="example-full-width">
     <input matInput
-    [(ngModel)]="model.Name" name="name">
+    [(ngModel)]="model.LinkStream" name="linkStream" placeholder="youtube link">
   </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <input matInput
-    [(ngModel)]="model.Password" name="password">
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <input matInput
-    [(ngModel)]="model.LinkStream" name="linkStream">
-  </mat-form-field>
+</div>
+  <div>
   <mat-form-field appearance="fill">
     <mat-label>startdate</mat-label>
-    <input matInput [matDatepicker]="startStream" [(ngModel)]="model.StartStream" name="startStream" >
+    <input matInput required [matDatepicker]="startStream" [(ngModel)]="model.StartStream" name="startStream" placeholder="start datum">
     <mat-datepicker-toggle  matSuffix [for]="startStream" ></mat-datepicker-toggle>
     <mat-datepicker #startStream></mat-datepicker>
   </mat-form-field>
+</div>
+  <div>
   <mat-form-field appearance="fill">
     <mat-label>enddate</mat-label>
-    <input matInput [matDatepicker]="endStream" [(ngModel)]="model.EndStream" name="endStream" >
+    <input matInput required [matDatepicker]="endStream" [(ngModel)]="model.EndStream" name="endStream" placeholder="eind datum">
     <mat-datepicker-toggle  matSuffix [for]="endStream" ></mat-datepicker-toggle>
     <mat-datepicker #endStream></mat-datepicker>
   </mat-form-field>
-  <button >Make Room</button>
+</div>
+<button mat-raised-button color="primary" type="submit"
+[disabled]="!roomsForm.form.valid || submitted">Submit</button>
 </form>
 
 </div>
