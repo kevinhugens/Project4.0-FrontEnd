@@ -8,6 +8,9 @@ export class Room {
     StartStream: Date;
     EndStream: Date;
     Description: String;
-    UserID: number;
+    Live: Boolean;
+    PresentatorID: number;
+    Presentator: User;
+    ModeratorID: number;
     Moderator: User;
 }
