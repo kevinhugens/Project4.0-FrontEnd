@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiLink: "https://localhost:5000/"
+  apiLink: "http://localhost:5000/"
 };
 
 /*

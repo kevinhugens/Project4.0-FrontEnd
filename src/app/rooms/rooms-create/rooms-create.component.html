@@ -1,3 +1,35 @@
+<div>
+  <p>{{ model | json }}</p>
+<form (ngSubmit)="onSubmit()" >
+  <mat-form-field class="example-full-width">
+    <input matInput
+    [(ngModel)]="model.Name" name="name">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput
+    [(ngModel)]="model.Password" name="password">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput
+    [(ngModel)]="model.LinkStream" name="linkStream">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>startdate</mat-label>
+    <input matInput [matDatepicker]="startStream" [(ngModel)]="model.StartStream" name="startStream" >
+    <mat-datepicker-toggle  matSuffix [for]="startStream" ></mat-datepicker-toggle>
+    <mat-datepicker #startStream></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>enddate</mat-label>
+    <input matInput [matDatepicker]="endStream" [(ngModel)]="model.EndStream" name="endStream" >
+    <mat-datepicker-toggle  matSuffix [for]="endStream" ></mat-datepicker-toggle>
+    <mat-datepicker #endStream></mat-datepicker>
+  </mat-form-field>
+  <button >Make Room</button>
+</form>
+
+</div>
+<!--
 <div class="card">
   <h4 class="card-header">Room aanmaken</h4>
   <div class="card-body">
@@ -28,8 +60,16 @@
         </div>
       </div>
       <div class="form-group">
+        <label for="linkStream">linkStream Youtube</label>
+        <input type="text" formControlName="linkStream" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && f.linkStream.errors }" />
+        <div *ngIf="submitted && f.linkStream.errors" class="invalid-feedback">
+          <div *ngIf="f.linkStream.errors.required">linkStream is required</div>
+        </div>
+      </div>
+      <div class="form-group">
         <label for="password">Startdatum</label>
-        <input type="date" formControlName="startDate" class="form-control"
+        <input type="datetime-local" formControlName="startDate" class="form-control"
                [ngClass]="{ 'is-invalid': submitted && f.startDate.errors }" />
         <div *ngIf="submitted && f.startDate.errors" class="invalid-feedback">
           <div *ngIf="f.startDate.errors.required">Start Date is required</div>
@@ -54,3 +94,4 @@
     </form>
   </div>
 </div>
+-->
