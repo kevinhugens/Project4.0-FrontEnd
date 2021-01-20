@@ -17,7 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [SharedComponent],
@@ -39,7 +39,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     HttpClientModule,
     MatSnackBarModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTooltipModule
   ],
   exports : [
     CommonModule,
@@ -59,7 +60,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     HttpClientModule,
     MatSnackBarModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTooltipModule
   ]
 })
 export class SharedModule { }

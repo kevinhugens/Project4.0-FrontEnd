@@ -1,8 +1,28 @@
 <h1 style="text-align: center;">Axxess Streams</h1>
-<div style="text-align: center;">
-    <iframe width="80%" height="400px" src="http://www.youtube.com/embed/NlOF03DUoWc" frameborder="0" allowfullscreen></iframe>
-</div> 
-<div class="row mt-5">
-    <button class="btn btn-primary">Setup Mobile</button>
-</div>
+<ng-container *ngIf="loggedUser; else notLogged">
+    <ng-container *ngIf="selectedRoom; else noRoomSelected">
+        <ng-container *ngIf="selectedRoom['presentatorID'] != loggedUser['userID']">
+            <div style="text-align: center;">
+                <iframe width="80%" height="400px" src="http://www.youtube.com/embed/NlOF03DUoWc" frameborder="0" allowfullscreen></iframe>
+            </div> 
+            <div class="row mt-5">
+                <button class="btn btn-primary" style="margin-left:auto;margin-right:auto">Setup Mobile</button>
+            </div>
+        </ng-container>
+        
+        <ng-container *ngIf="selectedRoom['presentatorID'] == loggedUser['userID']">
+            <h3 style="text-align: center;">Presentator Panel</h3>
+            <p>
+                Overzicht van polls
+            </p>
+        </ng-container>
+    </ng-container>
+</ng-container>
 
+
+<ng-template #notLogged>
+    <h3 style="text-align: center;">Meld aan om een stream te volgen.</h3>
+</ng-template>
+<ng-template #noRoomSelected >
+    <h3 style="text-align: center;">Selecteer een room op de homepagina om een stream te kunnen volgen.</h3>
+</ng-template>

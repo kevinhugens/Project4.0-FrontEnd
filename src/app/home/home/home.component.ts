@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this._authenticateService.loggedUser.subscribe((result) => {
       this.loggedUser = result;
-    })
+    });
   }
 
   createRoom() {
@@ -32,7 +32,11 @@ export class HomeComponent implements OnInit {
   }
 
   editRoom(room: Room) {
-
+    
+  }
+  followStream(room: Room) {
+    this._roomService.selectedRoom = room;
+    this._router.navigate(["rooms"]);
   }
 
   deleteRoom(room: Room) {

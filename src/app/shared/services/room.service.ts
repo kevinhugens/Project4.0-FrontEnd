@@ -9,6 +9,7 @@ import { Room } from '../models/room.model';
 })
 export class RoomService {
   apiUrl = environment.apiLink;
+  selectedRoom: Room;
   constructor(private http: HttpClient) { }
   
   getRooms(): Observable<Room[]> {
