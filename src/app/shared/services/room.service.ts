@@ -27,4 +27,8 @@ export class RoomService {
     return this.http.delete<Room>(this.apiUrl + "api/room/" + id)
   }
   
+  addRoom(room: Room) {
+    return this.http.post(this.apiUrl + "api/room/", room);
+  }
+  
 }
