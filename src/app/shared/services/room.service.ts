@@ -18,5 +18,13 @@ export class RoomService {
   getRoom(id: number): Observable<Room> {
     return this.http.get<Room>(this.apiUrl + "api/room/" + id);
   }
+
+  updateRoom(id: number, room: Room){
+    return this.http.put<Room>(this.apiUrl + "api/room/" + id, room)
+  }
+
+  deleteRoom(id: number){
+    return this.http.delete<Room>(this.apiUrl + "api/room/" + id)
+  }
   
 }

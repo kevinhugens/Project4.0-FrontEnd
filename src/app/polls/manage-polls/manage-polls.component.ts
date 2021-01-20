@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { PollService } from 'src/app/shared/services/poll.service';
 import { Option } from '../../shared/models/Option.model';
-import { Poll } from '../../shared/models/poll.model'; 
+import { Poll } from '../../shared/models/poll.model';
 
 @Component({
   selector: 'app-manage-polls',
@@ -11,9 +12,12 @@ export class ManagePollsComponent implements OnInit {
   beheerPolls : Poll[] = [];
   newOption : Option = new Option();
   newPoll : Poll = new Poll();
-  constructor() { }
+  constructor(private _pollService: PollService) { }
 
   ngOnInit(): void {
+    if(this._pollService.pollsFromRoom != null) {
+      this.beheerPolls = this._pollService.pollsFromRoom;
+    }
   }
 
   addPoll() {
@@ -25,15 +29,15 @@ export class ManagePollsComponent implements OnInit {
   }
   addOption(i: any) {
     var optie = new Option();
-    optie.content = prompt("Mogelijk antwoord");
-    this.beheerPolls[i].antwoorden.push(optie);
+    optie.Content = prompt("Mogelijk antwoord");
+    //this.beheerPolls[i].Options.(optie);
   }
   editOption(i: any,y:any) {
     
-    this.beheerPolls[i].antwoorden[y].content = prompt("Update optie");
+    this.beheerPolls[i].Options[y].Content = prompt("Update optie");
   }
   deleteOption(i:any,y: any) {
-    this.beheerPolls[i].antwoorden.splice(y,1);
+    //this.beheerPolls[i].Options.splice(y,1);
   }
   onSubmit() {
     console.log(this.beheerPolls);

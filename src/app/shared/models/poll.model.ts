@@ -1,7 +1,10 @@
-import { Option } from "./option.model";
+import { Observable } from "rxjs";
+import { Option } from "./Option.model";
+
 
 export class Poll {
-    id: number;
-    question: String;
-    antwoorden : Option[] = [];
+    PollID: number;
+    RoomID: number;
+    Question: String;
+    Options?: Observable<Option>;
 }

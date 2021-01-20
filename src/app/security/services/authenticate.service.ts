@@ -11,7 +11,7 @@ import { environment } from '../../../environments/environment';
 export class AuthenticateService {
   private userLogged = new BehaviorSubject(this.getCurrentUser());
   loggedUser = this.userLogged.asObservable();
-  currentUser: User;
+
   apiUrl = environment.apiLink;
 
   logUser(user: User) {
@@ -27,7 +27,6 @@ export class AuthenticateService {
   }
   getCurrentUser() {
     if (localStorage.getItem("currentUser")) {
-      this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
       return JSON.parse(localStorage.getItem("currentUser"));
     }
     else {
@@ -38,8 +37,6 @@ export class AuthenticateService {
   constructor(private _httpClient: HttpClient) { }
 
   authenticate(userLogin: UserLogin): Observable<User> {
-    console.log("Authenticate");
-    console.log(userLogin)
     return this._httpClient.post<User>(this.apiUrl + "api/User/authenticate", userLogin);
   }
 }
