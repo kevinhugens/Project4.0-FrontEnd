@@ -9,7 +9,7 @@ import { RoomsCreateComponent } from './rooms/rooms-create/rooms-create.componen
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent},
+  { path: 'home', component: HomeComponent },
   { path: 'rooms', component: RoomsComponent },
   { path: 'polls', component: PollsComponent },
   { path: 'managepolls', component: ManagePollsComponent },
