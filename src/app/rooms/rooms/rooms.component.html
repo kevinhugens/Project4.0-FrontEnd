@@ -1,7 +1,7 @@
 <h1 style="text-align: center;">Axxess Streams</h1>
 <ng-container *ngIf="loggedUser; else notLogged">
     <ng-container *ngIf="selectedRoom; else noRoomSelected">
-        <ng-container *ngIf="selectedRoom['presentatorID'] != loggedUser['userID']">
+        <ng-container *ngIf="!isPresentator">
             <div style="text-align: center;">
                 <iframe width="80%" height="400px" src="http://www.youtube.com/embed/NlOF03DUoWc" frameborder="0" allowfullscreen></iframe>
             </div> 
@@ -10,11 +10,20 @@
             </div>
         </ng-container>
         
-        <ng-container *ngIf="selectedRoom['presentatorID'] == loggedUser['userID']">
+        <ng-container *ngIf="isPresentator">
             <h3 style="text-align: center;">Presentator Panel</h3>
-            <p>
+            <h4 style="text-align: center;">
                 Overzicht van polls
-            </p>
+            </h4>
+            <div class="row mb-3" *ngFor="let poll of lijstPolls" style="align-items: center;display: flex;justify-content: center;">
+                <span class="col col-md-4 mr-3">{{ poll.question }}</span>
+                <button class="btn btn-info mr-3">Open</button>
+                <button class="btn btn-warning mr-3">Close</button>
+                <button class="btn btn-success" (click)="showResults()">Results</button>
+            </div>
+            <div class="row" style="align-items: flex-end;" class="text-right">
+                <button class="btn btn-danger" (click)="stopStream()">Stop stream</button>
+            </div>
         </ng-container>
     </ng-container>
 </ng-container>

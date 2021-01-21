@@ -8,8 +8,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PollService {
   apiUrl = environment.apiLink;
-  pollsFromRoom : Poll[] = [];
-
+  roomID: number;
+  
   constructor(private http: HttpClient) { }
 
   getPolls(): Observable<Poll[]>{
@@ -35,5 +35,4 @@ export class PollService {
   getAllPollsByRoomID(roomID: number) {
     return this.http.get<Poll[]>(this.apiUrl + "api/poll/room/" + roomID);
   }
-
 }
