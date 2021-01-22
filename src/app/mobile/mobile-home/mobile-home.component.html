@@ -2,6 +2,11 @@
     <h1>Axxes Streams</h1>
     <p>Welkom bij axxes streams, scan de qr-code bij de room om interactie te kunnen doen op de stream.</p>
     <p>Veel plezier!</p>
-    <button class="btn btn-primary">Scan QR</button>
-    <zxing-scanner (scanSuccess)="onCodeResult($event)"></zxing-scanner>
+    <section class="results" *ngIf="qrResultString">
+		<small>Result</small>
+		<strong>{{ qrResultString}}</strong>
+    </section>
+    
+    <zxing-scanner #scanner start="true" [device]="currentDevice" (scanSuccess)="onCodeResult($event)"
+    [formats]="['QR_CODE', 'EAN_13', 'CODE_128', 'DATA_MATRIX']"></zxing-scanner>
 </div>
