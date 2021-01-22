@@ -7,7 +7,6 @@
 		<strong>{{ qrResultString}}</strong>
     </section>
 
-    <zxing-scanner #scanner [autofocusEnabled]="true" [autostart]="false" [enable]="true"  [device]="currentDevice"
-    (scanSuccess)="onCodeResult($event)" [formats]="['QR_CODE', 'EAN_13', 'CODE_128', 'DATA_MATRIX']"
-    [tryHarder]="true"></zxing-scanner>
+    <zxing-scanner #scanner
+    (scanSuccess)="onCodeResult($event)" [formats]="['QR_CODE', 'EAN_13', 'CODE_128', 'DATA_MATRIX']"></zxing-scanner>
 </div>

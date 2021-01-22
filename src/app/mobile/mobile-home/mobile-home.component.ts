@@ -18,12 +18,11 @@ export class MobileHomeComponent implements OnInit {
   qrResult: Result;
 
   availableDevices: MediaDeviceInfo[];
-  currentDevice: MediaDeviceInfo = null;
+  currentDevice: MediaDeviceInfo;
 
   constructor(private _userService: UserService) { }
 
   ngOnInit(): void {
-    this.onPageInit();
   }
   
 
@@ -32,33 +31,5 @@ export class MobileHomeComponent implements OnInit {
       //console.log(data);
    // });
    alert(resultString);
-  }
-
-  private onPageInit(){
-    this.initCamera();
-    console.log(this.scanner);
-    this.scanner.permissionResponse.subscribe(
-      (perm: boolean) =>{
-       this.hasPermission = perm;
-      });
-    console.log('inside the init camera');
-  }
-
-  private initCamera(): void {
-    this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => {
-      this.hasDevices = true;
-      this.availableDevices = devices;
-      this.currentDevice = null;
-      if (this.availableDevices.length > 1) {
-        const defaultCamera = this.availableDevices.filter(e => e.label.toLocaleLowerCase().indexOf('back') > -1);
-        if (defaultCamera !== null && defaultCamera !== undefined) {
-          this.currentDevice = defaultCamera[0];
-        } else {
-           this.currentDevice = this.availableDevices[0];
-        }
-      } else {
-        this.currentDevice = this.availableDevices[0];
-      }
-    });
   }
 }
