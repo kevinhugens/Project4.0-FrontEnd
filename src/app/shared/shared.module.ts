@@ -21,7 +21,6 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
-
 @NgModule({
   declarations: [SharedComponent],
   imports: [
