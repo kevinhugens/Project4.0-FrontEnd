@@ -19,6 +19,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 @NgModule({
   declarations: [SharedComponent],
@@ -42,7 +44,9 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTooltipModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    NgxQRCodeModule,
+    ZXingScannerModule
   ],
   exports : [
     CommonModule,
@@ -64,7 +68,9 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTooltipModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    NgxQRCodeModule,
+    ZXingScannerModule
   ]
 })
 export class SharedModule { }

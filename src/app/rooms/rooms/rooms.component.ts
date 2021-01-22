@@ -18,6 +18,9 @@ export class RoomsComponent implements OnInit {
   isPresentator = false;
   lijstPolls: Poll[] = [];
 
+  //qr code
+  elementType = 'url';
+  value = 'http://www.google.be/';
   constructor(private router: Router,private _authenticateService: AuthenticateService, private _roomService: RoomService, private _pollService: PollService) { }
 
   ngOnInit(): void {
@@ -30,6 +33,7 @@ export class RoomsComponent implements OnInit {
           this.gatherPollsFromRoom();
         }
       }
+      this.value += result["token"];
       
     });
   }

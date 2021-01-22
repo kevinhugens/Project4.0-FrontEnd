@@ -5,8 +5,13 @@
             <div style="text-align: center;">
                 <iframe width="80%" height="400px" src="http://www.youtube.com/embed/NlOF03DUoWc" frameborder="0" allowfullscreen></iframe>
             </div> 
-            <div class="row mt-5">
-                <button class="btn btn-primary" style="margin-left:auto;margin-right:auto">Setup Mobile</button>
+            <div class="mt-5">
+                <!--<button class="btn btn-primary" style="margin-left:auto;margin-right:auto">Setup Mobile</button>-->
+                <h3 style="text-align: center;">Scan onderstaande qr-code voor interactie met je mobiel toestel.</h3>
+                <ngx-qrcode 
+                [elementType]="elementType" 
+                [value]="value" style="text-align: center;">
+                </ngx-qrcode>
             </div>
         </ng-container>
         
