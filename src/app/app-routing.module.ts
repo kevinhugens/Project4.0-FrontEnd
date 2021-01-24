@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'rooms/create', component: RoomsCreateComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'rooms/edit', component: RoomsEditComponent },
-  { path: 'mobile/room/:id', component: MobileRoomComponent }
+  { path: 'mobile/room/:id', component: MobileRoomComponent },
+  { path: 'mobile/home', component: MobileHomeComponent },
   
 ];
 
