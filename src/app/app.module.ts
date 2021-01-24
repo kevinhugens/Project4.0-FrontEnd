@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { PollsModule } from './polls/polls.module';
 import { RoomsModule } from './rooms/rooms.module';
 import { SecurityModule } from './security/security.module'
+import { MobileModule } from './mobile/mobile.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -21,7 +22,8 @@ import { SecurityModule } from './security/security.module'
     SharedModule,
     PollsModule,
     RoomsModule,
-    SecurityModule
+    SecurityModule,
+    MobileModule
   ],
   providers: [],
   bootstrap: [AppComponent]

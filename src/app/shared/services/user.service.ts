@@ -18,4 +18,7 @@ export class UserService {
   getUser(id: number): Observable<User> {
     return this.http.get<User>(this.apiUrl + "api/user/" + id);
   }
+  getUserByToken(token: String): Observable<User> {
+    return this.http.get<User>(this.apiUrl + "api/user/token/" + token);
+  }
 }

@@ -20,10 +20,10 @@
             <mat-action-list *ngIf="item.options != null && item.options.length > 0; else geenopties">
                 <mat-list-item *ngFor="let option of item.options; let y = index">
                     {{option.content}}
-                    <button mat-icon-button class="ml-5" (click)="editOption(i,y)">
+                    <button mat-icon-button class="ml-5" (click)="editOption(option)">
                         <mat-icon>edit</mat-icon>
                     </button>
-                    <button mat-icon-button class="ml-2" (click)="deleteOption(i,y)">
+                    <button mat-icon-button class="ml-2" (click)="deleteOption(option)">
                         <mat-icon>delete_forever</mat-icon>
                     </button>
                 </mat-list-item>
@@ -34,11 +34,8 @@
         </mat-card-content>
         
         <mat-card-actions>
-            <button mat-icon-button (click)="addOption(i)"><mat-icon>add_circle</mat-icon></button>
-            <button mat-icon-button class="ml-2" (click)="deletePoll(i)"><mat-icon>delete</mat-icon></button>
+            <button mat-icon-button (click)="addOption(item)"><mat-icon>add_circle</mat-icon></button>
+            <button mat-icon-button class="ml-2" (click)="deletePoll(item)"><mat-icon>delete</mat-icon></button>
         </mat-card-actions>
     </mat-card>
 </div>
-
-
-<button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>

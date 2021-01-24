@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import {Room} from 'src/app/shared/models/room.model'
 import {RoomService} from 'src/app/shared/services/room.service'
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
@@ -14,13 +12,13 @@ import { AuthenticateService } from 'src/app/security/services/authenticate.serv
 export class RoomsCreateComponent implements OnInit {
 
 
-  model;
+  model : Room;
   loading = false;
   submitted = false;
 
-
-  constructor(private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
+  startTime: String;
+  endTime: String;
+  constructor(
     private router: Router,
     private _roomService: RoomService,
     private _authenticateService: AuthenticateService) { }
@@ -29,8 +27,10 @@ export class RoomsCreateComponent implements OnInit {
       this.model = new Room();
       this._authenticateService.loggedUser.subscribe(
         result => {
-          console.log(result.userID)
-          this.model.PresentatorID = result.userID;
+          if(result) {
+            this.model.PresentatorID = result.userID;
+          }
+          
         }
       );
     }
@@ -41,17 +41,27 @@ export class RoomsCreateComponent implements OnInit {
     this.submitted = true;
     //check some stuff
     this.loading = true;
+
+    var date = new Date();
+    date = this.model.StartStream;
+    date.setHours(parseInt(this.startTime.split(":")[0]) + 1, parseInt(this.startTime.split(":")[1]));
+    this.model.StartStream = date;
+
+    var date2 = new Date();
+    date2 = this.model.EndStream;
+    date2.setHours(parseInt(this.endTime.split(":")[0]) + 1, parseInt(this.endTime.split(":")[1]));
+    this.model.EndStream = date2;
+
     this._roomService.addRoom(this.model)
     .subscribe({
       next: () => {
-        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-        this.router.navigateByUrl("/rooms");
+        this.router.navigateByUrl("/home");
       },
       error: error => {
         this.loading = false;
       }}
-    )
-  }
+    );
+   }
 
 
 }

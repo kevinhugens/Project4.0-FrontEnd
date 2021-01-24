@@ -18,7 +18,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 @NgModule({
   declarations: [SharedComponent],
   imports: [
@@ -40,7 +42,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTooltipModule
+    MatTooltipModule,
+    NgxMaterialTimepickerModule,
+    NgxQRCodeModule,
+    ZXingScannerModule
   ],
   exports : [
     CommonModule,
@@ -61,7 +66,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTooltipModule
+    MatTooltipModule,
+    NgxMaterialTimepickerModule,
+    NgxQRCodeModule,
+    ZXingScannerModule
   ]
 })
 export class SharedModule { }

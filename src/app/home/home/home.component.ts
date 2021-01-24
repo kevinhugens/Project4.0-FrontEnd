@@ -32,6 +32,8 @@ export class HomeComponent implements OnInit {
   }
 
   editRoom(room: Room) {
+    this._roomService.selectedRoom = room;
+    this._router.navigate(["rooms/edit"]);
     
   }
   followStream(room: Room) {
@@ -51,20 +53,21 @@ export class HomeComponent implements OnInit {
   }
 
   goLive(room: Room) {
-    room["live"] = true;
-    this._roomService.updateRoom(room["roomID"],room).subscribe((result) => {
-      this.snackBar.open("Room " + room["name"] + " gaat live.", "", { duration: 5000 });
-        this._roomService.getRooms().subscribe((data) => {
-          this.rooms = data;
-        });
-    });
+    if(confirm("Ben je zeker dat je live wil gaan?")) {
+      room["live"] = true;
+      this._roomService.updateRoom(room["roomID"],room).subscribe((result) => {
+        this.snackBar.open("Room " + room["name"] + " gaat live.", "", { duration: 5000 });
+          this._roomService.getRooms().subscribe((data) => {
+            this.rooms = data;
+          });
+      });
+    }
   }
 
   managePolls(id: number) {
-    this._pollService.getAllPollsByRoomID(id).subscribe((result) => {
-      this._pollService.pollsFromRoom = result;
+    if(id != null) {
+      this._pollService.roomID = id;
       this._router.navigate(["managepolls"]);
-    });
+    }
   }
-
 }

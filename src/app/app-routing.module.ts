@@ -7,7 +7,8 @@ import { ManagePollsComponent } from './polls/manage-polls/manage-polls.componen
 import { LoginComponent } from './security/login/login.component';
 import { RoomsCreateComponent } from './rooms/rooms-create/rooms-create.component';
 import { ChatComponent } from './rooms/chat/chat.component';
-
+import { RoomsEditComponent } from './rooms/rooms-edit/rooms-edit.component';
+import { MobileHomeComponent } from './mobile/mobile-home/mobile-home.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -16,7 +17,9 @@ const routes: Routes = [
   { path: 'managepolls', component: ManagePollsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'rooms/create', component: RoomsCreateComponent },
-  { path: 'chat', component: ChatComponent }
+  { path: 'chat', component: ChatComponent },
+  { path: 'rooms/edit', component: RoomsEditComponent },
+  { path: 'mobile/home', component: MobileHomeComponent }
 ];
 
 @NgModule({

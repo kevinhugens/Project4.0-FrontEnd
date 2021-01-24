@@ -1,0 +1,1 @@
+Header set Feature-Policy "geolocation 'none'; midi 'none'; usb 'none'; magnetometer 'none'; accelerometer 'none'; vr 'none'; speaker 'none'; ambient-light-sensor 'none'; gyroscope 'none'; microphone 'none'"
