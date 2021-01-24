@@ -8,6 +8,7 @@ import { LoginComponent } from './security/login/login.component';
 import { RoomsCreateComponent } from './rooms/rooms-create/rooms-create.component';
 import { ChatComponent } from './rooms/chat/chat.component';
 import { RoomsEditComponent } from './rooms/rooms-edit/rooms-edit.component';
+import { MobileRoomComponent } from './rooms/mobile-room/mobile-room.component';
 import { MobileHomeComponent } from './mobile/mobile-home/mobile-home.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'rooms/create', component: RoomsCreateComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'rooms/edit', component: RoomsEditComponent },
-  { path: 'mobile/home', component: MobileHomeComponent }
+  { path: 'mobile/room/:id', component: MobileRoomComponent }
+  
 ];
 
 @NgModule({

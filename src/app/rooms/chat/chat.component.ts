@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, Input } from '@angular/core';
 import { SignalRService } from 'src/app/shared/services/signal-r.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -11,12 +11,12 @@ import { AuthenticateService } from 'src/app/security/services/authenticate.serv
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
+  @Input() roomId: number;
   apiUrl = environment.apiLink;
   title = 'ClientApp';  
   txtMessage: string = '';
   messages = new Array<Message>();  
   message = new Message();  
-  roomId = 0
   userId;
   username ="";
   constructor(  
@@ -46,9 +46,9 @@ export class ChatComponent implements OnInit {
   
     this.signalRService.messageReceived.subscribe((message: Message) => {  
       this._ngZone.run(() => {  
-        if (message.roomId !== this.roomId) {  
+        if (message.roomId == this.roomId) {  
           this.messages.push(message);  
-        }  
+        }
       });  
     });  
   }  
