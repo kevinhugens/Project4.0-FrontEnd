@@ -24,7 +24,7 @@ export class SignalRService {
   }  
 
   sendMessage(message: Message) {  
-    this._hubConnection.invoke('SendMessageAsync', message.message);  
+    this._hubConnection.invoke('SendMessageAsync', message);  
   }  
   
   private createConnection() {  
@@ -53,8 +53,8 @@ export class SignalRService {
   
   private registerOnServerEvents(): void {  
     this._hubConnection.on('RecievedCon', (data: any) => {  
-      this.messageReceived.emit(data);  
-      console.log('wubalubadubdub'); 
+      console.log('verbonden met server...'); 
+      console.log('connectieID: ' + data); //dit is voor te testen, connectieID kan beter niet in frontend gebruikt worden.
     });  
     this._hubConnection.on('RecieveMessage', (data: any) => {  
       this.messageReceived.emit(data);  
