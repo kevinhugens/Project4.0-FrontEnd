@@ -46,7 +46,7 @@ export class ChatComponent implements OnInit {
       //in comments voor doubles te vermijden. Kan wel intresant zijn voor de gebruiker zijn als het bericht niet aankomt dat er dan een
       //teken bij het bericht komt te staan.
       console.log(this.message)
-      this.signalRService.sendMessage(this.message);  
+      this.signalRService.sendMessageToGroup(this.message, this.roomId);  
       this.txtMessage = '';  
     }  
   }  
@@ -57,6 +57,13 @@ export class ChatComponent implements OnInit {
         if (message.roomId == this.roomId) {  
           this.messages.push(message);  
         }
+      });  
+    });  
+
+    this.signalRService.connectionEstablished.subscribe((x: Boolean) => {  
+      //wachten tot een connectie gemaakt is voordat we een room joinen
+      this._ngZone.run(() => {  
+        this.signalRService.joinRoom(this.roomId);  
       });  
     });  
   }  
