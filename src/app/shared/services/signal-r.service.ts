@@ -3,6 +3,7 @@ import { HubConnection, HubConnectionBuilder, IHttpConnectionOptions } from '@as
 import {Message} from 'src/app/shared/models/message.model'
 import { environment } from '../../../environments/environment';
 import { AppComponent } from 'src/app/app.component';
+import { Poll } from '../models/poll.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class SignalRService {
   apiUrl = environment.apiLink;
   messageReceived = new EventEmitter<Message>();  
   connectionEstablished = new EventEmitter<Boolean>();  
+  pollReceived = new EventEmitter<Poll>();
   
   private connectionIsEstablished = false;  
   private _hubConnection: HubConnection;  
@@ -26,6 +28,9 @@ export class SignalRService {
   sendMessage(message: Message) {  
     this._hubConnection.invoke('SendMessageAsync', message);  
   }  
+  sendPoll(poll: Poll) {
+    this._hubConnection.invoke("SendPollAsync", poll);
+  }
   
   private createConnection() {  
     this._hubConnection = new HubConnectionBuilder()  
@@ -57,8 +62,10 @@ export class SignalRService {
       console.log('connectieID: ' + data); //dit is voor te testen, connectieID kan beter niet in frontend gebruikt worden.
     });  
     this._hubConnection.on('RecieveMessage', (data: any) => {  
-      this.messageReceived.emit(data);  
-      console.log(data); 
+      this.messageReceived.emit(data);
     }); 
+    this._hubConnection.on("ReceivePoll", (data: any) => {
+      this.pollReceived.emit(data);
+    })
   }  
 }

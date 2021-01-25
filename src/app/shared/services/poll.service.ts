@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Poll } from '../models/poll.model';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
@@ -9,8 +9,14 @@ import { HttpClient } from '@angular/common/http';
 export class PollService {
   apiUrl = environment.apiLink;
   roomID: number;
+  private mobilePoll = new BehaviorSubject<Poll[]>([]);
+  activeMobilePoll = this.mobilePoll.asObservable();
   
   constructor(private http: HttpClient) { }
+
+  openPollToMobile(poll: Poll) {
+    this.mobilePoll.next([...this.mobilePoll.getValue(),poll]);
+  }
 
   getPolls(): Observable<Poll[]>{
     return this.http.get<Poll[]>(this.apiUrl + "api/poll");

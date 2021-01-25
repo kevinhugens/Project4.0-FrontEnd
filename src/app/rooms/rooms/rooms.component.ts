@@ -7,6 +7,7 @@ import { UserInRoom } from 'src/app/shared/models/user-in-room.model';
 import { User } from 'src/app/shared/models/user.model';
 import { PollService } from 'src/app/shared/services/poll.service';
 import { RoomService } from 'src/app/shared/services/room.service';
+import { SignalRService } from 'src/app/shared/services/signal-r.service';
 import { UserInRoomService } from 'src/app/shared/services/user-in-room.service';
 
 @Component({
@@ -19,12 +20,12 @@ export class RoomsComponent implements OnInit {
   selectedRoom: Room = null;
   isPresentator = false;
   lijstPolls: Poll[] = [];
-
+  activePollForPresentator: Poll;
   //qr code
   elementType = 'url';
   value;
   constructor(private router: Router,private _authenticateService: AuthenticateService, private _roomService: RoomService, 
-    private _pollService: PollService, private _userInRoomService: UserInRoomService) { }
+    private _pollService: PollService, private _userInRoomService: UserInRoomService, private _signalRService: SignalRService) { }
 
   ngOnInit(): void {
     this.selectedRoom = this._roomService.selectedRoom;
@@ -43,9 +44,15 @@ export class RoomsComponent implements OnInit {
           userInRoom.RoomID = this.selectedRoom["roomID"];
           userInRoom.UserID = result["userID"];
           this._userInRoomService.addUserInRoom(userInRoom).subscribe();
-        }   
+        }
       }
     });
+  }
+
+  openPoll(poll: Poll) {
+    //console.log(poll);
+    //this._pollService.openPollToMobile(poll);
+    this._signalRService.sendPoll(poll);
   }
 
   gatherPollsFromRoom(){

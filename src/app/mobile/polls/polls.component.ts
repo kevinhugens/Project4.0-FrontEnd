@@ -15,19 +15,6 @@ export class PollsComponent implements OnInit {
   constructor(private _pollService: PollService,private _signalRService: SignalRService, private _ngZone: NgZone,) { }
 
   ngOnInit(): void {
-    // this._pollService.activeMobilePoll.subscribe((data) => {
-    //   this.polls = data;
-    //   console.log("data",data);
-    //   if(data != null && data.length>0) {
-    //     for (let index = 0; index < data.length; index++) {
-    //       const element = data[index];
-    //       if(element["pollID"] == this.roomID){
-    //         console.log("poll gevonden");
-    //         console.log(element);
-    //       }
-    //     }
-    //   }
-    // });
     this.subscribeToEvents();
   }
 

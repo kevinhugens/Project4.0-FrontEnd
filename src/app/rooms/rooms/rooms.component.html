@@ -22,7 +22,7 @@
             </h4>
             <div class="row mb-3" *ngFor="let poll of lijstPolls" style="align-items: center;display: flex;justify-content: center;">
                 <span class="col col-md-4 mr-3">{{ poll.question }}</span>
-                <button class="btn btn-info mr-3">Open</button>
+                <button class="btn btn-info mr-3" (click)="openPoll(poll)">Open</button>
                 <button class="btn btn-warning mr-3">Close</button>
                 <button class="btn btn-success" (click)="showResults()">Results</button>
             </div>
