@@ -31,6 +31,9 @@ export class SignalRService {
   sendPoll(poll: Poll) {
     this._hubConnection.invoke("SendPollAsync", poll);
   }
+  sendMessageToGroup(message: Message, groupID: number) {  
+    this._hubConnection.invoke('SendMessageToRoomAsync', message, groupID.toString());  
+  }  
   
   private createConnection() {  
     this._hubConnection = new HubConnectionBuilder()  
@@ -47,7 +50,8 @@ export class SignalRService {
       .then(() => {  
         this.connectionIsEstablished = true;  
         console.log('Hub connection started');  
-        this.connectionEstablished.emit(true);  
+        this.connectionEstablished.emit(true); 
+        
       })  
       .catch(err => {  
         console.log('Error while establishing connection, retrying...');  
@@ -55,6 +59,11 @@ export class SignalRService {
         setTimeout(function () { this.startConnection(); }, 5);  
       });  
   }  
+
+  public joinRoom(roomID: number): void{
+    console.log(roomID.toString())
+    this._hubConnection.invoke('JoinRoom', roomID.toString()); 
+  }
   
   private registerOnServerEvents(): void {  
     this._hubConnection.on('RecievedCon', (data: any) => {  
