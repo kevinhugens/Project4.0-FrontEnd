@@ -20,7 +20,7 @@ export class RoomsComponent implements OnInit {
 
   //qr code
   elementType = 'url';
-  value = 'http://www.google.be/';
+  value;
   constructor(private router: Router,private _authenticateService: AuthenticateService, private _roomService: RoomService, private _pollService: PollService) { }
 
   ngOnInit(): void {
@@ -32,8 +32,10 @@ export class RoomsComponent implements OnInit {
           this.isPresentator = true;
           this.gatherPollsFromRoom();
         }
+        this.value=this.selectedRoom["roomID"];
+        this.value += ","+ result["token"];
       }
-      this.value += result["token"];
+      
       
     });
   }

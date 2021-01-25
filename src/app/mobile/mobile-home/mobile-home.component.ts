@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../shared/services/user.service'
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
+import { Router } from '@angular/router';
+import { AuthenticateService } from 'src/app/security/services/authenticate.service';
 
 @Component({
   selector: 'app-mobile-home',
@@ -17,7 +19,7 @@ export class MobileHomeComponent implements OnInit {
     availableDevices: MediaDeviceInfo[];
     currentDevice: MediaDeviceInfo = null;
 
-  constructor(private _userService: UserService) { }
+  constructor(private _userService: UserService, private _authenticateService: AuthenticateService ,private router: Router) { }
 
   ngOnInit(): void {
     this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => {
@@ -46,9 +48,12 @@ export class MobileHomeComponent implements OnInit {
   }
   
   handleQrCodeResult(resultString: String) {
-    //this._userService.getUserByToken(resultString).subscribe((data) => {
-      //console.log(data);
-   // });
-   alert(resultString);
+   var array = resultString.split(',');
+   var roomID = array[0];
+   var token = array[1];
+   this._userService.getUserByToken(token).subscribe((data) => {
+      this._authenticateService.logUser(data);
+      this.router.navigate(["mobile/room/"+roomID]);
+   });
   }
 }

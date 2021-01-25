@@ -28,17 +28,17 @@ export class HomeComponent implements OnInit {
   }
 
   createRoom() {
-    this._router.navigate(["rooms/create"]);
+    this._router.navigate(["room/create"]);
   }
 
   editRoom(room: Room) {
     this._roomService.selectedRoom = room;
-    this._router.navigate(["rooms/edit"]);
+    this._router.navigate(["room/edit"]);
     
   }
   followStream(room: Room) {
     this._roomService.selectedRoom = room;
-    this._router.navigate(["rooms"]);
+    this._router.navigate(["room"]);
   }
 
   deleteRoom(room: Room) {

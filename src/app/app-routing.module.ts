@@ -6,23 +6,23 @@ import { RoomsComponent} from './rooms/rooms/rooms.component';
 import { ManagePollsComponent } from './polls/manage-polls/manage-polls.component';
 import { LoginComponent } from './security/login/login.component';
 import { RoomsCreateComponent } from './rooms/rooms-create/rooms-create.component';
-import { ChatComponent } from './rooms/chat/chat.component';
+import { ChatComponent } from './mobile/chat/chat.component';
 import { RoomsEditComponent } from './rooms/rooms-edit/rooms-edit.component';
-import { MobileRoomComponent } from './rooms/mobile-room/mobile-room.component';
+import { MobileRoomComponent } from './mobile/mobile-room/mobile-room.component';
 import { MobileHomeComponent } from './mobile/mobile-home/mobile-home.component';
+
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'rooms', component: RoomsComponent },
+  { path: 'room', component: RoomsComponent },
   { path: 'polls', component: PollsComponent },
   { path: 'managepolls', component: ManagePollsComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'rooms/create', component: RoomsCreateComponent },
+  { path: 'room/create', component: RoomsCreateComponent },
   { path: 'chat', component: ChatComponent },
-  { path: 'rooms/edit', component: RoomsEditComponent },
+  { path: 'room/edit', component: RoomsEditComponent },
   { path: 'mobile/room/:id', component: MobileRoomComponent },
   { path: 'mobile/home', component: MobileHomeComponent },
-  
 ];
 
 @NgModule({
