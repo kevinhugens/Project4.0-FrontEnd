@@ -19,6 +19,11 @@ export class PollsComponent implements OnInit {
   }
 
   private subscribeToEvents(): void {  
+    this._signalRService.connectionEstablished.subscribe(() => {
+      this._ngZone.run(() => {
+        this._signalRService.joinRoom(this.roomID);
+      });
+    });
   
     this._signalRService.pollReceived.subscribe((poll: Poll) => {  
       this._ngZone.run(() => {  

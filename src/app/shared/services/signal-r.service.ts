@@ -28,11 +28,11 @@ export class SignalRService {
   sendMessage(message: Message) {  
     this._hubConnection.invoke('SendMessageAsync', message);  
   }  
-  sendPoll(poll: Poll) {
-    this._hubConnection.invoke("SendPollAsync", poll);
+  sendPoll(poll: Poll, roomID: number) {
+    this._hubConnection.invoke("SendPollAsync", poll, roomID.toString());
   }
-  sendMessageToGroup(message: Message, groupID: number) {  
-    this._hubConnection.invoke('SendMessageToRoomAsync', message, groupID.toString());  
+  sendMessageToGroup(message: Message, roomID: number) {  
+    this._hubConnection.invoke('SendMessageToRoomAsync', message, roomID.toString());  
   }  
   
   private createConnection() {  

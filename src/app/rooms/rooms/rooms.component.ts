@@ -50,9 +50,7 @@ export class RoomsComponent implements OnInit {
   }
 
   openPoll(poll: Poll) {
-    //console.log(poll);
-    //this._pollService.openPollToMobile(poll);
-    this._signalRService.sendPoll(poll);
+    this._signalRService.sendPoll(poll,this.selectedRoom["roomID"]);
   }
 
   gatherPollsFromRoom(){
