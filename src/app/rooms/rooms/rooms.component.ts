@@ -3,9 +3,11 @@ import { Router } from '@angular/router';
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
 import { Poll } from 'src/app/shared/models/poll.model';
 import { Room } from 'src/app/shared/models/room.model';
+import { UserInRoom } from 'src/app/shared/models/user-in-room.model';
 import { User } from 'src/app/shared/models/user.model';
 import { PollService } from 'src/app/shared/services/poll.service';
 import { RoomService } from 'src/app/shared/services/room.service';
+import { UserInRoomService } from 'src/app/shared/services/user-in-room.service';
 
 @Component({
   selector: 'app-rooms',
@@ -21,7 +23,8 @@ export class RoomsComponent implements OnInit {
   //qr code
   elementType = 'url';
   value;
-  constructor(private router: Router,private _authenticateService: AuthenticateService, private _roomService: RoomService, private _pollService: PollService) { }
+  constructor(private router: Router,private _authenticateService: AuthenticateService, private _roomService: RoomService, 
+    private _pollService: PollService, private _userInRoomService: UserInRoomService) { }
 
   ngOnInit(): void {
     this.selectedRoom = this._roomService.selectedRoom;
@@ -32,11 +35,16 @@ export class RoomsComponent implements OnInit {
           this.isPresentator = true;
           this.gatherPollsFromRoom();
         }
-        this.value=this.selectedRoom["roomID"];
-        this.value += ","+ result["token"];
+        if(result != null) {
+          this.value=this.selectedRoom["roomID"];
+          this.value += ","+ result["token"];
+
+          var userInRoom = new UserInRoom();
+          userInRoom.RoomID = this.selectedRoom["roomID"];
+          userInRoom.UserID = result["userID"];
+          this._userInRoomService.addUserInRoom(userInRoom).subscribe();
+        }   
       }
-      
-      
     });
   }
 
