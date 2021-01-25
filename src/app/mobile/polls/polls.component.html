@@ -1,0 +1,7 @@
+<div *ngIf="activePollForThisRoom">
+    <p>Huidige poll</p>
+    <p>{{activePollForThisRoom.question}}</p>
+    <ol>
+        <li *ngFor="let option of activePollForThisRoom.options">{{option.content}}</li>
+    </ol>
+</div>
