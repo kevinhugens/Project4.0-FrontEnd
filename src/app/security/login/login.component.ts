@@ -20,14 +20,11 @@ export class LoginComponent implements OnInit {
     //console.log("User wants to login:", this.userLogin);
     this._authenticateService.authenticate(this.userLogin).subscribe(
       result => {
-        //console.log("Result:", result);
-        //console.log("Token is:", result.token);
         if (result.token) {
           // Save in localStorage before setting the user as logged in!
           localStorage.setItem("token", result.token);
-          localStorage.setItem("currentUser",JSON.stringify(result));
           this._authenticateService.logUser(result);
-          this.router.navigate(['']); 
+          this.router.navigate(['home']); 
           this.snackBar.open("Welkom " + result.firstName + " " + result.lastName + "!", "", { duration: 5000 });
         }else{
           this.snackBar.open("Aanmelden niet gelukt!", "", { duration: 5000 });

@@ -31,6 +31,6 @@ export class AppComponent {
     localStorage.clear();
     this.snackBar.open("Tot later " + this.currentUser.firstName + " " + this.currentUser.lastName + "!", "", { duration: 5000 });
     this._authenticateService.logUser(null);
-    this.router.navigate(['/home']);
+    this.router.navigate(['home']);
   }
 }

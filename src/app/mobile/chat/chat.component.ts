@@ -23,7 +23,15 @@ export class ChatComponent implements OnInit {
     private signalRService: SignalRService,  
     private _ngZone: NgZone  ,
     private _authenticateService: AuthenticateService
-  ) {  
+  ) {
+    this._authenticateService.loggedUser.subscribe(
+      result => {
+        if(result!= null) {
+          this.userId = result["userID"].toString();
+          this.username = result["firstName"];
+        }
+      }
+    );
     this.subscribeToEvents();  
   }  
   sendMessage(): void {  
@@ -54,13 +62,7 @@ export class ChatComponent implements OnInit {
   }  
 
   ngOnInit(): void {
-    this._authenticateService.loggedUser.subscribe(
-      result => {
-        console.log(result)
-        this.userId = result.userID.toString();
-        this.username = result.firstName;
-      }
-    );
+    
   }
 
 }
