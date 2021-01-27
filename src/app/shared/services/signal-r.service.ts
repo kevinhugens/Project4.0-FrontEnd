@@ -76,8 +76,5 @@ export class SignalRService {
     this._hubConnection.on("ReceivePoll", (data: any) => {
       this.pollReceived.emit(data);
     });
-    this._hubConnection.on("ReceiveGroupCount", (data: any) => {
-      console.log(data);
-    })
   }  
 }
