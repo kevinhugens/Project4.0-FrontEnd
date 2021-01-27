@@ -20,6 +20,10 @@ export class UserInRoomService {
     return this.http.get<UserInRoom>(this.apiUrl + "api/userInRoom/" + id);
   }
 
+  UserInRoomExists(userid: number,roomid: number): Observable<UserInRoom>{
+    return this.http.get<UserInRoom>(this.apiUrl + "api/UserInRoom/exists/" + userid +"/"+ roomid);
+  }
+
   getAllUsersInRoom(roomid: number): Observable<UserInRoom[]> {
     return this.http.get<UserInRoom[]>(this.apiUrl + "api/userInRoom/room/"+roomid);
   }

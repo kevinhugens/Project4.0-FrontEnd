@@ -39,12 +39,11 @@ export class RoomsComponent implements OnInit {
         if(result != null) {
           this.value=this.selectedRoom["roomID"];
           this.value += ","+ result["token"];
-          
-          //TODO: verder aanvullen
-          var userInRoom = new UserInRoom();
-          userInRoom.RoomID = this.selectedRoom["roomID"];
-          userInRoom.UserID = result["userID"];
-          this._userInRoomService.addUserInRoom(userInRoom).subscribe();
+
+          //var userInRoom = new UserInRoom();
+          //userInRoom.RoomID = this.selectedRoom["roomID"];
+          //userInRoom.UserID = result["userID"];
+          //this._userInRoomService.addUserInRoom(userInRoom).subscribe();
         }
       }
     });

@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import {Message} from 'src/app/shared/models/message.model'
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
+import { UserInRoom } from 'src/app/shared/models/user-in-room.model';
+import { UserInRoomService } from 'src/app/shared/services/user-in-room.service';
 
 @Component({
   selector: 'app-chat',
@@ -22,7 +24,8 @@ export class ChatComponent implements OnInit {
   constructor(  
     private signalRService: SignalRService,  
     private _ngZone: NgZone  ,
-    private _authenticateService: AuthenticateService
+    private _authenticateService: AuthenticateService,
+    private _userInRoomService: UserInRoomService
   ) {
     this._authenticateService.loggedUser.subscribe(
       result => {
@@ -63,7 +66,22 @@ export class ChatComponent implements OnInit {
     this.signalRService.connectionEstablished.subscribe((x: Boolean) => {  
       //wachten tot een connectie gemaakt is voordat we een room joinen
       this._ngZone.run(() => {  
-        this.signalRService.joinRoom(this.roomId);  
+        this.signalRService.joinRoom(this.roomId);
+        //Userroom opvullen in database
+        
+        var userInRoom = new UserInRoom();
+          userInRoom.RoomID = this.roomId;
+          userInRoom.UserID = Number(this.userId);
+          console.log(userInRoom);
+          this._userInRoomService.UserInRoomExists(Number(this.userId),this.roomId).subscribe(result =>{
+            if(result){
+              //kijk hier of user gekickt is.
+              console.log("gebruiker al in room")
+            }else{
+              this._userInRoomService.addUserInRoom(userInRoom).subscribe();
+            }
+          });
+          
       });  
     });  
   }  
