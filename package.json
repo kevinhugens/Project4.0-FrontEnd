@@ -27,8 +27,10 @@
     "@zxing/library": "^0.18.3",
     "@zxing/ngx-scanner": "3.0.0",
     "bootstrap": "^4.5.3",
+    "chart.js": "^2.9.4",
     "jquery": "^3.5.1",
     "ngx-material-timepicker": "^5.5.3",
+    "primeng": "^11.2.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

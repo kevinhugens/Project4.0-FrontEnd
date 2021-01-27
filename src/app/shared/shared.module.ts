@@ -21,6 +21,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import {ChartModule} from 'primeng/chart';
+
 @NgModule({
   declarations: [SharedComponent],
   imports: [
@@ -45,7 +47,8 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     MatTooltipModule,
     NgxMaterialTimepickerModule,
     NgxQRCodeModule,
-    ZXingScannerModule
+    ZXingScannerModule,
+    ChartModule
   ],
   exports : [
     CommonModule,
@@ -69,7 +72,8 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     MatTooltipModule,
     NgxMaterialTimepickerModule,
     NgxQRCodeModule,
-    ZXingScannerModule
+    ZXingScannerModule,
+    ChartModule
   ]
 })
 export class SharedModule { }

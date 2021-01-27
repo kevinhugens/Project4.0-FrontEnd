@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'room', component: RoomsComponent },
-  { path: 'polls', component: PollsComponent },
+  { path: 'polls/:id', component: PollsComponent },
   { path: 'managepolls', component: ManagePollsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'room/create', component: RoomsCreateComponent },

@@ -16,6 +16,10 @@ export class UserPollService {
     return this.http.get<UserPoll[]>(this.apiUrl + "api/userPoll");
   }
 
+  getOptionCountOnPoll(pollid: number) {
+    return this.http.get<number[]>(this.apiUrl + "api/userPoll/poll/"+pollid);
+  }
+
   getUserPoll(id: number): Observable<UserPoll> {
     return this.http.get<UserPoll>(this.apiUrl + "api/userPoll/" + id);
   }

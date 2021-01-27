@@ -1,32 +1,31 @@
-<h1 style="text-align: center;">Axxess Streams</h1>
+<h1>Axxess Streams</h1>
 <ng-container *ngIf="loggedUser; else notLogged">
     <ng-container *ngIf="selectedRoom; else noRoomSelected">
         <ng-container *ngIf="!isPresentator">
-            <div style="text-align: center;">
+            <div class="center">
                 <iframe width="80%" height="400px" src="http://www.youtube.com/embed/NlOF03DUoWc" frameborder="0" allowfullscreen></iframe>
             </div> 
             <div class="mt-5">
                 <!--<button class="btn btn-primary" style="margin-left:auto;margin-right:auto">Setup Mobile</button>-->
-                <h3 style="text-align: center;">Scan onderstaande qr-code voor interactie met je mobiel toestel.</h3>
+                <h3>Scan onderstaande qr-code voor interactie met je mobiel toestel.</h3>
                 <ngx-qrcode 
                 [elementType]="elementType" 
-                [value]="value" style="text-align: center;">
+                [value]="value" class="center">
                 </ngx-qrcode>
             </div>
         </ng-container>
         
-        <ng-container *ngIf="isPresentator">
-            <h3 style="text-align: center;">Presentator Panel</h3>
-            <h4 style="text-align: center;">
+        <ng-container *ngIf="isPresentator" class="center">
+            <h3>Presentator Panel</h3>
+            <h4>
                 Overzicht van polls
             </h4>
             <div class="row mb-3" *ngFor="let poll of lijstPolls" style="align-items: center;display: flex;justify-content: center;">
                 <span class="col col-md-4 mr-3">{{ poll.question }}</span>
                 <button class="btn btn-info mr-3" (click)="openPoll(poll)">Open</button>
-                <button class="btn btn-warning mr-3">Close</button>
-                <button class="btn btn-success" (click)="showResults()">Results</button>
+                <button class="btn btn-success" (click)="showResults(poll)">Results</button>
             </div>
-            <div class="row" style="align-items: flex-end;" class="text-right">
+            <div class="row" class="text-right">
                 <button class="btn btn-danger" (click)="stopStream()">Stop stream</button>
             </div>
         </ng-container>
@@ -35,8 +34,8 @@
 
 
 <ng-template #notLogged>
-    <h3 style="text-align: center;">Meld aan om een stream te volgen.</h3>
+    <h3>Meld aan om een stream te volgen.</h3>
 </ng-template>
 <ng-template #noRoomSelected >
-    <h3 style="text-align: center;">Selecteer een room op de homepagina om een stream te kunnen volgen.</h3>
+    <h3>Selecteer een room op de homepagina om een stream te kunnen volgen.</h3>
 </ng-template>

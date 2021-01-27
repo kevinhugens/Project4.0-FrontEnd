@@ -1,7 +1,7 @@
-<h1 style="text-align: center;">Welkom bij Axxes Streams!</h1>
+<h1>Welkom bij Axxes Streams!</h1>
 <div class="row" *ngIf="loggedUser">
   <div class="col col-md-6">
-    <h1>Geplande</h1>
+    <h1 style="text-align: left;">Geplande</h1>
   </div>
   <div class="col col-md-6" style="text-align: right;">
     <button class="btn btn-primary" (click)="createRoom()">Create new room</button>
@@ -36,12 +36,12 @@
 
 <div *ngIf="loggedUser && rooms">
   <hr />
-  <h1>Live</h1>
+  <h1 style="text-align: left;">Live</h1>
   <div class="row">
     <ng-container class="col-12" *ngFor="let room of rooms">
       <div class="card mr-2" style="width: 18rem;" *ngIf="room.live">
         <div class="card-body" (click)="followStream(room)" matTooltip="Click to follow stream">
-          <h5 class="card-title">{{room.name}}</h5>
+          <h5 class="card-title" style="text-align: left;">{{room.name}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{room.startStream | date:'dd/MM/yyyy HH:mm'}} - {{room.endStream |
             date:'HH:mm'}}</h6>
           <p class="card-text">{{room.description}}</p>
@@ -55,8 +55,8 @@
 </div>
 
 <div *ngIf="!loggedUser">
-  <h3 style="text-align: center;">Meld aan om een stream te kunnen volgen</h3>
+  <h3>Meld aan om een stream te kunnen volgen</h3>
 </div>
 <div *ngIf="!(rooms.length>0)">
-  <h3 style="text-align: center;">Deze week zijn er geen streams!</h3>
+  <h3>Deze week zijn er geen streams!</h3>
 </div>

@@ -32,14 +32,15 @@ export class RoomsComponent implements OnInit {
     this._authenticateService.loggedUser.subscribe((result) => {
       this.loggedUser = result;
       if(this.selectedRoom) {
-        if(this.loggedUser.userID == this.selectedRoom["presentatorID"]) {
+        if(this.loggedUser.userID == this.selectedRoom["presentatorID"]) { //controleren op null
           this.isPresentator = true;
           this.gatherPollsFromRoom();
         }
         if(result != null) {
           this.value=this.selectedRoom["roomID"];
           this.value += ","+ result["token"];
-
+          
+          //TODO: verder aanvullen
           var userInRoom = new UserInRoom();
           userInRoom.RoomID = this.selectedRoom["roomID"];
           userInRoom.UserID = result["userID"];
@@ -66,8 +67,8 @@ export class RoomsComponent implements OnInit {
       });
     }
   }
-  showResults() {
-    this.router.navigate(["polls"]);
+  showResults(poll: Poll) {
+    this.router.navigate(["polls/"+poll["pollID"]]);
   }
 
 }
