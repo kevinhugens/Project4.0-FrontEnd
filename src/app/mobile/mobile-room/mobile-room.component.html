@@ -5,9 +5,10 @@
 <ng-template #result>
     <div *ngIf="room; else noroom" class="center">
         <div *ngIf="allowed; else notallowed">
-            <p>mobile-room {{roomId}}</p>
+            <h2>{{room.name}}</h2>
+            <h3>(Room {{roomId}})</h3>
             <app-polls [roomID]=roomId></app-polls>
-            <hr>
+            
             <app-chat [roomId]=roomId></app-chat>
         </div>
         

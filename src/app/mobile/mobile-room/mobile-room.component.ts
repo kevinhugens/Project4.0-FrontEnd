@@ -13,6 +13,7 @@ import { UserInRoomService } from 'src/app/shared/services/user-in-room.service'
 })
 export class MobileRoomComponent implements OnInit {
   roomId;
+  roomName; //room.Name werkte niet in html?
   room: Room = null;
   loading=true;
   allowed = true;
@@ -30,6 +31,7 @@ export class MobileRoomComponent implements OnInit {
     this._roomService.getRoom(this.roomId).subscribe((result) => {
       if(result !== null){
         this.room = result;
+        this.roomName = result["Name"]
         console.log(result)
         //UserID inladen
         this._authenticateService.loggedUser.subscribe(
