@@ -6,6 +6,7 @@
     <div *ngIf="room; else noroom" class="center">
         <p>mobile-room {{roomId}}</p>
         <app-polls [roomID]=roomId></app-polls>
+        <hr/>
         <app-chat [roomId]=roomId></app-chat>
     </div>
 </ng-template>

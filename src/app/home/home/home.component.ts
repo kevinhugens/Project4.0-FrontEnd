@@ -16,14 +16,16 @@ export class HomeComponent implements OnInit {
   rooms: Room[] = [];
   constructor(private _roomService: RoomService,private _authenticateService: AuthenticateService, 
     private _pollService: PollService, private _router: Router, private snackBar: MatSnackBar) {
-    _roomService.getRooms().subscribe((result) => {
-      this.rooms = result;
-    });
   }
 
   ngOnInit(): void {
     this._authenticateService.loggedUser.subscribe((result) => {
       this.loggedUser = result;
+      if(result != null) {
+      this._roomService.getRooms().subscribe((result) => {
+        this.rooms = result;
+      });
+    }
     });
   }
 

@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthenticateService } from './security/services/authenticate.service';
-import { Room } from './shared/models/room.model';
 import { User } from './shared/models/user.model';
-import { RoomService } from './shared/services/room.service';
 
 @Component({
   selector: 'app-root',
@@ -13,13 +11,9 @@ import { RoomService } from './shared/services/room.service';
 })
 export class AppComponent {
   title = 'project4-frontend';
-  rooms: Room[] = []
   currentUser: User;
 
-  constructor(private router: Router, private snackBar: MatSnackBar, private _authenticateService: AuthenticateService, private _roomService: RoomService) {
-    this._roomService.getRooms().subscribe((result) => {
-      this.rooms = result;
-    });
+  constructor(private router: Router, private snackBar: MatSnackBar, private _authenticateService: AuthenticateService) {
     this._authenticateService.loggedUser.subscribe(
       result => {
         this.currentUser = result;
