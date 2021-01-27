@@ -4,14 +4,20 @@
 </div>
 <ng-template #result>
     <div *ngIf="room; else noroom" class="center">
-        <p>mobile-room {{roomId}}</p>
-        <app-polls [roomID]=roomId></app-polls>
-        <hr/>
-        <app-chat [roomId]=roomId></app-chat>
+        <div *ngIf="allowed; else notallowed">
+            <p>mobile-room {{roomId}}</p>
+            <app-polls [roomID]=roomId></app-polls>
+            <hr>
+            <app-chat [roomId]=roomId></app-chat>
+        </div>
+        
     </div>
 </ng-template>
 
 <ng-template #noroom>
     <h3>Deze room bestaat niet!</h3>
+</ng-template>
+<ng-template #notallowed>
+    <h3>Niet toegestaan!</h3>
 </ng-template>
 
