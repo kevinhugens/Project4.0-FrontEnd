@@ -40,10 +40,10 @@ export class RoomsComponent implements OnInit {
           this.value=this.selectedRoom["roomID"];
           this.value += ","+ result["token"];
 
-          var userInRoom = new UserInRoom();
-          userInRoom.RoomID = this.selectedRoom["roomID"];
-          userInRoom.UserID = result["userID"];
-          this._userInRoomService.addUserInRoom(userInRoom).subscribe();
+          //var userInRoom = new UserInRoom();
+          //userInRoom.RoomID = this.selectedRoom["roomID"];
+          //userInRoom.UserID = result["userID"];
+          //this._userInRoomService.addUserInRoom(userInRoom).subscribe();
         }
       }
     });
