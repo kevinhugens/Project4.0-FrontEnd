@@ -8,4 +8,5 @@ export class UserInRoom {
     RoomID: number;
     Room: Room;
     IsModerator: Boolean;
+    IsAllowed: Boolean;
 }
