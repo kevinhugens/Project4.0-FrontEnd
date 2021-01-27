@@ -67,28 +67,6 @@ export class ChatComponent implements OnInit {
       //wachten tot een connectie gemaakt is voordat we een room joinen
       this._ngZone.run(() => {  
         this.signalRService.joinRoom(this.roomId);
-        //Userroom opvullen in database
-        
-        var userInRoom = new UserInRoom();
-          userInRoom.RoomID = this.roomId;
-          userInRoom.UserID = Number(this.userId);
-          userInRoom.IsAllowed = true;
-          console.log(userInRoom);
-          this._userInRoomService.UserInRoomExists(Number(this.userId),this.roomId).subscribe(result =>{
-            if(result){
-              console.log("gebruiker al in room")
-              console.log(result)
-              //kijk hier of user gekickt is.
-              if(result["isAllowed"]){
-                console.log("gebruiker toegelaten")
-              }else{
-                console.log("gebruiker niet toegelaten")
-              }
-            }else{
-              this._userInRoomService.addUserInRoom(userInRoom).subscribe();
-            }
-          });
-          
       });  
     });  
   }  
