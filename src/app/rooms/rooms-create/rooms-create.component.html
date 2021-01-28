@@ -21,7 +21,10 @@
 <div>
   <mat-form-field class="example-full-width">
     <input matInput
-    [(ngModel)]="model.LinkStream" name="linkStream" placeholder="youtube link">
+    [(ngModel)]="model.LinkStream" name="linkStream" placeholder="youtube link" [pattern]="linkPattern" #linkStream="ngModel">
+    <div *ngIf="linkStream.errors?.pattern"> 
+      Link not valid.
+   </div>
   </mat-form-field>
 </div>
   <div>

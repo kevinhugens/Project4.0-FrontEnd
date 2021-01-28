@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {Room} from 'src/app/shared/models/room.model'
 import {RoomService} from 'src/app/shared/services/room.service'
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-rooms-create',
@@ -15,14 +16,17 @@ export class RoomsCreateComponent implements OnInit {
   model : Room;
   loading = false;
   submitted = false;
-
   startTime: String;
   endTime: String;
+  linkPattern = "^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$"
   constructor(
     private router: Router,
     private _roomService: RoomService,
-    private _authenticateService: AuthenticateService) { }
+    private _authenticateService: AuthenticateService,
+    private formBuilder: FormBuilder,) {
+     }
 
+    
     ngOnInit(): void {
       this.model = new Room();
       this._authenticateService.loggedUser.subscribe(
