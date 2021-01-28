@@ -12,6 +12,7 @@ export class RoomsEditComponent implements OnInit {
   room: Room;
   startTime: String;
   endTime: String;
+  linkPattern = "^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$"
   constructor(private router: Router,
     private _roomService: RoomService,) { }
 
