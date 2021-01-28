@@ -58,3 +58,35 @@
 <button mat-raised-button color="primary" type="submit"
 [disabled]="!roomsForm.form.valid || submitted">Submit</button>
 </form>
+<div>
+  <form #presentatorForm="ngForm" (ngSubmit)="onSubmitPresentator()" >
+    <div>
+      <mat-form-field class="example-full-width">
+        <input matInput
+        [(ngModel)]="presentatorEmail" name="presentatorEmail" placeholder="email presentator">
+      </mat-form-field>
+      <div class="error">
+
+      </div>
+      <div class="verified">
+
+      </div>
+      <button mat-raised-button color="primary" type="submit">Verifieer</button>
+    </div>
+  </form>
+  <form #moderatorForm="ngForm" (ngSubmit)="onSubmitModerator()" >
+    <div>
+      <mat-form-field class="example-full-width">
+        <input matInput
+        [(ngModel)]="moderatorEmail" name="moderatorEmail" placeholder="email moderator">
+      </mat-form-field>
+      <div class="error">
+
+      </div>
+      <div class="verified">
+
+      </div>
+      <button mat-raised-button color="primary" type="submit">Verifieer</button>
+    </div>
+  </form>
+</div>

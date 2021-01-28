@@ -13,6 +13,8 @@ export class RoomsEditComponent implements OnInit {
   startTime: String;
   endTime: String;
   linkPattern = "^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$"
+  moderatorEmail ="";
+  presentatorEmail="";
   constructor(private router: Router,
     private _roomService: RoomService,) { }
 
@@ -44,4 +46,12 @@ export class RoomsEditComponent implements OnInit {
     });
    }
 
+
+   onSubmitModerator(){
+
+  }
+
+  onSubmitPresentator(){
+    //this._userService.getUser()
+ }
 }

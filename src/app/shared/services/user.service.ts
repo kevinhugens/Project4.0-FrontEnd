@@ -21,4 +21,7 @@ export class UserService {
   getUserByToken(token: String): Observable<User> {
     return this.http.get<User>(this.apiUrl + "api/user/token/" + token);
   }
+  getUserByEmail(email: String): Observable<User> {
+    return this.http.get<User>(this.apiUrl + "api/user/email/" + email);
+  }
 }

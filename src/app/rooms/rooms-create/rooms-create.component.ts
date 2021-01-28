@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {Room} from 'src/app/shared/models/room.model'
 import {RoomService} from 'src/app/shared/services/room.service'
+import {UserService} from 'src/app/shared/services/user.service'
+import {UserInRoomService} from 'src/app/shared/services/user-in-room.service'
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -18,12 +20,16 @@ export class RoomsCreateComponent implements OnInit {
   submitted = false;
   startTime: String;
   endTime: String;
-  linkPattern = "^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$"
+  linkPattern = "^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$";
+  moderatorEmail ="";
+  presentatorEmail="";
   constructor(
     private router: Router,
     private _roomService: RoomService,
     private _authenticateService: AuthenticateService,
-    private formBuilder: FormBuilder,) {
+    private formBuilder: FormBuilder,
+    private _userService: UserService,
+    private _userInRoomService: UserInRoomService) {
      }
 
     
@@ -67,5 +73,11 @@ export class RoomsCreateComponent implements OnInit {
     );
    }
 
+   onSubmitModerator(){
 
+   }
+
+   onSubmitPresentator(){
+     //this._userService.getUser()
+  }
 }
