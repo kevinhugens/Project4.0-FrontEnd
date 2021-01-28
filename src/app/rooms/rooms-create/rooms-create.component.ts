@@ -5,7 +5,6 @@ import {RoomService} from 'src/app/shared/services/room.service'
 import {UserService} from 'src/app/shared/services/user.service'
 import {UserInRoomService} from 'src/app/shared/services/user-in-room.service'
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-rooms-create',
@@ -14,7 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RoomsCreateComponent implements OnInit {
 
-
+  userId;
   model : Room;
   loading = false;
   submitted = false;
@@ -23,11 +22,15 @@ export class RoomsCreateComponent implements OnInit {
   linkPattern = "^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$";
   moderatorEmail ="";
   presentatorEmail="";
+  isInvalidPresentator=false;
+  isVerifiedPresentator=false;
+  isInvalidModerator=false;
+  isVerifiedModerator=false;
+
   constructor(
     private router: Router,
     private _roomService: RoomService,
     private _authenticateService: AuthenticateService,
-    private formBuilder: FormBuilder,
     private _userService: UserService,
     private _userInRoomService: UserInRoomService) {
      }
@@ -39,6 +42,7 @@ export class RoomsCreateComponent implements OnInit {
         result => {
           if(result) {
             this.model.PresentatorID = result.userID;
+            this.userId = result.userID;
           }
           
         }
@@ -74,10 +78,33 @@ export class RoomsCreateComponent implements OnInit {
    }
 
    onSubmitModerator(){
-
+    this._userService.getUserByEmail(this.moderatorEmail).subscribe(result=>{
+      //check if the given email is valid
+      if(result){
+        console.log("found")
+        this.isVerifiedModerator = true;
+        this.isInvalidModerator = false;
+        this.model.ModeratorID = result.userID; 
+      }else{
+        this.isVerifiedModerator = false;
+        this.isInvalidModerator = true;
+        console.log("not found")
+      }
+    })
    }
 
    onSubmitPresentator(){
-     //this._userService.getUser()
+     this._userService.getUserByEmail(this.presentatorEmail).subscribe(result=>{
+       if(result){
+        this.model.PresentatorID = result.userID
+        console.log("found")
+        this.isVerifiedPresentator = true;
+        this.isInvalidPresentator = false;
+       }else{
+        this.isVerifiedPresentator = false;
+        this.isInvalidPresentator = true;
+        console.log("not found")
+       }
+     })
   }
 }

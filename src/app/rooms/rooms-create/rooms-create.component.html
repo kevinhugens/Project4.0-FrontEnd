@@ -65,12 +65,12 @@
         <input matInput
         [(ngModel)]="presentatorEmail" name="presentatorEmail" placeholder="email presentator">
       </mat-form-field>
-      <div class="error">
-
-      </div>
-      <div class="verified">
-
-      </div>
+      <div class="error" *ngIf="isInvalidPresentator">
+        <p>Email not found</p>
+    </div>
+    <div class="verified" *ngIf="isVerifiedPresentator">
+        <p>Verified</p>
+    </div>
       <button mat-raised-button color="primary" type="submit">Verifieer</button>
     </div>
   </form>
@@ -80,11 +80,11 @@
         <input matInput
         [(ngModel)]="moderatorEmail" name="moderatorEmail" placeholder="email moderator">
       </mat-form-field>
-      <div class="error">
-
+      <div class="error" *ngIf="isInvalidModerator">
+          <p>Email not found</p>
       </div>
-      <div class="verified">
-
+      <div class="verified" *ngIf="isVerifiedModerator">
+          <p>Verified</p>
       </div>
       <button mat-raised-button color="primary" type="submit">Verifieer</button>
     </div>
