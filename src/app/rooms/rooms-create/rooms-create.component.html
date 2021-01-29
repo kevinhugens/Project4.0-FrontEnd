@@ -1,64 +1,66 @@
-
-<form #roomsForm="ngForm" (ngSubmit)="onSubmit()" >
-<div>
-  <mat-form-field class="example-full-width">
-    <input matInput 
-    [(ngModel)]="model.Name" name="name" placeholder="Room naam">
-  </mat-form-field>
-</div>
-<div>
-  <mat-form-field class="example-full-width">
-    <input matInput
-    [(ngModel)]="model.Password" name="password" placeholder="passwoord">
-  </mat-form-field>
-</div>
-<div>
-  <mat-form-field class="example-full-width">
-    <input matInput
-    [(ngModel)]="model.Description" name="description" placeholder="description">
-  </mat-form-field>
-</div>
-<div>
-  <mat-form-field class="example-full-width">
-    <input matInput
-    [(ngModel)]="model.LinkStream" name="linkStream" placeholder="youtube link" [pattern]="linkPattern" #linkStream="ngModel">
-    <div *ngIf="linkStream.errors?.pattern"> 
-      Not a valid youtube link.
-   </div>
-  </mat-form-field>
-</div>
-  <div>
-  <mat-form-field appearance="fill">
-    <mat-label>startdate</mat-label>
-    <input matInput required [matDatepicker]="startStream" [(ngModel)]="model.StartStream" name="startStream" placeholder="start datum">
-    <mat-datepicker-toggle  matSuffix [for]="startStream" ></mat-datepicker-toggle>
-    <mat-datepicker #startStream></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Kies een tijd</mat-label>
-    <input matInput required  [ngxTimepicker]="fullTimeStart" [format]="24" name="startTime" [(ngModel)]="startTime">
-    <ngx-material-timepicker-toggle matSuffix [for]="fullTimeStart"></ngx-material-timepicker-toggle>
-    <ngx-material-timepicker #fullTimeStart></ngx-material-timepicker>
-  </mat-form-field>
-</div>
-  <div>
-  <mat-form-field appearance="fill">
-    <mat-label>enddate</mat-label>
-    <input matInput required [matDatepicker]="endStream" [(ngModel)]="model.EndStream" name="endStream" placeholder="eind datum">
-    <mat-datepicker-toggle  matSuffix [for]="endStream" ></mat-datepicker-toggle>
-    <mat-datepicker #endStream></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Kies een tijd</mat-label>
-    <input matInput required [ngxTimepicker]="fullTimeEnd" [format]="24" name="endTime" [(ngModel)]="endTime">
-    <ngx-material-timepicker-toggle matSuffix [for]="fullTimeEnd"></ngx-material-timepicker-toggle>
-    <ngx-material-timepicker #fullTimeEnd></ngx-material-timepicker>
-  </mat-form-field>
-</div>
-<button mat-raised-button color="primary" type="submit"
-[disabled]="!roomsForm.form.valid || submitted">Submit</button>
-</form>
-<div>
+<div class="row">
+  <div class="col-xs-6">
+    <form #roomsForm="ngForm" (ngSubmit)="onSubmit()" >
+    <div>
+      <mat-form-field class="example-full-width">
+        <input matInput 
+        [(ngModel)]="model.Name" name="name" placeholder="Room naam">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-full-width">
+        <input matInput
+        [(ngModel)]="model.Password" name="password" placeholder="passwoord">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-full-width">
+        <input matInput
+        [(ngModel)]="model.Description" name="description" placeholder="description">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-full-width">
+        <input matInput
+        [(ngModel)]="model.LinkStream" name="linkStream" placeholder="youtube link" [pattern]="linkPattern" #linkStream="ngModel">
+        <div *ngIf="linkStream.errors?.pattern"> 
+          Not a valid youtube link.
+      </div>
+      </mat-form-field>
+    </div>
+      <div>
+      <mat-form-field appearance="fill">
+        <mat-label>startdate</mat-label>
+        <input matInput required [matDatepicker]="startStream" [(ngModel)]="model.StartStream" name="startStream" placeholder="start datum">
+        <mat-datepicker-toggle  matSuffix [for]="startStream" ></mat-datepicker-toggle>
+        <mat-datepicker #startStream></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Kies een tijd</mat-label>
+        <input matInput required  [ngxTimepicker]="fullTimeStart" [format]="24" name="startTime" [(ngModel)]="startTime">
+        <ngx-material-timepicker-toggle matSuffix [for]="fullTimeStart"></ngx-material-timepicker-toggle>
+        <ngx-material-timepicker #fullTimeStart></ngx-material-timepicker>
+      </mat-form-field>
+    </div>
+      <div>
+      <mat-form-field appearance="fill">
+        <mat-label>enddate</mat-label>
+        <input matInput required [matDatepicker]="endStream" [(ngModel)]="model.EndStream" name="endStream" placeholder="eind datum">
+        <mat-datepicker-toggle  matSuffix [for]="endStream" ></mat-datepicker-toggle>
+        <mat-datepicker #endStream></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Kies een tijd</mat-label>
+        <input matInput required [ngxTimepicker]="fullTimeEnd" [format]="24" name="endTime" [(ngModel)]="endTime">
+        <ngx-material-timepicker-toggle matSuffix [for]="fullTimeEnd"></ngx-material-timepicker-toggle>
+        <ngx-material-timepicker #fullTimeEnd></ngx-material-timepicker>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type="submit"
+    [disabled]="!roomsForm.form.valid || submitted">Submit</button>
+    </form>
+  </div>
+<div class="col-xs-6">
   <form #presentatorForm="ngForm" (ngSubmit)="onSubmitPresentator()" >
     <div>
       <mat-form-field class="example-full-width">
@@ -89,4 +91,5 @@
       <button mat-raised-button color="primary" type="submit">Verifieer</button>
     </div>
   </form>
+</div>
 </div>
