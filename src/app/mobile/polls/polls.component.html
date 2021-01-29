@@ -1,13 +1,17 @@
-<div *ngIf="activePollForThisRoom">
-    <p>Huidige poll</p>
-    <p>{{activePollForThisRoom.question}}</p>
+<div class="poll">
+  <div *ngIf="activePollForThisRoom; else nopoll">
+    <h3 class="question">{{activePollForThisRoom.question}}</h3>
     <mat-selection-list #options [multiple]="false" class="mt-3">
-        <mat-list-option *ngFor="let option of activePollForThisRoom.options" [value]="option">
+        <mat-list-option class="option" *ngFor="let option of activePollForThisRoom.options" [value]="option">
           {{option.content}}
         </mat-list-option>
       </mat-selection-list>
       <p class="mt-3">
         <button class="btn btn-info" (click)="saveOption(options.selectedOptions.selected[0]?.value)">Save option</button>
       </p>
-      
+    </div>
+    <ng-template #nopoll>
+      <h3>Geen actieve poll.</h3>
+    </ng-template>
 </div>
+

@@ -21,6 +21,7 @@ export class ChatComponent implements OnInit {
   message = new Message();  
   userId;
   username ="";
+  lastMessageRecievedTime = new Date(0);
   constructor(  
     private signalRService: SignalRService,  
     private _ngZone: NgZone  ,
@@ -58,7 +59,8 @@ export class ChatComponent implements OnInit {
     this.signalRService.messageReceived.subscribe((message: Message) => {  
       this._ngZone.run(() => {  
         if (message.roomId == this.roomId) {  
-          this.messages.push(message);  
+          this.messages.push(message); 
+          this.lastMessageRecievedTime = message.date //voor te kijken of het uur moet laten gezien worden.
         }
       });  
     });  

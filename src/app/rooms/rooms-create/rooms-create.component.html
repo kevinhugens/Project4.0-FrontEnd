@@ -21,7 +21,10 @@
 <div>
   <mat-form-field class="example-full-width">
     <input matInput
-    [(ngModel)]="model.LinkStream" name="linkStream" placeholder="youtube link">
+    [(ngModel)]="model.LinkStream" name="linkStream" placeholder="youtube link" [pattern]="linkPattern" #linkStream="ngModel">
+    <div *ngIf="linkStream.errors?.pattern"> 
+      Not a valid youtube link.
+   </div>
   </mat-form-field>
 </div>
   <div>
@@ -55,3 +58,35 @@
 <button mat-raised-button color="primary" type="submit"
 [disabled]="!roomsForm.form.valid || submitted">Submit</button>
 </form>
+<div>
+  <form #presentatorForm="ngForm" (ngSubmit)="onSubmitPresentator()" >
+    <div>
+      <mat-form-field class="example-full-width">
+        <input matInput
+        [(ngModel)]="presentatorEmail" name="presentatorEmail" placeholder="email presentator">
+      </mat-form-field>
+      <div class="error" *ngIf="isInvalidPresentator">
+        <p>Email not found</p>
+    </div>
+    <div class="verified" *ngIf="isVerifiedPresentator">
+        <p>Verified</p>
+    </div>
+      <button mat-raised-button color="primary" type="submit">Verifieer</button>
+    </div>
+  </form>
+  <form #moderatorForm="ngForm" (ngSubmit)="onSubmitModerator()" >
+    <div>
+      <mat-form-field class="example-full-width">
+        <input matInput
+        [(ngModel)]="moderatorEmail" name="moderatorEmail" placeholder="email moderator">
+      </mat-form-field>
+      <div class="error" *ngIf="isInvalidModerator">
+          <p>Email not found</p>
+      </div>
+      <div class="verified" *ngIf="isVerifiedModerator">
+          <p>Verified</p>
+      </div>
+      <button mat-raised-button color="primary" type="submit">Verifieer</button>
+    </div>
+  </form>
+</div>
