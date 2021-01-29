@@ -15,6 +15,15 @@ export class RoomService {
   getRooms(): Observable<Room[]> {
     return this.http.get<Room[]>(this.apiUrl + "api/room");
   }
+  getAllRoomsForThisWeek(): Observable<Room[]> {
+    return this.http.get<Room[]>(this.apiUrl + "api/room/week");
+  }
+  getAllLiveRooms(): Observable<Room[]> {
+    return this.http.get<Room[]>(this.apiUrl + "api/room/live");
+  }
+  getAllRoomsFromPresentator(presentatorID: number): Observable<Room[]> {
+    return this.http.get<Room[]>(this.apiUrl + "api/room/presentator/"+presentatorID);
+  }
 
   getRoom(id: number): Observable<Room> {
     return this.http.get<Room>(this.apiUrl + "api/room/" + id);

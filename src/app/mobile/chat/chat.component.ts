@@ -48,7 +48,7 @@ export class ChatComponent implements OnInit {
       //this.messages.push(this.message);  
       //in comments voor doubles te vermijden. Kan wel intresant zijn voor de gebruiker zijn als het bericht niet aankomt dat er dan een
       //teken bij het bericht komt te staan.
-      console.log(this.message)
+      console.log(this.message);
       this.signalRService.sendMessageToGroup(this.message, this.roomId);  
       this.txtMessage = '';  
     }  

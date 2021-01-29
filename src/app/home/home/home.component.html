@@ -1,22 +1,23 @@
 <h1>Welkom bij Axxes Streams!</h1>
+
 <div class="row" *ngIf="loggedUser">
   <div class="col col-md-6">
-    <h1 style="text-align: left;">Geplande</h1>
+    <h1 style="text-align: left;">Beheer</h1>
   </div>
   <div class="col col-md-6" style="text-align: right;">
     <button class="btn btn-primary" (click)="createRoom()">Create new room</button>
   </div>
 </div>
-<div class="row" *ngIf="loggedUser && rooms">
-  <ng-container *ngFor="let room of rooms">
-    <div class="card mr-2" style="width: 18rem;" *ngIf="!room.live">
+<div class="row" *ngIf="loggedUser && roomsbypresentator">
+  <ng-container *ngFor="let room of roomsbypresentator">
+    <div class="card mr-2" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title" style="text-align: left;">{{room.name}}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{room.startStream | date:'dd/MM/yyyy HH:mm'}} - {{room.endStream |
           date:'HH:mm'}}</h6>
         <p class="card-text">{{room.description}}</p>
       </div>
-      <div class="card-footer text-muted" *ngIf="loggedUser.userID == room.presentatorID">
+      <div class="card-footer text-muted" >
         <button mat-icon-button (click)="editRoom(room)">
           <mat-icon>edit</mat-icon>
         </button>
@@ -34,12 +35,37 @@
   </ng-container>
 </div>
 
-<div *ngIf="loggedUser && rooms">
+<div *ngIf="loggedUser && !(roomsbypresentator.length>0)">
+  <h3>Geen rooms om te beheren</h3>
+</div>
+
+<div *ngIf="loggedUser && roomsthisweek">
+  <hr>
+  <h1 style="text-align: left;">Deze week</h1>
+  <div class="row">
+    <ng-container *ngFor="let room of roomsthisweek">
+      <div class="card mr-2" style="width: 18rem;" *ngIf="room.live">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align: left;">{{room.name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{room.startStream | date:'dd/MM/yyyy HH:mm'}} - {{room.endStream |
+            date:'HH:mm'}}</h6>
+          <p class="card-text">{{room.description}}</p>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<div *ngIf="loggedUser && !(roomsthisweek.length>0)">
+  <h3>Deze week zijn er geen geplande streams</h3>
+</div>
+
+<div *ngIf="loggedUser && roomsthisweek">
   <hr>
   <h1 style="text-align: left;">Live</h1>
   <div class="row">
-    <ng-container class="col-12" *ngFor="let room of rooms">
-      <div class="card mr-2" style="width: 18rem;" *ngIf="room.live">
+    <ng-container class="col-12" *ngFor="let room of roomslive">
+      <div class="card mr-2" style="width: 18rem;">
         <div class="card-body" (click)="followStream(room)" matTooltip="Click to follow stream">
           <h5 class="card-title" style="text-align: left;">{{room.name}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{room.startStream | date:'dd/MM/yyyy HH:mm'}} - {{room.endStream |
@@ -57,6 +83,7 @@
 <div *ngIf="!loggedUser">
   <h3>Meld aan om een stream te kunnen volgen</h3>
 </div>
-<div *ngIf="loggedUser && !(rooms.length>0)">
-  <h3>Deze week zijn er geen streams!</h3>
+
+<div *ngIf="loggedUser && !(roomslive.length>0)">
+  <h3>Momenteel geen live streams</h3>
 </div>

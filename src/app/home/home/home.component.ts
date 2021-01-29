@@ -13,19 +13,20 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class HomeComponent implements OnInit {
   loggedUser: User = null;
-  rooms: Room[] = [];
-  constructor(private _roomService: RoomService,private _authenticateService: AuthenticateService, 
+  roomslive: Room[] = [];
+  roomsthisweek: Room[] = [];
+  roomsbypresentator: Room[] = [];
+  currentDate: Date = new Date();
+  constructor(private _roomService: RoomService, private _authenticateService: AuthenticateService,
     private _pollService: PollService, private _router: Router, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
     this._authenticateService.loggedUser.subscribe((result) => {
       this.loggedUser = result;
-      if(result != null) {
-      this._roomService.getRooms().subscribe((result) => {
-        this.rooms = result;
-      });
-    }
+      if (result != null) {
+        this.update();
+      }
     });
   }
 
@@ -36,13 +37,13 @@ export class HomeComponent implements OnInit {
   editRoom(room: Room) {
     this._roomService.selectedRoom = room;
     this._router.navigate(["room/edit"]);
-    
+
   }
   followStream(room: Room) {
     this._roomService.selectedRoom = room;
-    if(room["password"] !== null && room["password"] !== "") {
+    if (room["password"] !== null && room["password"] !== "") {
       var password = prompt("Geef het stream wachtwoord op");
-      if(password == room["password"]) {
+      if (password == room["password"]) {
         this._router.navigate(["room"]);
       }
       else {
@@ -54,32 +55,39 @@ export class HomeComponent implements OnInit {
   }
 
   deleteRoom(room: Room) {
-    if(confirm("Ben je zeker dat je de room wilt verwijderen?")) {
+    if (confirm("Ben je zeker dat je de room wilt verwijderen?")) {
       this._roomService.deleteRoom(room["roomID"]).subscribe((result) => {
         this.snackBar.open("Room " + room["name"] + " verwijderen.", "", { duration: 5000 });
-        this._roomService.getRooms().subscribe((data) => {
-          this.rooms = data;
-        });
+        this.update();
       });
     }
   }
 
   goLive(room: Room) {
-    if(confirm("Ben je zeker dat je live wil gaan?")) {
+    if (confirm("Ben je zeker dat je live wil gaan?")) {
       room["live"] = true;
-      this._roomService.updateRoom(room["roomID"],room).subscribe((result) => {
+      this._roomService.updateRoom(room["roomID"], room).subscribe((result) => {
         this.snackBar.open("Room " + room["name"] + " gaat live.", "", { duration: 5000 });
-          this._roomService.getRooms().subscribe((data) => {
-            this.rooms = data;
-          });
+        this.update();
       });
     }
   }
 
   managePolls(id: number) {
-    if(id != null) {
+    if (id != null) {
       this._pollService.roomID = id;
       this._router.navigate(["managepolls"]);
     }
+  }
+  update(){
+    this._roomService.getAllRoomsForThisWeek().subscribe((rooms) => {
+      this.roomsthisweek = rooms;
+    });
+    this._roomService.getAllRoomsFromPresentator(this.loggedUser["userID"]).subscribe((data) => {
+      this.roomsbypresentator = data;
+    });
+    this._roomService.getAllLiveRooms().subscribe((live) => {
+      this.roomslive = live;
+    });
   }
 }
