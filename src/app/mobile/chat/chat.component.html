@@ -1,20 +1,36 @@
-  <div class="container">
-    <div class="chat d-flex flex-column overflow-auto justify-content-between">
-      <div class="mesgs flex-column overflow-auto">
-        <div *ngFor="let msg of messages"> 
-          <span class="time_date" > {{msg.date | date:'HH:mm'}} </span> 
-          <div class="message" [ngClass]="{'ownMessage' : msg.clientuniqueid == userId, 'otherMessage' : msg.clientuniqueid != userId}">
-            <p>  
-              <Strong>{{msg.username}}   : </Strong>{{msg.message}}   
-             </p>   
+<div class="messaging">
+  <div class="msg_history">
+    <li class="message" *ngFor="let msg of messages">
+      <div *ngIf="
+                msg.clientuniqueid !== userId;
+                then incoming_msg;
+                else outgoing_msg
+              "></div>
+      <ng-template #incoming_msg>
+        <div class="incoming_msg">
+          <div class="received_msg">
+            <div class="received_withd_msg">
+              <p> <strong>{{msg.username}}: </strong>{{ msg.message }}</p>
+            </div>
           </div>
-          
         </div>
-      </div>
-      <div class="type_msg">   
-          <input type="text" [value]="txtMessage"  
-          (input)="txtMessage=$event.target.value" (keydown.enter)="sendMessage()" placeholder="Type a message" />  
-          <button class="btn-primary btn" type="button"  (click)="sendMessage()">Verstuur</button>   
-      </div>  
-    </div>
+      </ng-template>
+      <ng-template #outgoing_msg>
+        <div class="outgoing_msg">
+          <div class="sent_msg">
+            <p>{{ msg.message }}</p>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+  </div>
+  <div class="type_msg">
+    <form class="input_msg_write" (ngSubmit)="sendMessage()">
+      <input type="text" class="write_msg" placeholder="Type a message" name="newMessage" [(ngModel)]="txtMessage"
+        (keydown.enter)="sendMessage()" />
+      <button mat-icon-button class="msg_send_btn" type="submit">
+        <mat-icon>send</mat-icon>
+      </button>
+    </form>
+
   </div>

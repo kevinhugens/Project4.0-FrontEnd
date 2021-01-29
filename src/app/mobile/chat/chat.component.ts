@@ -39,6 +39,8 @@ export class ChatComponent implements OnInit {
     this.subscribeToEvents();  
   }  
   sendMessage(): void {  
+    console.log("test");
+    console.log(this.txtMessage);
     if (this.txtMessage) {  
       this.message = new Message();  
       this.message.clientuniqueid = this.userId;  

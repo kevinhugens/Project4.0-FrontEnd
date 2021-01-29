@@ -62,14 +62,14 @@ export class RoomsEditComponent implements OnInit {
     this._userService.getUserByEmail(this.moderatorEmail).subscribe(result=>{
       //check if the given email is valid
       if(result){
-        console.log("found")
+        console.log("found");
         this.isVerifiedModerator = true;
         this.isInvalidModerator = false;
-        this.room.ModeratorID = result.userID; 
+        this.room.ModeratorID = result.userID;
       }else{
         this.isVerifiedModerator = false;
         this.isInvalidModerator = true;
-        console.log("not found")
+        console.log("not found");
       }
     })
    }
@@ -77,14 +77,14 @@ export class RoomsEditComponent implements OnInit {
    onSubmitPresentator(){
      this._userService.getUserByEmail(this.presentatorEmail).subscribe(result=>{
        if(result){
-        this.room.PresentatorID = result.userID
-        console.log("found")
+        this.room.PresentatorID = result.userID;
+        console.log("found");
         this.isVerifiedPresentator = true;
         this.isInvalidPresentator = false;
        }else{
         this.isVerifiedPresentator = false;
         this.isInvalidPresentator = true;
-        console.log("not found")
+        console.log("not found");
        }
      })
   }
