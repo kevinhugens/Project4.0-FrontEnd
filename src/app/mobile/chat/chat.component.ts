@@ -16,6 +16,7 @@ import { RoomService } from 'src/app/shared/services/room.service';
 })
 export class ChatComponent implements OnInit {
   @Input() roomId: number;
+  @Input() hideQstButton: Boolean = false;
   modId =-1; //
   apiUrl = environment.apiLink;
   title = 'ClientApp';  
@@ -25,7 +26,7 @@ export class ChatComponent implements OnInit {
   userId;
   username ="";
   lastMessageRecievedTime = new Date(0);
-  isQuestion: Boolean;
+  isQuestion: boolean = false;
   constructor(  
     private signalRService: SignalRService,  
     private _ngZone: NgZone  ,
@@ -46,6 +47,7 @@ export class ChatComponent implements OnInit {
   }  
   sendMessage(): void {  
     console.log("test");
+    console.log(this.isQuestion);
     console.log(this.txtMessage);
     if (this.txtMessage) {  
       this.message = new Message();  

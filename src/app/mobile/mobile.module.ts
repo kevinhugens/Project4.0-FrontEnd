@@ -11,6 +11,7 @@ import { PollsComponent } from './polls/polls.component';
   imports: [
     CommonModule,
     SharedModule
-  ]
+  ],
+  exports: [ChatComponent]
 })
 export class MobileModule { }

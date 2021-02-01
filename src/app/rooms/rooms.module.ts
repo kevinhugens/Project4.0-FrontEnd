@@ -4,7 +4,7 @@ import { RoomsComponent } from './rooms/rooms.component';
 import { RoomsCreateComponent } from './rooms-create/rooms-create.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RoomsEditComponent } from './rooms-edit/rooms-edit.component';
-
+import { MobileModule } from '../mobile/mobile.module';
 
 
 
@@ -12,7 +12,8 @@ import { RoomsEditComponent } from './rooms-edit/rooms-edit.component';
   declarations: [RoomsComponent, RoomsCreateComponent, RoomsEditComponent],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    MobileModule
   ]
 })
 export class RoomsModule { }

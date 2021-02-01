@@ -6,7 +6,7 @@
         <div *ngIf="allowed; else notallowed">
             <h2>{{room.name}}</h2>
             <app-polls [roomID]=roomId></app-polls>
-            <app-chat [roomId]=roomId></app-chat>
+            <app-chat [roomId]=roomId [hideQstButton]="false"></app-chat>
         </div>
     </div>
 </ng-template>

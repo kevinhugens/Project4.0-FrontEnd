@@ -10,7 +10,7 @@
           </div>
         </div>
       </div>
-      <ng-template #messagetemplate >
+      <ng-template #messagetemplate>
         <div *ngIf="
           msg.clientuniqueid !== userId;
           then incoming_msg;
@@ -34,11 +34,12 @@
     </li>
   </div>
   <div class="type_msg">
-    <form class="input_msg_write" (ngSubmit)="sendMessage()">
-      <input type="checkbox" id="questionbox" name="questionbox" [(ngModel)]="isQuestion">
-      <label for="questionbox">Question to presentator</label>
-      <input type="text" class="write_msg" placeholder="Type a message" name="newMessage" [(ngModel)]="txtMessage"
+    <form (ngSubmit)="sendMessage()">
+      <input type="text" class="input_msg_write" placeholder="Type a message" name="newMessage" [(ngModel)]="txtMessage"
         (keydown.enter)="sendMessage()" />
+      <mat-button-toggle class="msg_qst_radio mr-3" checked="checked" [checked]="isQuestion" (change)="isQuestion = $event.source.checked" name="questionbox">
+        Vraag
+      </mat-button-toggle>
       <button mat-icon-button class="msg_send_btn" type="submit">
         <mat-icon>send</mat-icon>
       </button>

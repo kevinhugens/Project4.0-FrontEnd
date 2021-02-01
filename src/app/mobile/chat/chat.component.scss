@@ -40,29 +40,39 @@
 	width: fit-content;
 }
 
-.input_msg_write input {
+.input_msg_write {
 	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
 	border: medium none;
 	color: #4c4c4c;
 	font-size: 15px;
 	min-height: 48px;
-	width: 80%;
+	width: 60%;
 }
 
 .type_msg {
 	border-top: 1px solid #c4c4c4;
+	padding-top: 5px;
 	
 }
-
+.msg_qst_radio {
+	background: rgb(191, 210, 219);
+	color: #fff;
+	text-align: center;
+	min-width: 10%;
+}
+.mat-button-toggle-checked {
+	background: #05728f;
+}
 .msg_send_btn {
-	background: #05728f none repeat scroll 0 0;
+	background: #05728f;
 	border: medium none;
 	border-radius: 50%;
 	color: #fff;
 	cursor: pointer;
-    font-size: 10px;
-    text-align: center;
+	text-align: center;
+	max-width:10%
 }
+
 
 .messaging {
 	padding: 0 0 15 0;
