@@ -1,9 +1,9 @@
 <h1>Axxess Streams</h1>
 <ng-container *ngIf="loggedUser; else notLogged">
     <ng-container *ngIf="selectedRoom; else noRoomSelected">
-        <ng-container *ngIf="!isPresentator">
+        <ng-container *ngIf="!isPresentator && streamUrl">
             <div class="center">
-                <iframe width="80%" height="400px" src="http://www.youtube.com/embed/NlOF03DUoWc" frameborder="0"
+                <iframe width="80%" height="400px" [src]="streamUrl" frameborder="0"
                     allowfullscreen></iframe>
             </div>
             <div class="mt-5">
@@ -12,6 +12,10 @@
                 <ngx-qrcode [elementType]="elementType" [value]="value" class="center">
                 </ngx-qrcode>
             </div>
+        </ng-container>
+
+        <ng-container *ngIf="!isPresentator && !streamUrl">
+            <h3>Onjuiste stream url. Wacht op de presentator om de stream url bij te werken.</h3>
         </ng-container>
 
         <ng-container *ngIf="isPresentator" class="center">

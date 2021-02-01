@@ -1,4 +1,5 @@
 import { Component, NgZone, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
 import { Message } from 'src/app/shared/models/message.model';
@@ -22,6 +23,7 @@ export class RoomsComponent implements OnInit {
   isPresentator = false;
   lijstPolls: Poll[] = [];
   activePollForPresentator: Poll;
+  streamUrl: SafeResourceUrl = null;
   //qr code
   elementType = 'url';
   value;
@@ -34,34 +36,37 @@ export class RoomsComponent implements OnInit {
   username ="";
   constructor(private router: Router,private _authenticateService: AuthenticateService, private _roomService: RoomService, 
     private _pollService: PollService, private _userInRoomService: UserInRoomService, 
-    private _signalRService: SignalRService, private _ngZone: NgZone) { }
+    private _signalRService: SignalRService, private _ngZone: NgZone, public sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.selectedRoom = this._roomService.selectedRoom;
     this._authenticateService.loggedUser.subscribe((result) => {
       this.loggedUser = result;
-      this.userId = result["userID"].toString();
-      this.username = result["firstName"];
-      if(this.selectedRoom) {
-        this.roomId = this._roomService.selectedRoom["roomID"];
-        this.subscribeToEvents();
-        if(this.loggedUser.userID == this.selectedRoom["presentatorID"]) { //controleren op null
-          this.isPresentator = true;
-          this.gatherPollsFromRoom();
-          
-        }
-        if(result != null) {
-          this.value=this.selectedRoom["roomID"];
-          this.value += ","+ result["token"];
-
-          //var userInRoom = new UserInRoom();
-          //userInRoom.RoomID = this.selectedRoom["roomID"];
-          //userInRoom.UserID = result["userID"];
-          //this._userInRoomService.addUserInRoom(userInRoom).subscribe();
+      if(result !== null && result !== undefined) {
+        this.userId = result["userID"].toString();
+        this.username = result["firstName"];
+        if(this.selectedRoom) {
+          this.roomId = this._roomService.selectedRoom["roomID"];
+          if(this.loggedUser.userID == this.selectedRoom["presentatorID"]) { //controleren op null
+            this.isPresentator = true;
+            this.subscribeToEvents();
+            this.gatherPollsFromRoom();
+            
+          } else if(this.selectedRoom["linkStream"]) {
+            this.streamUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.selectedRoom["linkStream"]);
+          }
+          if(result != null) { 
+            this.value=this.selectedRoom["roomID"];
+            this.value += ","+ result["token"];
+  
+            //var userInRoom = new UserInRoom();
+            //userInRoom.RoomID = this.selectedRoom["roomID"];
+            //userInRoom.UserID = result["userID"];
+            //this._userInRoomService.addUserInRoom(userInRoom).subscribe();
+          }
         }
       }
     });
-    
   }
 
   openPoll(poll: Poll) {

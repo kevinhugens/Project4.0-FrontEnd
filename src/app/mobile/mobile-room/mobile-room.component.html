@@ -1,21 +1,22 @@
-
 <div *ngIf="loading; else result">
     <mat-spinner style="margin-left: auto;margin-right: auto;"></mat-spinner>
 </div>
 <ng-template #result>
-    <div *ngIf="room; else noroom" class="center">
+    <div *ngIf="roomExist && isLive && room" class="center">
         <div *ngIf="allowed; else notallowed">
             <h2>{{room.name}}</h2>
             <app-polls [roomID]=roomId></app-polls>
-            
             <app-chat [roomId]=roomId></app-chat>
         </div>
     </div>
 </ng-template>
 
-<ng-template #noroom>
+<ng-container *ngIf="!roomExist">
     <h3>Deze room bestaat niet!</h3>
-</ng-template>
+</ng-container>
+<ng-container *ngIf="roomExist && !isLive">
+    <h3>Deze room is momenteel niet live!</h3>
+</ng-container>
 <ng-template #notallowed>
     <h3>Niet toegestaan!</h3>
 </ng-template>

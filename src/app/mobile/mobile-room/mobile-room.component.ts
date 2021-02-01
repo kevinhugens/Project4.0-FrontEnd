@@ -15,59 +15,63 @@ export class MobileRoomComponent implements OnInit {
   roomId;
   roomName; //room.Name werkte niet in html?
   room: Room = null;
-  loading=true;
+  loading = true;
   allowed = true;
+  roomslive: Room[] = [];
+  isLive = false;
+  roomExist = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private _roomService: RoomService,
     private _userInRoomService: UserInRoomService,
     private _authenticateService: AuthenticateService,
-  ) { 
+  ) {
   }
 
   ngOnInit(): void {
     this.roomId = Number(this.route.snapshot.paramMap.get("id"));
-    this._roomService.getRoom(this.roomId).subscribe((result) => {
-      if(result !== null){
-        this.room = result;
-        this.roomName = result["Name"]
-        console.log(result)
-        //UserID inladen
-        this._authenticateService.loggedUser.subscribe(
-          result => {
-            if(result!= null) {
-              var userID = result["userID"].toString();
-              //kijken of gebruiker toestemming heeft tot deze room
-              
-          this._userInRoomService.UserInRoomExists(Number(userID),this.roomId).subscribe(result =>{
-            if(result){
-              console.log("gebruiker al in room")
-              console.log(result)
-              //kijk hier of user gekickt is.
-              if(result["isAllowed"]){
-                console.log("gebruiker toegelaten")
-              }else{
-                console.log("gebruiker niet toegelaten")
-              }
-            }else{
-              //gebruiker is nog niet in room dus object ordt aangemaakt
-              var userInRoom = new UserInRoom();
-              userInRoom.RoomID = this.roomId;
-              userInRoom.UserID = Number(userID);
-              userInRoom.IsAllowed = true;
-              console.log(userInRoom);
-              this._userInRoomService.addUserInRoom(userInRoom).subscribe();
-            }
-          });
-            }
+    this._roomService.getIsRoomLive(this.roomId).subscribe((data) => {
+      if (data == true) {
+        this.roomExist = true;
+        this.isLive = true;
+        this._roomService.getRoom(this.roomId).subscribe((result) => {
+          if (result !== null) {
+            this.room = result;
+            this.roomName = result["Name"]
+            this._authenticateService.loggedUser.subscribe(
+              result => {
+                if (result != null) {
+                  var userID = result["userID"].toString();
+                  this._userInRoomService.UserInRoomExists(Number(userID), this.roomId).subscribe(result => {
+                    if (result) {
+                      console.log("gebruiker al in room");
+                      if (result["isAllowed"]) {
+                        console.log("gebruiker toegelaten");
+                      } else {
+                        console.log("gebruiker niet toegelaten");
+                      }
+                    } else {
+                      //gebruiker is nog niet in room dus object ordt aangemaakt
+                      var userInRoom = new UserInRoom();
+                      userInRoom.RoomID = this.roomId;
+                      userInRoom.UserID = Number(userID);
+                      userInRoom.IsAllowed = true;
+                      console.log(userInRoom);
+                      this._userInRoomService.addUserInRoom(userInRoom).subscribe();
+                    }
+                  });
+                }
+              });
           }
-        );
+        });
+      } else {
+        this.roomExist = true;
+        this.isLive = false;
       }
       this.loading = false;
-    }, () => {
-      this.loading = false;
-    }); 
+    },() => {this.loading = false;});
+
   }
 
 }

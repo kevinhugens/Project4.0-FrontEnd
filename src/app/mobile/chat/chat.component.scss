@@ -1,4 +1,4 @@
-.received_msg {
+.incoming_msg {
 	display: inline-block;
 	vertical-align: top;
     width: 100%;
@@ -12,11 +12,11 @@
 	font-size: 14px;
 	margin: 0;
 	padding: 5px 10px 5px 12px;
-	width: 100%;
 }
 
 .received_withd_msg {
-	width: 75%;
+	max-width: 75%;
+	width: fit-content;
 }
 
 .sent_msg p {
@@ -36,7 +36,8 @@
 
 .sent_msg {
 	float: right;
-	width: 65%;
+	max-width: 65%;
+	width: fit-content;
 }
 
 .input_msg_write input {
@@ -59,7 +60,7 @@
 	border-radius: 50%;
 	color: #fff;
 	cursor: pointer;
-    font-size: 15px;
+    font-size: 10px;
     text-align: center;
 }
 

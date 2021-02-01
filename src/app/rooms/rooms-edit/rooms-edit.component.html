@@ -1,95 +1,99 @@
+<h1 class="col-md-6">Room wijzigen</h1>
 <div class="row">
-  <div class="col-xs-6">
-<form #roomsForm="ngForm" (ngSubmit)="onSubmit()" >
+  <form #presentatorForm="ngForm" (ngSubmit)="onSubmitPresentator()" class="col-xs-12 col-md-6">
     <div>
-      <mat-form-field class="example-full-width">
-        <input matInput 
-        [(ngModel)]="room['name']" name="name" placeholder="Room naam">
+      <mat-form-field class="col-xs-10 col-md-10">
+        <input matInput [(ngModel)]="presentatorEmail" name="presentatorEmail" placeholder="email presentator">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Verifieer</button>
+    </div>
+  </form>
+
+  <div class="col-md-6">
+    <div class="invalid-feedback col-md-12" *ngIf="isInvalidPresentator" style="display:flex;align-items: center;height: 100%;">
+      <p>Email not found</p>
+    </div>
+    <div class="valid-feedback col-md-12" *ngIf="isVerifiedPresentator" style="display:flex;align-items: center;height: 100%;">
+      <p>Verified</p>
+    </div>
+  </div>
+
+  <form #moderatorForm="ngForm" (ngSubmit)="onSubmitModerator()" class="col-xs-12 col-md-6">
+    <div>
+      <mat-form-field class="col-xd-10 col-md-10">
+        <input matInput [(ngModel)]="moderatorEmail" name="moderatorEmail" placeholder="email moderator">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Verifieer</button>
+    </div>
+  </form>
+
+  <div class="col-md-6">
+    <div class="invalid-feedback col-md-12" *ngIf="isInvalidModerator" style="display:flex;align-items: center;height: 100%;">
+      <p>Email not found</p>
+    </div>
+    <div class="valid-feedback col-md-12" *ngIf="isVerifiedModerator" style="display:flex;align-items: center;height: 100%;">
+      <p>Verified</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <form #roomsForm="ngForm" (ngSubmit)="onSubmit()" class="col-xs-12 col-md-6">
+    <div>
+      <mat-form-field class="col-md-6">
+        <input matInput [(ngModel)]="room['name']" name="name" placeholder="Room naam">
+      </mat-form-field>
+      <mat-form-field class="col-md-6">
+        <input matInput [(ngModel)]="room['password']" name="password" placeholder="passwoord">
       </mat-form-field>
     </div>
     <div>
-      <mat-form-field class="example-full-width">
-        <input matInput
-        [(ngModel)]="room['password']" name="password" placeholder="passwoord">
+      <mat-form-field class="col-md-6">
+        <input matInput [(ngModel)]="room['description']" name="description" placeholder="description">
+      </mat-form-field>
+      <mat-form-field class="col-md-6">
+        <input matInput [(ngModel)]="room['linkStream']" name="linkStream" [pattern]="linkPattern"
+          placeholder="youtube link" #linkStream="ngModel">
+        <mat-error *ngIf="linkStream.errors?.pattern">
+          Not a valid youtube link
+        </mat-error>
       </mat-form-field>
     </div>
     <div>
-      <mat-form-field class="example-full-width">
-        <input matInput
-        [(ngModel)]="room['description']" name="description" placeholder="description">
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field class="example-full-width">
-        <input matInput
-        [(ngModel)]="room['linkStream']" name="linkStream" [pattern]="linkPattern" placeholder="youtube link" #linkStream="ngModel">
-        <div *ngIf="linkStream.errors?.pattern"> 
-           Not a valid youtube link.
-       </div>
-      </mat-form-field>
-    </div>
-      <div>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" class="col-md-6">
         <mat-label>startdate</mat-label>
-        <input matInput required [matDatepicker]="startStream" [(ngModel)]="room['startStream']" name="startStream" placeholder="start datum">
-        <mat-datepicker-toggle  matSuffix [for]="startStream" ></mat-datepicker-toggle>
+        <input matInput required [matDatepicker]="startStream" [(ngModel)]="room['startStream']" name="startStream"
+          placeholder="start datum">
+        <mat-datepicker-toggle matSuffix [for]="startStream"></mat-datepicker-toggle>
         <mat-datepicker #startStream></mat-datepicker>
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" class="col-md-6">
         <mat-label>Kies een tijd</mat-label>
-        <input matInput required  [ngxTimepicker]="fullTimeStart" [format]="24" name="startTime" [(ngModel)]="startTime">
+        <input matInput required [ngxTimepicker]="fullTimeStart" [format]="24" name="startTime" [(ngModel)]="startTime">
         <ngx-material-timepicker-toggle matSuffix [for]="fullTimeStart"></ngx-material-timepicker-toggle>
         <ngx-material-timepicker #fullTimeStart></ngx-material-timepicker>
       </mat-form-field>
     </div>
-      <div>
-      <mat-form-field appearance="fill">
+    <div>
+      <mat-form-field appearance="fill" class="col-md-6">
         <mat-label>enddate</mat-label>
-        <input matInput required [matDatepicker]="endStream" [(ngModel)]="room['endStream']" name="endStream" placeholder="eind datum">
-        <mat-datepicker-toggle  matSuffix [for]="endStream" ></mat-datepicker-toggle>
+        <input matInput required [matDatepicker]="endStream" [(ngModel)]="room['endStream']" name="endStream"
+          placeholder="eind datum">
+        <mat-datepicker-toggle matSuffix [for]="endStream"></mat-datepicker-toggle>
         <mat-datepicker #endStream></mat-datepicker>
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" class="col-md-6">
         <mat-label>Kies een tijd</mat-label>
         <input matInput required [ngxTimepicker]="fullTimeEnd" [format]="24" name="endTime" [(ngModel)]="endTime">
         <ngx-material-timepicker-toggle matSuffix [for]="fullTimeEnd"></ngx-material-timepicker-toggle>
         <ngx-material-timepicker #fullTimeEnd></ngx-material-timepicker>
       </mat-form-field>
     </div>
-    <button mat-raised-button color="primary" type="submit"
-    [disabled]="!roomsForm.form.valid">Submit</button>
-    </form>
-  </div>
-    <div class="col-xs-6">
-      <form #presentatorForm="ngForm" (ngSubmit)="onSubmitPresentator()" >
-        <div>
-          <mat-form-field class="example-full-width">
-            <input matInput
-            [(ngModel)]="presentatorEmail" name="presentatorEmail" placeholder="email presentator">
-          </mat-form-field>
-          <div class="error" *ngIf="isInvalidPresentator">
-            <p>Email not found</p>
-        </div>
-        <div class="verified" *ngIf="isVerifiedPresentator">
-            <p>Verified</p>
-        </div>
-          <button mat-raised-button color="primary" type="submit">Verifieer</button>
-        </div>
-      </form>
-      <form #moderatorForm="ngForm" (ngSubmit)="onSubmitModerator()" >
-        <div>
-          <mat-form-field class="example-full-width">
-            <input matInput
-            [(ngModel)]="moderatorEmail" name="moderatorEmail" placeholder="email moderator">
-          </mat-form-field>
-          <div class="error" *ngIf="isInvalidModerator">
-            <p>Email not found</p>
-        </div>
-        <div class="verified" *ngIf="isVerifiedModerator">
-            <p>Verified</p>
-        </div>
-          <button mat-raised-button color="primary" type="submit">Verifieer</button>
-        </div>
-      </form>
+    <div class="col-md-6">
+      <button mat-raised-button color="primary" type="submit" class="col-md-12"
+      [disabled]="!roomsForm.form.valid">Submit</button>
     </div>
-  </div>
+    
+  </form>
+
+</div>

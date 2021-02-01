@@ -25,6 +25,10 @@ export class RoomService {
     return this.http.get<Room[]>(this.apiUrl + "api/room/presentator/"+presentatorID);
   }
 
+  getIsRoomLive(id: number) : Observable<Boolean> {
+    return this.http.get<Boolean>(this.apiUrl + "api/room/islive/" + id);
+  }
+
   getRoom(id: number): Observable<Room> {
     return this.http.get<Room>(this.apiUrl + "api/room/" + id);
   }

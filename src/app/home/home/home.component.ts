@@ -64,13 +64,24 @@ export class HomeComponent implements OnInit {
   }
 
   goLive(room: Room) {
-    if (confirm("Ben je zeker dat je live wil gaan?")) {
-      room["live"] = true;
-      this._roomService.updateRoom(room["roomID"], room).subscribe((result) => {
-        this.snackBar.open("Room " + room["name"] + " gaat live.", "", { duration: 5000 });
-        this.update();
-      });
+    if(room["live"] === true) {
+      if (confirm("Room staat al live.\nBen je zeker dat je deze niet meer als live wil publiceren?")) {
+        room["live"] = false;
+        this._roomService.updateRoom(room["roomID"], room).subscribe((result) => {
+          this.snackBar.open("Room " + room["name"] + " is niet meer live.", "", { duration: 5000 });
+          this.update();
+        });
+      }
+    } else {
+      if (confirm("Ben je zeker dat je live wil gaan?")) {
+        room["live"] = true;
+        this._roomService.updateRoom(room["roomID"], room).subscribe((result) => {
+          this.snackBar.open("Room " + room["name"] + " gaat live.", "", { duration: 5000 });
+          this.update();
+        });
+      }
     }
+    
   }
 
   managePolls(id: number) {
