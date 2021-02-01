@@ -15,7 +15,8 @@ export class SignalRService {
   messageReceived = new EventEmitter<Message>();  
   connectionEstablished = new EventEmitter<Boolean>();  
   pollReceived = new EventEmitter<Poll>();
-  
+  questionReceived = new EventEmitter<Poll>();
+
   private connectionIsEstablished = false;  
   private _hubConnection: HubConnection;  
 
@@ -34,6 +35,10 @@ export class SignalRService {
   sendMessageToGroup(message: Message, roomID: number) {  
     this._hubConnection.invoke('SendMessageToRoomAsync', message, roomID.toString());  
   }  
+
+  sendQuestion(message: Message, roomID: number) {  
+    this._hubConnection.invoke('SendQuestionAsync', message, roomID.toString());  
+  } 
   
   private createConnection() {  
     this._hubConnection = new HubConnectionBuilder()  
@@ -75,6 +80,9 @@ export class SignalRService {
     }); 
     this._hubConnection.on("ReceivePoll", (data: any) => {
       this.pollReceived.emit(data);
+    });
+    this._hubConnection.on("ReceiveQuestion", (data: any) => {
+      this.questionReceived.emit(data);
     });
   }  
 }

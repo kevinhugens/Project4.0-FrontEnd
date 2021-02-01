@@ -30,7 +30,8 @@ export class RoomsComponent implements OnInit {
   //chat
   roomId: number;
   txtMessage: string = '';
-  messages = new Array<Message>();  
+  messages = new Array<Message>(); 
+  questions =  new Array<Message>(); 
   message = new Message();  
   userId;
   username ="";
@@ -106,9 +107,17 @@ export class RoomsComponent implements OnInit {
     }  
   }  
   private subscribeToEvents(): void {  
+    
+    this._signalRService.questionReceived.subscribe((message: Message) => {  
+      this._ngZone.run(() => { 
+          console.log("message")  
+          this.questions.push(message);  
+      });  
+    });  
   
     this._signalRService.messageReceived.subscribe((message: Message) => {  
       this._ngZone.run(() => {  
+        console.log("message")
         if (message.roomId == this.roomId) {  
           this.messages.push(message);  
         }
@@ -119,6 +128,7 @@ export class RoomsComponent implements OnInit {
       //wachten tot een connectie gemaakt is voordat we een room joinen
       this._ngZone.run(() => {  
         this._signalRService.joinRoom(this.roomId);
+        console.log("join")
       });  
     });  
   }  
