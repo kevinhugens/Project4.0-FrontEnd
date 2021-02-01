@@ -1,11 +1,22 @@
 <div class="messaging">
   <div class="msg_history">
-    <li class="message" *ngFor="let msg of messages">
-      <div *ngIf="
-                msg.clientuniqueid !== userId;
-                then incoming_msg;
-                else outgoing_msg
-              "></div>
+    <li class="message" *ngFor="let msg of messages; let i = index">
+      <div *ngIf="msg.isQuestion; else messagetemplate">
+        <div *ngIf="userId == modId" class="question" [ngClass]="{'msg.isValidatedQuestion': answered}">
+          <p> <strong>{{msg.username}}: </strong>{{ msg.message }}</p>
+          <div *ngIf="!msg.IsValidatedQuestion">
+            <button class="btn btn-success" (click)=AcceptQuestion(i)>Accepteer</button>
+            <button class="btn btn-danger" (click)=RejectQuestion(i)>Weiger</button>
+          </div>
+        </div>
+      </div>
+      <ng-template #messagetemplate >
+        <div *ngIf="
+          msg.clientuniqueid !== userId;
+          then incoming_msg;
+          else outgoing_msg">
+        </div>
+      </ng-template>
       <ng-template #incoming_msg>
         <div class="incoming_msg">
           <div class="received_msg">
@@ -26,6 +37,8 @@
   </div>
   <div class="type_msg">
     <form class="input_msg_write" (ngSubmit)="sendMessage()">
+      <input type="checkbox" id="questionbox" name="questionbox" [(ngModel)]="isQuestion">
+      <label for="questionbox">Question to presentator</label>
       <input type="text" class="write_msg" placeholder="Type a message" name="newMessage" [(ngModel)]="txtMessage"
         (keydown.enter)="sendMessage()" />
       <button mat-icon-button class="msg_send_btn" type="submit">

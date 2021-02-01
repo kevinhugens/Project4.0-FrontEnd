@@ -6,6 +6,8 @@ import {Message} from 'src/app/shared/models/message.model'
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
 import { UserInRoom } from 'src/app/shared/models/user-in-room.model';
 import { UserInRoomService } from 'src/app/shared/services/user-in-room.service';
+import { Room } from 'src/app/shared/models/room.model';
+import { RoomService } from 'src/app/shared/services/room.service';
 
 @Component({
   selector: 'app-chat',
@@ -14,6 +16,7 @@ import { UserInRoomService } from 'src/app/shared/services/user-in-room.service'
 })
 export class ChatComponent implements OnInit {
   @Input() roomId: number;
+  modId =-1; //
   apiUrl = environment.apiLink;
   title = 'ClientApp';  
   txtMessage: string = '';
@@ -22,11 +25,13 @@ export class ChatComponent implements OnInit {
   userId;
   username ="";
   lastMessageRecievedTime = new Date(0);
+  isQuestion: Boolean;
   constructor(  
     private signalRService: SignalRService,  
     private _ngZone: NgZone  ,
     private _authenticateService: AuthenticateService,
-    private _userInRoomService: UserInRoomService
+    private _userInRoomService: UserInRoomService,
+    private _roomService: RoomService
   ) {
     this._authenticateService.loggedUser.subscribe(
       result => {
@@ -36,6 +41,7 @@ export class ChatComponent implements OnInit {
         }
       }
     );
+    
     this.subscribeToEvents();  
   }  
   sendMessage(): void {  
@@ -48,14 +54,28 @@ export class ChatComponent implements OnInit {
       this.message.message = this.txtMessage;  
       this.message.date = new Date();  
       this.message.username = this.username; 
-      //this.messages.push(this.message);  
-      //in comments voor doubles te vermijden. Kan wel intresant zijn voor de gebruiker zijn als het bericht niet aankomt dat er dan een
-      //teken bij het bericht komt te staan.
+      this.message.IsQuestion = this.isQuestion;
+      if(this.modId == -1){
+        this.message.IsValidatedQuestion = true; //als er geen moderator is wordt de vraag meteen doorgestuurd naar de presentator
+      }else{
+        this.message.IsValidatedQuestion = false;
+      }
+      
       console.log(this.message);
       this.signalRService.sendMessageToGroup(this.message, this.roomId);  
       this.txtMessage = '';  
     }  
   }  
+  AcceptQuestion(index){
+    this.messages[index].IsValidatedQuestion = true;
+    this.messages[index].IsAcceptedQuestion = true;
+    this.signalRService.sendQuestion(this.message, this.roomId);
+  }
+  RejectQuestion(index){
+    this.messages[index].IsValidatedQuestion = true;
+    this.messages[index].IsAcceptedQuestion = false;
+    this.signalRService.sendQuestion(this.message, this.roomId);
+  }
   private subscribeToEvents(): void {  
   
     this.signalRService.messageReceived.subscribe((message: Message) => {  
@@ -73,10 +93,22 @@ export class ChatComponent implements OnInit {
         this.signalRService.joinRoom(this.roomId);
       });  
     });  
+
+    this.signalRService.questionReceived.subscribe((message: Message) => {  
+      this._ngZone.run(() => {   
+          console.log(message)
+      });  
+    });  
   }  
 
   ngOnInit(): void {
-    
+    this._roomService.getRoom(this.roomId).subscribe(result =>{
+      if(result["moderatorID"]!= null) {
+        this.modId = result["moderatorID"];
+        
+      }
+      console.log("mod: "+this.modId)
+    })
   }
 
 }

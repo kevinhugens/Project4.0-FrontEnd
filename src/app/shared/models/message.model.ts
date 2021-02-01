@@ -4,5 +4,7 @@ export class Message {
     username: string; //De naam van de gebruiker die het bericht verzend. 
     message: string;
     date: Date; //onnodig?
-    showDate?: Boolean; //voor in de html te weten of de datum gezien moet worden
+    IsQuestion: Boolean;
+    IsValidatedQuestion: Boolean; //validated betekend dat de moderator het bekeken heeft, niet of de vraag goegekeurt is
+    IsAcceptedQuestion: Boolean; //betekend dat moderator het goedgekeurt heeft.
 }

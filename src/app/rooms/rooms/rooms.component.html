@@ -45,6 +45,17 @@
                     <button class="btn-primary btn" type="button" (click)="sendMessage()">Verstuur</button>
                 </div>
             </div>
+            <hr>
+            <h3>Inkomende vragen</h3>
+            <div class="center">
+                <div class="qstns">
+                    <div *ngFor="let qst of questions">
+                        <p>
+                            <Strong>{{qst.username}} : </Strong>{{qst.message}}
+                        </p>
+                    </div>
+                </div>
+            </div>
 
         </ng-container>
     </ng-container>
