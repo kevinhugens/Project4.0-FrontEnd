@@ -47,13 +47,13 @@ export class HomeComponent implements OnInit {
     if (room["password"] !== null && room["password"] !== "") {
       var password = prompt("Geef het stream wachtwoord op");
       if (password == room["password"]) {
-        this._router.navigate(["room"]);
+        this._router.navigate(["room/"+ room["roomID"]]);
       }
       else {
         alert("Verkeerd wachtwoord!");
       }
     } else {
-      this._router.navigate(["room"]);
+      this._router.navigate(["room/"+ room["roomID"]]);
     }
   }
 

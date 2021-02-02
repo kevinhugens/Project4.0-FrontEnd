@@ -69,17 +69,15 @@
   <div class="row">
     <ng-container class="col-12" *ngFor="let room of roomslive">
       <div class="card mr-2" style="width: 18rem;">
-        <div class="card-body" (click)="followStream(room)" matTooltip="Click to follow stream">
+        <div class="card-body">
           <h5 class="card-title text-left">{{room.name}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{room.startStream | date:'dd/MM/yyyy HH:mm'}} - {{room.endStream |
             date:'HH:mm'}}</h6>
           <p class="card-text">{{room.description}}</p>
         </div>
         <div class="card-footer">
-          <button *ngIf="loggedUser['userID'] != room['presentatorID']; else presentator" class="btn btn-info" (click)="followStream(room)">Follow stream</button>
-          <ng-template #presentator>
-            <button class="btn btn-info" (click)="panel(room)">Panel</button>
-          </ng-template>
+          <button class="btn btn-info" (click)="followStream(room)">Follow stream</button>
+          <button *ngIf="loggedUser['userID'] == room['presentatorID']" class="btn btn-success ml-3" (click)="panel(room)">Panel</button>
         </div>
       </div>
     </ng-container>

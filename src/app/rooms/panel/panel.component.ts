@@ -34,12 +34,12 @@ export class PanelComponent implements OnInit {
   ngOnInit(): void {
     this.roomId = Number(this.route.snapshot.paramMap.get("id"));
     this._authenticateService.loggedUser.subscribe((result) => {
-      this.loggedUser = result;
-      if (this.roomId) {
+      if (result !== null && result !== undefined && this.roomId) {
+        this.loggedUser = result;
         this._roomService.getIsRoomLive(this.roomId).subscribe((live) => {
           if (live == true) {
             this._roomService.getRoom(this.roomId).subscribe((room) => {
-              if (result !== null && result !== undefined && room !== null) {
+              if (room !== null) {
                 this.selectedRoom = room;
                 this.userId = result["userID"].toString();
                 this.username = result["firstName"];
