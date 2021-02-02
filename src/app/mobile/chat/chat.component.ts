@@ -71,12 +71,12 @@ export class ChatComponent implements OnInit {
   AcceptQuestion(index){
     this.messages[index].IsValidatedQuestion = true;
     this.messages[index].IsAcceptedQuestion = true;
-    this.signalRService.sendQuestion(this.message, this.roomId);
+    this.signalRService.sendQuestion(this.messages[index], this.roomId);
   }
   RejectQuestion(index){
     this.messages[index].IsValidatedQuestion = true;
     this.messages[index].IsAcceptedQuestion = false;
-    this.signalRService.sendQuestion(this.message, this.roomId);
+    this.signalRService.sendQuestion(this.messages[index], this.roomId);
   }
   private subscribeToEvents(): void {  
   

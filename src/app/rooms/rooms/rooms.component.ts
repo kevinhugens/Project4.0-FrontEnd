@@ -74,6 +74,12 @@ export class RoomsComponent implements OnInit {
     this._signalRService.sendPoll(poll,this.selectedRoom["roomID"]);
   }
 
+  questionAnswered(index){
+    if (index > -1) {
+      this.questions.splice(index, 1);
+   }
+  }
+
   gatherPollsFromRoom(){
     this._pollService.getAllPollsByRoomID(this.selectedRoom["roomID"]).subscribe((result) => {
       this.lijstPolls = result;
@@ -107,11 +113,15 @@ export class RoomsComponent implements OnInit {
     }  
   }  
   private subscribeToEvents(): void {  
+
+    //nog zorgen dat enkel gesubt wordt als gebruiker een presentator is.
     
     this._signalRService.questionReceived.subscribe((message: Message) => {  
       this._ngZone.run(() => { 
-          console.log("message")  
-          this.questions.push(message);  
+          if(message["isAcceptedQuestion"]){
+            this.questions.push(message);  
+          }
+          
       });  
     });  
   
