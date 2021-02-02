@@ -37,7 +37,8 @@
     <form (ngSubmit)="sendMessage()">
       <input type="text" class="input_msg_write" placeholder="Type a message" name="newMessage" [(ngModel)]="txtMessage"
         (keydown.enter)="sendMessage()" />
-      <mat-button-toggle *ngIf="!hideQstButton" class="msg_qst_radio" checked="checked" [checked]="isQuestion" (change)="isQuestion = $event.source.checked" name="questionbox">
+      <mat-button-toggle *ngIf="!hideQstButton" class="msg_qst_radio" checked="checked" [checked]="isQuestion"
+        (change)="isQuestion = $event.source.checked" name="questionbox">
         Vraag
       </mat-button-toggle>
       <button mat-icon-button class="msg_send_btn ml-3" type="submit">
@@ -45,3 +46,4 @@
       </button>
     </form>
   </div>
+</div>
