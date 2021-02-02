@@ -10,13 +10,13 @@ import { ChatComponent } from './mobile/chat/chat.component';
 import { RoomsEditComponent } from './rooms/rooms-edit/rooms-edit.component';
 import { MobileRoomComponent } from './mobile/mobile-room/mobile-room.component';
 import { MobileHomeComponent } from './mobile/mobile-home/mobile-home.component';
-
+import { PanelComponent } from './rooms/panel/panel.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'room', component: RoomsComponent },
   { path: 'room/:id', component: RoomsComponent },
-  { path: 'room/presentator/:id', component: RoomsComponent },
+  { path: 'room/presentator/:id', component: PanelComponent },
   { path: 'polls/:id', component: PollsComponent },
   { path: 'managepolls', component: ManagePollsComponent },
   { path: 'login', component: LoginComponent },

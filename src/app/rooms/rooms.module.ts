@@ -5,11 +5,12 @@ import { RoomsCreateComponent } from './rooms-create/rooms-create.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RoomsEditComponent } from './rooms-edit/rooms-edit.component';
 import { MobileModule } from '../mobile/mobile.module';
+import { PanelComponent } from './panel/panel.component';
 
 
 
 @NgModule({
-  declarations: [RoomsComponent, RoomsCreateComponent, RoomsEditComponent],
+  declarations: [RoomsComponent, RoomsCreateComponent, RoomsEditComponent, PanelComponent],
   imports: [
     CommonModule,
     SharedModule,

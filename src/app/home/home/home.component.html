@@ -78,7 +78,7 @@
         <div class="card-footer">
           <button *ngIf="loggedUser['userID'] != room['presentatorID']; else presentator" class="btn btn-info" (click)="followStream(room)">Follow stream</button>
           <ng-template #presentator>
-            <button class="btn btn-info" (click)="followStream(room)">Panel</button>
+            <button class="btn btn-info" (click)="panel(room)">Panel</button>
           </ng-template>
         </div>
       </div>

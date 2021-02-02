@@ -39,6 +39,9 @@ export class HomeComponent implements OnInit {
     this._router.navigate(["room/edit"]);
 
   }
+  panel(room: Room) {
+    this._router.navigate(["room/presentator/"+room["roomID"]]);
+  }
   followStream(room: Room) {
     this._roomService.selectedRoom = room;
     if (room["password"] !== null && room["password"] !== "") {

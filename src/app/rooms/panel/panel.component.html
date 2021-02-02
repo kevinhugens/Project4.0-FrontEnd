@@ -1,0 +1,47 @@
+<ng-container *ngIf="loggedUser; else notLogged">
+    <ng-container *ngIf="selectedRoom; else noRoomSelected">
+        <h3>Presentator Panel</h3>
+        <h4>
+            Overzicht van polls
+        </h4>
+        <div class="row mb-3" *ngFor="let poll of lijstPolls"
+            style="align-items: center;display: flex;justify-content: center;">
+            <span class="col col-md-4 mr-3">{{ poll.question }}</span>
+            <button class="btn btn-info mr-3" (click)="openPoll(poll)">Open</button>
+            <button class="btn btn-success" (click)="showResults(poll)">Results</button>
+        </div>
+        <div class="row mb-3" *ngIf="!(lijstPolls.length>0)" style="align-items: center;display: flex;justify-content: center;">
+            <h5>Geen polls ingesteld voor deze stream</h5>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-8 center">
+                <h3>Live Chat</h3>
+                <app-chat [roomId]=roomId [hideQstButton]="true"></app-chat>
+            </div>
+        
+            <div class="center col-md-4">
+                <h3>Inkomende vragen</h3>
+                <div class="qstns">
+                    <div *ngFor="let qst of questions; let i = index">
+                        <p>
+                            <Strong>{{qst.username}} : </Strong>{{qst.message}} <button class="btn btn-danger"
+                                (click)="questionAnswered(i)">Beantwoord</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" class="text-right" style="padding-bottom: 50px;">
+            <button class="btn btn-danger" (click)="stopStream()">Stop stream</button>
+        </div>
+    </ng-container>
+</ng-container>
+
+
+<ng-template #notLogged>
+    <h3>Meld aan om een stream te volgen.</h3>
+</ng-template>
+<ng-template #noRoomSelected>
+    <h3>Selecteer een room op de homepagina om een stream te kunnen volgen.</h3>
+</ng-template>
