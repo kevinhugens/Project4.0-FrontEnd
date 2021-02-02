@@ -57,15 +57,23 @@ export class ChatComponent implements OnInit {
       this.message.date = new Date();  
       this.message.username = this.username; 
       this.message.IsQuestion = this.isQuestion;
-      if(this.modId == -1){
-        this.message.IsValidatedQuestion = true; //als er geen moderator is wordt de vraag meteen doorgestuurd naar de presentator
+      if(this.isQuestion){
+        if(this.modId == -1){
+          this.message.IsValidatedQuestion = true;
+          this.message.IsAcceptedQuestion = true;
+           //als er geen moderator is wordt de vraag meteen doorgestuurd naar de presentator
+           this.signalRService.sendQuestion(this.message, this.roomId)
+        }else{
+          this.message.IsValidatedQuestion = false;
+        }
       }else{
-        this.message.IsValidatedQuestion = false;
+        console.log(this.message);
+        this.signalRService.sendMessageToGroup(this.message, this.roomId);  
+        this.txtMessage = '';  
       }
       
-      console.log(this.message);
-      this.signalRService.sendMessageToGroup(this.message, this.roomId);  
-      this.txtMessage = '';  
+      
+      
     }  
   }  
   AcceptQuestion(index){
