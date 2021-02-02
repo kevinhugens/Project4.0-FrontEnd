@@ -39,6 +39,10 @@ export class SignalRService {
   sendQuestion(message: Message, roomID: number) {  
     this._hubConnection.invoke('SendQuestionAsync', message, roomID.toString());  
   } 
+
+  isConnected(){
+    return this.connectionIsEstablished
+  }
   
   private createConnection() {  
     this._hubConnection = new HubConnectionBuilder()  

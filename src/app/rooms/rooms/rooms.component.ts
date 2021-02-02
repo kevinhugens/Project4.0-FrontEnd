@@ -44,7 +44,6 @@ export class RoomsComponent implements OnInit {
     this._authenticateService.loggedUser.subscribe((result) => {
       this.loggedUser = result;
       if (this.roomId) {
-        this.subscribeToEvents();
         this._roomService.getIsRoomLive(this.roomId).subscribe((live) => {
           if (live == true) {
             this._roomService.getRoom(this.roomId).subscribe((room) => {
@@ -56,6 +55,12 @@ export class RoomsComponent implements OnInit {
                 this.value += "," + result["token"];
                 if (this.loggedUser.userID == this.selectedRoom["presentatorID"]) {
                   this.isPresentator = true;  
+                  if(this._signalRService.isConnected()){
+                    console.log("blablabla")
+                    this._signalRService.joinRoom(this.roomId);
+                    
+                  }
+                  this.subscribeToEvents();
                   this.gatherPollsFromRoom();
                 } else if (this.selectedRoom["linkStream"]) {
                   this.streamUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.selectedRoom["linkStream"]);
