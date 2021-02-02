@@ -63,8 +63,13 @@ export class ChatComponent implements OnInit {
           this.message.IsAcceptedQuestion = true;
            //als er geen moderator is wordt de vraag meteen doorgestuurd naar de presentator
            this.signalRService.sendQuestion(this.message, this.roomId)
+           this.txtMessage = '';  
+           this.isQuestion = false;
         }else{
           this.message.IsValidatedQuestion = false;
+          this.txtMessage = '';  
+           this.isQuestion = false;
+           this.signalRService.sendMessageToGroup(this.message, this.roomId);  //een moderator kijkt op een message of het een vraag is, niet met de sendQuestionfunctie dus.
         }
       }else{
         console.log(this.message);
