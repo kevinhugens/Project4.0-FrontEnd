@@ -41,7 +41,7 @@
                 
                 <div class="center col-md-4">
                     <h3>Inkomende vragen</h3>
-                    <div class="qstns">
+                    <div class="qstns" >
                         <div *ngFor="let qst of questions; let i = index">
                             <p>
                                 <Strong>{{qst.username}} : </Strong>{{qst.message}} <button class="btn btn-danger" (click)="questionAnswered(i)">Beantwoord</button>
@@ -50,14 +50,12 @@
                     </div>
                 </div>
             </div>
-            <hr>
             <div class="row" class="text-right" style="padding-bottom: 50px;">
                 <button class="btn btn-danger" (click)="stopStream()">Stop stream</button>
             </div>
         </ng-container>
     </ng-container>
 </ng-container>
-
 
 <ng-template #notLogged>
     <h3>Meld aan om een stream te volgen.</h3>
