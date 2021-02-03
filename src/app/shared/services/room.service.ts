@@ -21,8 +21,14 @@ export class RoomService {
   getAllLiveRooms(): Observable<Room[]> {
     return this.http.get<Room[]>(this.apiUrl + "api/room/live");
   }
-  getAllRoomsFromPresentator(presentatorID: number): Observable<Room[]> {
+  getAllRoomsFromPresentatorToManage(presentatorID: number): Observable<Room[]> {
     return this.http.get<Room[]>(this.apiUrl + "api/room/presentator/"+presentatorID);
+  }
+  getAllRoomsFromHistoryFromPresentator(presentatorID: number): Observable<Room[]> {
+    return this.http.get<Room[]>(this.apiUrl + "api/room/history/"+presentatorID);
+  }
+  getAllRoomsFromHistory(): Observable<Room[]> {
+    return this.http.get<Room[]>(this.apiUrl + "api/room/history");
   }
 
   getIsRoomLive(id: number) : Observable<Boolean> {

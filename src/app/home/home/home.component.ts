@@ -47,13 +47,13 @@ export class HomeComponent implements OnInit {
     if (room["password"] !== null && room["password"] !== "") {
       var password = prompt("Geef het stream wachtwoord op");
       if (password == room["password"]) {
-        this._router.navigate(["room/"+ room["roomID"]]);
+        this._router.navigate(["room/watch/"+ room["roomID"]]);
       }
       else {
         alert("Verkeerd wachtwoord!");
       }
     } else {
-      this._router.navigate(["room/"+ room["roomID"]]);
+      this._router.navigate(["room/watch/"+ room["roomID"]]);
     }
   }
 
@@ -97,7 +97,7 @@ export class HomeComponent implements OnInit {
     this._roomService.getAllRoomsForThisWeek().subscribe((rooms) => {
       this.roomsthisweek = rooms;
     });
-    this._roomService.getAllRoomsFromPresentator(this.loggedUser["userID"]).subscribe((data) => {
+    this._roomService.getAllRoomsFromPresentatorToManage(this.loggedUser["userID"]).subscribe((data) => {
       this.roomsbypresentator = data;
     });
     this._roomService.getAllLiveRooms().subscribe((live) => {

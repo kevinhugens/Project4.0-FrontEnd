@@ -1,9 +1,9 @@
 <ng-container *ngIf="loggedUser; else notLogged">
     <ng-container *ngIf="selectedRoom; else noRoomSelected">
-        <h3>Presentator Panel</h3>
-        <h4>
+        <h1>Presentator Panel</h1>
+        <h2>
             Overzicht van polls
-        </h4>
+        </h2>
         <div class="row mb-3" *ngFor="let poll of lijstPolls"
             style="align-items: center;display: flex;justify-content: center;">
             <span class="col col-md-4 mr-3">{{ poll.question }}</span>
@@ -11,17 +11,17 @@
             <button class="btn btn-success" (click)="showResults(poll)">Results</button>
         </div>
         <div class="row mb-3" *ngIf="!(lijstPolls.length>0)" style="align-items: center;display: flex;justify-content: center;">
-            <h5>Geen polls ingesteld voor deze stream</h5>
+            <h3>Geen polls ingesteld voor deze stream</h3>
         </div>
         <hr>
         <div class="row">
             <div class="col-md-8 center">
-                <h3>Live Chat</h3>
+                <h2>Live Chat</h2>
                 <app-chat [roomId]=roomId [hideQstButton]="true"></app-chat>
             </div>
         
             <div class="center col-md-4">
-                <h3>Inkomende vragen</h3>
+                <h2>Inkomende vragen</h2>
                 <div class="qstns">
                     <div *ngFor="let qst of questions; let i = index">
                         <p>
@@ -40,8 +40,8 @@
 
 
 <ng-template #notLogged>
-    <h3>Meld aan om een stream te volgen.</h3>
+    <h1>Meld aan om een stream te volgen.</h1>
 </ng-template>
 <ng-template #noRoomSelected>
-    <h3>Selecteer een room op de homepagina om een stream te kunnen volgen.</h3>
+    <h1>Selecteer een room op de homepagina om een stream te kunnen volgen.</h1>
 </ng-template>

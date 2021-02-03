@@ -2,7 +2,7 @@
   <div class="msg_history">
     <li class="message" *ngFor="let msg of messages; let i = index">
       <div *ngIf="msg.isQuestion; else messagetemplate">
-        <div *ngIf="userId == modId" class="question" [ngClass]="{'msg.isValidatedQuestion': answered}">
+        <div *ngIf="userId == modId" class="question">
           <p> <strong>{{msg.username}}: </strong>{{ msg.message }}</p>
           <div *ngIf="!msg.IsValidatedQuestion">
             <button class="btn btn-success" (click)=AcceptQuestion(i)>Accepteer</button>

@@ -96,5 +96,8 @@
 }
 
 .answered {
+	word-wrap: break-word;
+	list-style-type: none;
+	width: 100%;
 	background: rgb(191, 210, 219);
 }

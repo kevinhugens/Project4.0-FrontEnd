@@ -1,0 +1,40 @@
+<h1>Voorgaande streams</h1>
+<h2>Eigen gepresenteerde streams</h2>
+<div class="row" *ngIf="loggedUser && roomsbypresentator">
+    <ng-container *ngFor="let room of roomsbypresentator">
+        <div class="col-md-3">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title text-left">{{room.name}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{room.startStream | date:'dd/MM/yyyy HH:mm'}} -
+                        {{room.endStream |
+                        date:'HH:mm'}}</h6>
+                    <p class="card-text">{{room.description}}</p>
+                </div>
+                <div class="card-footer text-muted">
+                    <button mat-icon-button (click)="showPolls(room.roomID)">
+                        <mat-icon>poll</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>
+
+<hr>
+<h2>Alle andere streams</h2>
+<div class="row" *ngIf="loggedUser && rooms">
+    <ng-container *ngFor="let room of rooms">
+        <div class="col-md-3">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title text-left">{{room.name}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{room.startStream | date:'dd/MM/yyyy HH:mm'}} -
+                        {{room.endStream |
+                        date:'HH:mm'}}</h6>
+                    <p class="card-text">{{room.description}}</p>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>
