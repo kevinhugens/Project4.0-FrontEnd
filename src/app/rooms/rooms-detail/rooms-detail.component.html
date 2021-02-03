@@ -1,0 +1,28 @@
+<div class="container">
+    <div *ngIf="!loading">
+        <h1>{{room["name"]}}</h1>
+        <h4>Gepresenteerd door: {{room["presentator"]["firstName"]}} {{room["presentator"]["lastName"]}}</h4>
+        <h4 *ngIf="room['moderator']">Moderator: {{room["moderator"]["firstName"]}} {{room["moderator"]["lastName"]}}</h4>
+        <div class="row">
+            <div class="col-6">
+                <h3>Polls</h3>
+                <div class="row mb-3" *ngFor="let poll of lijstPolls"
+                    style="align-items: center;display: flex;justify-content: center;">
+                    <span class="col col-md-4 mr-3">{{ poll.question }}</span>
+                    <button class="btn btn-success" (click)="showResults(poll)">Results</button>
+                    <app-polls [isDetailView]=true [givenPollId]=poll.pollId></app-polls>
+                </div>
+            </div>
+            <div class="col-6">
+                <h3>Gebruikers die gevolgd hebben</h3>
+                <div>
+                    <li *ngFor="let userInRoom of userInRoomList">
+                        <ul>{{userInRoom['user']['firstName']}} {{userInRoom['user']['lastName']}}</ul>
+                    </li>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+</div>

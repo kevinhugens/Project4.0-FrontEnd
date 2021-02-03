@@ -7,11 +7,12 @@ import { RoomsEditComponent } from './rooms-edit/rooms-edit.component';
 import { MobileModule } from '../mobile/mobile.module';
 import { PanelComponent } from './panel/panel.component';
 import { HistoryComponent } from './history/history.component';
+import { RoomsDetailComponent } from './rooms-detail/rooms-detail.component';
 
 
 
 @NgModule({
-  declarations: [RoomsComponent, RoomsCreateComponent, RoomsEditComponent, PanelComponent, HistoryComponent],
+  declarations: [RoomsComponent, RoomsCreateComponent, RoomsEditComponent, PanelComponent, HistoryComponent, RoomsDetailComponent],
   imports: [
     CommonModule,
     SharedModule,

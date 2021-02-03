@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
 import { Poll } from 'src/app/shared/models/poll.model';
@@ -15,6 +15,8 @@ import { UserPollService } from 'src/app/shared/services/user-poll.service';
   styleUrls: ['./polls.component.scss']
 })
 export class PollsComponent implements OnInit {
+  @Input() isDetailView: boolean;
+  @Input() givenPollId: number; //het pollId dat meegegeven wordt waneer het via een component opgeroepen wordt.
   loggedUser: User = null;
   poll: Poll;
   pollID: number;
@@ -28,7 +30,12 @@ export class PollsComponent implements OnInit {
     private route: ActivatedRoute, private router: Router, private _authenticateService: AuthenticateService, private _roomService: RoomService) { }
 
   ngOnInit(): void {
-    this.pollID = Number(this.route.snapshot.paramMap.get("id"));
+    if(this.isDetailView){
+      this.pollID = this.givenPollId
+    }else{
+      this.pollID = Number(this.route.snapshot.paramMap.get("id"));
+    }
+
     this._authenticateService.loggedUser.subscribe((result) => {
       if(result != null) {
         this.loggedUser = result;

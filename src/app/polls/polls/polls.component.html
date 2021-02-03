@@ -11,7 +11,7 @@
         <p-chart type="doughnut" [data]="data"></p-chart>
     
         <div class="row" class="text-right mt-5">
-            <button class="btn btn-primary" (click)="goBackToPresentatorPanel()">Presentator panel</button>
+            <button *ngIf="!isDetailView" class="btn btn-primary" (click)="goBackToPresentatorPanel()">Presentator panel</button>
         </div>
     </div>
 </ng-template>
