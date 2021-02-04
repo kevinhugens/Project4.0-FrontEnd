@@ -3,6 +3,7 @@ import { AuthenticateService } from 'src/app/security/services/authenticate.serv
 import { Room } from 'src/app/shared/models/room.model';
 import { User } from 'src/app/shared/models/user.model';
 import { RoomService } from 'src/app/shared/services/room.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-history',
@@ -13,7 +14,7 @@ export class HistoryComponent implements OnInit {
   loggedUser: User = null;
   roomsbypresentator: Room[] = [];
   rooms: Room[] = [];
-  constructor(private _roomService: RoomService, private _authenticateService: AuthenticateService) { }
+  constructor(private _roomService: RoomService, private _authenticateService: AuthenticateService, private router: Router) { }
 
   ngOnInit(): void {
     this._authenticateService.loggedUser.subscribe((user) => {
@@ -28,8 +29,9 @@ export class HistoryComponent implements OnInit {
       }
     })
   }
-  showPolls(roomID: number){
+  showDetails(roomID: number){
     console.log(roomID);
+    this.router.navigate(["room/detail/" + roomID]);   
   }
 
 }
