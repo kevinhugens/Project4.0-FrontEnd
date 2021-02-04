@@ -15,10 +15,10 @@ import { UserPollService } from 'src/app/shared/services/user-poll.service';
   styleUrls: ['./polls.component.scss']
 })
 export class PollsComponent implements OnInit {
-  @Input() isDetailView: boolean;
-  @Input() givenPollId: number; //het pollId dat meegegeven wordt waneer het via een component opgeroepen wordt.
+  isDetailView: boolean;
   loggedUser: User = null;
   poll: Poll;
+  roomID
   pollID: number;
   UserPolls: UserPoll[] = [];
   data;
@@ -30,17 +30,15 @@ export class PollsComponent implements OnInit {
     private route: ActivatedRoute, private router: Router, private _authenticateService: AuthenticateService, private _roomService: RoomService) { }
 
   ngOnInit(): void {
-    if(this.isDetailView){
-      this.pollID = this.givenPollId
-    }else{
+      this.isDetailView = Boolean(this.route.snapshot.queryParamMap.get('isDetailView'));
       this.pollID = Number(this.route.snapshot.paramMap.get("id"));
-    }
 
     this._authenticateService.loggedUser.subscribe((result) => {
       if(result != null) {
         this.loggedUser = result;
         this._pollService.getPoll(this.pollID).subscribe((poll) => {
           if(poll!=null) {
+            this.roomID = poll["roomID"];
             this._roomService.getRoom(poll["roomID"]).subscribe((room) => {
               if(room!=null && (this.loggedUser["userID"] == room["presentatorID"])){
                 this.isPresentatorOfPoll = true;
@@ -81,7 +79,10 @@ export class PollsComponent implements OnInit {
   }
 
   goBackToPresentatorPanel() {
-    this.router.navigate(["room"]);
+    this.router.navigate(["room/presentator/" + this.roomID]); //moet aangepast worden
+  }
+  goBackToRoomDetails() {
+    this.router.navigate(["room/detail/" + this.roomID]);
   }
   
 }

@@ -23,7 +23,7 @@ export class RoomsDetailComponent implements OnInit {
   lijstPolls: Poll[] = [];
   loading = true;
 
-  constructor(private route: ActivatedRoute, private _authenticateService: AuthenticateService, private _roomService: RoomService,
+  constructor(private route: ActivatedRoute,private router: Router, private _authenticateService: AuthenticateService, private _roomService: RoomService,
     private _userInRoomService: UserInRoomService, private _pollService: PollService,) { }
 
   ngOnInit(): void {
@@ -58,6 +58,6 @@ export class RoomsDetailComponent implements OnInit {
   }
 
   showResults(poll: Poll){
-    console.log(poll)
+    this.router.navigate(["polls/" + poll["pollID"]],{queryParams: {isDetailView: true}});
   }
 }

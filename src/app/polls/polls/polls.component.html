@@ -12,6 +12,7 @@
     
         <div class="row" class="text-right mt-5">
             <button *ngIf="!isDetailView" class="btn btn-primary" (click)="goBackToPresentatorPanel()">Presentator panel</button>
+            <button *ngIf="isDetailView" class="btn btn-primary" (click)="goBackToRoomDetails()">Room Details</button>
         </div>
     </div>
 </ng-template>
