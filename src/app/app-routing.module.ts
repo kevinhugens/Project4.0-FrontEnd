@@ -8,6 +8,7 @@ import { LoginComponent } from './security/login/login.component';
 import { RoomsCreateComponent } from './rooms/rooms-create/rooms-create.component';
 import { ChatComponent } from './mobile/chat/chat.component';
 import { RoomsEditComponent } from './rooms/rooms-edit/rooms-edit.component';
+import { RoomsDetailComponent } from './rooms/rooms-detail/rooms-detail.component';
 import { MobileRoomComponent } from './mobile/mobile-room/mobile-room.component';
 import { MobileHomeComponent } from './mobile/mobile-home/mobile-home.component';
 import { PanelComponent } from './rooms/panel/panel.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'managepolls', component: ManagePollsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'room/create', component: RoomsCreateComponent },
+  { path: 'room/detail/:id', component: RoomsDetailComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'room/edit', component: RoomsEditComponent },
   { path: 'mobile/room/:id', component: MobileRoomComponent },
