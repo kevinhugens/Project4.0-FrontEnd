@@ -11,16 +11,22 @@
 <div class="row" *ngIf="loggedUser && roomsbypresentator">
   <ng-container *ngFor="let room of roomsbypresentator">
     <div class="col-md-3">
-      <div class="card mb-2">
+      <div class="card mb-2" [ngClass]="{'published' : !room['live'] && room['published'], 'live' : room['live']}">
         <div class="card-body">
-          <h3 *ngIf="room['live'] != true; else live" class="card-title text-left">{{room.name}}</h3>
-          <ng-template #live>
-            <h3 class="card-title text-left">{{room.name}} - LIVE</h3>
-          </ng-template>
-          <h5 class="card-subtitle text-left mb-2 text-muted">{{room.startStream | date:'dd/MM/yyyy HH:mm'}} -
-            {{room.endStream |
-            date:'HH:mm'}}</h5>
-          <p class="card-text">{{room.description}}</p>
+          <div class="row">
+            <h3 class="card-title text-left col-md-6" style="display: flex;align-items: center;line-height: 100%;">{{room.name}} </h3>
+            <p class="col-md-6 text-muted text-right">
+              <button mat-icon-button  (click)="publishRoom(room)" [ngClass]="{'pubbtn' : !room['live'] && room['published']}" mat-raised-button>
+                <mat-icon>check_circle_outline</mat-icon>
+              </button> 
+            </p>            
+          </div>
+          <h5 class="card-subtitle text-left mb-2 text-muted">{{room.startStream | date:'dd/MM/yyyy HH:mm'}} - {{room.endStream | date:'HH:mm'}} <br>
+            Presentator: <strong>{{room["presentator"]["firstName"]}} {{room["presentator"]["lastName"]}}</strong></h5>
+          <p class="card-text">
+            
+            {{room.description}}
+          </p>
         </div>
         <div class="card-footer text-muted">
           <button mat-icon-button (click)="editRoom(room)">
@@ -29,7 +35,7 @@
           <button mat-icon-button class="ml-2" (click)="deleteRoom(room)">
             <mat-icon>delete_forever</mat-icon>
           </button>
-          <button mat-icon-button class="ml-2" (click)="goLive(room)">
+          <button mat-icon-button class="ml-2" (click)="goLive(room)" [ngClass]="{'livebtn' : room['live']}">
             <mat-icon>live_tv</mat-icon>
           </button>
           <button mat-icon-button class="ml-2" (click)="managePolls(room.roomID)">
@@ -51,7 +57,7 @@
   <div class="row">
     <ng-container *ngFor="let room of roomsthisweek">
       <div class="col-md-3">
-        <div class="card mb-2" *ngIf="room.live">
+        <div class="card mb-2">
           <div class="card-body">
             <h3 class="card-title text-left">{{room.name}}</h3>
             <h5 class="card-subtitle text-left mb-2 text-muted">{{room.startStream | date:'dd/MM/yyyy HH:mm'}} -

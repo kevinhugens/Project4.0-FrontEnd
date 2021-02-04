@@ -24,7 +24,6 @@ export class AppComponent {
   logout() {
     localStorage.clear();
     this.snackBar.open("Tot later " + this.currentUser.firstName + " " + this.currentUser.lastName + "!", "", { duration: 5000 });
-    this._authenticateService.logUser(null);
-    this.router.navigate(['home']);
+    window.location.href = "/home"; //hard refresh
   }
 }

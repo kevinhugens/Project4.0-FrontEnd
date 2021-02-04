@@ -5,6 +5,7 @@ import { AuthenticateService } from 'src/app/security/services/authenticate.serv
 import { Message } from 'src/app/shared/models/message.model';
 import { Poll } from 'src/app/shared/models/poll.model';
 import { Room } from 'src/app/shared/models/room.model';
+import { UserInRoom } from 'src/app/shared/models/user-in-room.model';
 import { User } from 'src/app/shared/models/user.model';
 import { PollService } from 'src/app/shared/services/poll.service';
 import { RoomService } from 'src/app/shared/services/room.service';
@@ -28,7 +29,7 @@ export class PanelComponent implements OnInit {
   userId;
   username = "";
   constructor(private route: ActivatedRoute, private router: Router, private _authenticateService: AuthenticateService, private _roomService: RoomService,
-    private _pollService: PollService, private _userInRoomService: UserInRoomService, private _signalRService: SignalRService, private _ngZone: NgZone, 
+    private _pollService: PollService, private _userInRoomService: UserInRoomService, private _signalRService: SignalRService, private _ngZone: NgZone,
     public sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
@@ -44,19 +45,24 @@ export class PanelComponent implements OnInit {
                 this.userId = result["userID"].toString();
                 this.username = result["firstName"];
                 if (this.loggedUser.userID == this.selectedRoom["presentatorID"]) {
-                  if(this._signalRService.isConnected()){
+                  // this._userInRoomService.UserInRoomExists(Number(this.loggedUser["userID"]), this.roomId).subscribe(result => {
+                  //   if (!result) {
+                  //     var userInRoom = new UserInRoom();
+                  //     userInRoom.RoomID = this.roomId;
+                  //     userInRoom.UserID = Number(this.loggedUser["userID"]);
+                  //     userInRoom.IsAllowed = true;
+                  //     this._userInRoomService.addUserInRoom(userInRoom).subscribe();
+                  //   }
+                  // });
+                  if (this._signalRService.isConnected()) {
                     console.log("blablabla")
                     this._signalRService.joinRoom(this.roomId);
                   }
                   this.subscribeToEvents();
                   this.gatherPollsFromRoom();
                 } else {
-                  this.router.navigate(["room/"+this.selectedRoom["roomID"]]);
+                  this.router.navigate(["room/watch/" + this.selectedRoom["roomID"]]);
                 }
-                  //var userInRoom = new UserInRoom();
-                  //userInRoom.RoomID = this.selectedRoom["roomID"];
-                  //userInRoom.UserID = result["userID"];
-                  //this._userInRoomService.addUserInRoom(userInRoom).subscribe();
               }
             }, () => { console.log("Room bestaat niet."); });
           }

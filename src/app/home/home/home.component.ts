@@ -44,17 +44,17 @@ export class HomeComponent implements OnInit {
   }
   followStream(room: Room) {
     this._roomService.selectedRoom = room;
-    if (room["password"] !== null && room["password"] !== "") {
-      var password = prompt("Geef het stream wachtwoord op");
-      if (password == room["password"]) {
-        this._router.navigate(["room/watch/"+ room["roomID"]]);
-      }
-      else {
-        alert("Verkeerd wachtwoord!");
-      }
-    } else {
-      this._router.navigate(["room/watch/"+ room["roomID"]]);
-    }
+    // if (room["password"] !== null && room["password"] !== "") {
+    //   var password = prompt("Geef het stream wachtwoord op");
+    //   if (password == room["password"]) {
+    //     this._router.navigate(["room/watch/"+ room["roomID"]]);
+    //   }
+    //   else {
+    //     alert("Verkeerd wachtwoord!");
+    //   }
+    // } else {
+    this._router.navigate(["room/watch/"+ room["roomID"]]);
+    //}
   }
 
   deleteRoom(room: Room) {
@@ -65,7 +65,25 @@ export class HomeComponent implements OnInit {
       });
     }
   }
-
+  publishRoom(room:Room) {
+    if(room["published"] === true) {
+      if (confirm("Room is al gepubliceerd.\nBen je zeker dat je dit ongedaan wil maken?")) {
+        room["published"] = false;
+        this._roomService.updateRoom(room["roomID"], room).subscribe((result) => {
+          this.snackBar.open("Room " + room["name"] + " staat niet meer gepubliceerd.", "", { duration: 5000 });
+          this.update();
+        });
+      }
+    } else {
+      if (confirm("Ben je zeker dat je de room wil publiceren?")) {
+        room["published"] = true;
+        this._roomService.updateRoom(room["roomID"], room).subscribe((result) => {
+          this.snackBar.open("Room " + room["name"] + " is gepubliceerd.", "", { duration: 5000 });
+          this.update();
+        });
+      }
+    }
+  }
   goLive(room: Room) {
     if(room["live"] === true) {
       if (confirm("Room staat al live.\nBen je zeker dat je deze niet meer als live wil publiceren?")) {

@@ -11,6 +11,10 @@
                 <ngx-qrcode [elementType]="elementType" [value]="value" class="center">
                 </ngx-qrcode>
             </div>
+            <div class="mt-3 text-center pb-5">
+                <p>Mobiel toestel niet bij de hand? Voer interactie uit vanaf je computer.</p>
+                <a class="btn btn-primary" href="/mobile/room/{{selectedRoom['roomID']}}" target="_blank">Interactie</a>
+            </div>
         </ng-container>
         <ng-container *ngIf="!streamUrl">
             <h3>Onjuiste stream url. Wacht op de presentator om de stream url bij te werken.</h3>
