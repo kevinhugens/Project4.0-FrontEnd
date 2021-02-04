@@ -13,6 +13,7 @@ import { MobileRoomComponent } from './mobile/mobile-room/mobile-room.component'
 import { MobileHomeComponent } from './mobile/mobile-home/mobile-home.component';
 import { PanelComponent } from './rooms/panel/panel.component';
 import { HistoryComponent } from './rooms/history/history.component';
+import { Error404Component } from './shared/error404/error404.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'room/edit', component: RoomsEditComponent },
   { path: 'mobile/room/:id', component: MobileRoomComponent },
   { path: 'mobile/home', component: MobileHomeComponent },
+  { path: '**', component: Error404Component },
 ];
 
 @NgModule({

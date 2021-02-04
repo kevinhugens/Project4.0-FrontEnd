@@ -23,8 +23,9 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import {ChartModule} from 'primeng/chart';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { Error404Component } from './error404/error404.component';
 @NgModule({
-  declarations: [SharedComponent],
+  declarations: [SharedComponent, Error404Component],
   imports: [
     CommonModule,
     FormsModule,

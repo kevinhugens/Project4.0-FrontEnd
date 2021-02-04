@@ -31,25 +31,25 @@ export class RoomsDetailComponent implements OnInit {
     this._authenticateService.loggedUser.subscribe((result) => {
       if (result !== null && result !== undefined && this.roomId) {
         this.loggedUser = result;
-        this._roomService.getRoom(this.roomId).subscribe((room) => {
-          if (room !== null) {
-            this.room = room;
-            //this.loading= false
-            if (this.loggedUser.userID == this.room["presentatorID"]) {
-              //get users in room
-              this._userInRoomService.getAllUsersInRoom(this.roomId).subscribe(result => {
-                this.userInRoomList = result;
-                this.loading = false; //eigenlijk moet loading wachten op 2 resultaten
-              });
-              //get polls of room
-              this._pollService.getAllPollsByRoomID(this.roomId).subscribe((result) => {
-                this.lijstPolls = result;
-              });
-            } else {
-              console.log("navigate")
-            }
-          }
-        }, () => { console.log("Room bestaat niet."); });
+            this._roomService.getRoom(this.roomId).subscribe((room) => {
+              if (room !== null) {
+                this.room = room;
+                if (this.loggedUser.userID == this.room["presentatorID"]) {
+                  //get users in room
+                  this._userInRoomService.getAllUsersInRoom(this.roomId).subscribe(result=>{
+                    this.userInRoomList = result;
+                    this.loading =false;
+                  });
+                  //get polls of room
+                  this._pollService.getAllPollsByRoomID(this.roomId).subscribe((result) => {
+                    this.lijstPolls = result;
+                    this.loading =false;
+                  });
+                } else {
+                  this.router.navigate(["history"])
+                }
+              }
+            }, () => { console.log("Room bestaat niet."); });
       }
     });
   }
