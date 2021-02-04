@@ -21,7 +21,7 @@ export class RoomsComponent implements OnInit {
   elementType = 'url';
   value;
   roomId: number;
-  constructor(private route: ActivatedRoute, private router: Router, private _authenticateService: AuthenticateService, 
+  constructor(private route: ActivatedRoute, private router: Router, private _authenticateService: AuthenticateService,
     private _roomService: RoomService, private _userInRoomService: UserInRoomService, public sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
@@ -38,22 +38,21 @@ export class RoomsComponent implements OnInit {
                     if (room["password"] !== null && room["password"] !== "") {
                       var password = prompt("Geef het stream wachtwoord op");
                       if (password == room["password"]) {
-                        var userInRoom = new UserInRoom();
-                        userInRoom.RoomID = this.roomId;
-                        userInRoom.UserID = Number(this.loggedUser["userID"]);
-                        userInRoom.IsAllowed = true;
-                        this._userInRoomService.addUserInRoom(userInRoom).subscribe();
+                        this.addUserInRoom();
                         this.update(room);
                       }
                       else {
                         alert("Verkeerd wachtwoord!");
-                        this.router.navigate(["home"]);                   
+                        this.router.navigate(["home"]);
                       }
-                    }       
+                    } else {
+                      this.addUserInRoom();
+                      this.update(room);
+                    }
                   } else {
                     this.update(room);
                   }
-                });              
+                });
               }
             });
           }
@@ -70,7 +69,15 @@ export class RoomsComponent implements OnInit {
       ? match[2]
       : null;
   }
-  update(room : Room) {
+
+  addUserInRoom(){
+    var userInRoom = new UserInRoom();
+    userInRoom.RoomID = this.roomId;
+    userInRoom.UserID = Number(this.loggedUser["userID"]);
+    this._userInRoomService.addUserInRoom(userInRoom).subscribe();
+  }
+
+  update(room: Room) {
     this.selectedRoom = room;
     this.value = this.selectedRoom["roomID"];
     this.value += "," + this.loggedUser["token"];

@@ -46,17 +46,16 @@ export class MobileRoomComponent implements OnInit {
                     if (room["password"] !== null && room["password"] !== "") {
                       var password = prompt("Geef het stream wachtwoord op");
                       if (password == room["password"]) {
-                        var userInRoom = new UserInRoom();
-                        userInRoom.RoomID = this.roomId;
-                        userInRoom.UserID = Number(user["userID"]);
-                        userInRoom.IsAllowed = true;
-                        this._userInRoomService.addUserInRoom(userInRoom).subscribe();
+                        this.addUserInRoom();
                         this.allowed = true;
                       }
                       else {
                         alert("Verkeerd wachtwoord!");
                         this.router.navigate(["mobile/home"]);
                       }
+                    } else {
+                      this.addUserInRoom();
+                      this.allowed = true;
                     }
                   } else {
                     this.allowed = true;
@@ -73,6 +72,12 @@ export class MobileRoomComponent implements OnInit {
       }
       this.loading = false;
     });
+  }
+  addUserInRoom(){
+    var userInRoom = new UserInRoom();
+    userInRoom.RoomID = this.roomId;
+    userInRoom.UserID = Number(this.loggedUser["userID"]);
+    this._userInRoomService.addUserInRoom(userInRoom).subscribe();
   }
 
 }

@@ -7,6 +7,4 @@ export class UserInRoom {
     User?: User;
     RoomID: number;
     Room: Room;
-    IsModerator: Boolean;
-    IsAllowed: Boolean;
 }
