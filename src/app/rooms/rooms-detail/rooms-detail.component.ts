@@ -36,20 +36,20 @@ export class RoomsDetailComponent implements OnInit {
               if (room !== null) {
                 this.room = room;
                 console.log(room)
-                //this.loading= false
                 if (this.loggedUser.userID == this.room["presentatorID"]) {
                   //get users in room
                   this._userInRoomService.getAllUsersInRoom(this.roomId).subscribe(result=>{
                     this.userInRoomList = result;
                     console.log(result);
-                    this.loading =false; //eigenlijk moet loading wachten op 2 resultaten
+                    this.loading =false;
                   });
                   //get polls of room
                   this._pollService.getAllPollsByRoomID(this.roomId).subscribe((result) => {
                     this.lijstPolls = result;
+                    this.loading =false;
                   });
                 } else {
-                  console.log("navigate")
+                  this.router.navigate(["history"])
                 }
               }
             }, () => { console.log("Room bestaat niet."); });
