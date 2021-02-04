@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
 import { Poll } from 'src/app/shared/models/poll.model';
-import { Room } from 'src/app/shared/models/room.model';
 import { UserPoll } from 'src/app/shared/models/user-poll.model';
 import { User } from 'src/app/shared/models/user.model';
 import { PollService } from 'src/app/shared/services/poll.service';
@@ -30,9 +29,8 @@ export class PollsComponent implements OnInit {
     private route: ActivatedRoute, private router: Router, private _authenticateService: AuthenticateService, private _roomService: RoomService) { }
 
   ngOnInit(): void {
-      this.isDetailView = Boolean(this.route.snapshot.queryParamMap.get('isDetailView'));
-      this.pollID = Number(this.route.snapshot.paramMap.get("id"));
-
+    this.isDetailView = Boolean(this.route.snapshot.queryParamMap.get('isDetailView'));
+    this.pollID = Number(this.route.snapshot.paramMap.get("id"));
     this._authenticateService.loggedUser.subscribe((result) => {
       if(result != null) {
         this.loggedUser = result;

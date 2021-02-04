@@ -27,8 +27,6 @@ export class RoomsComponent implements OnInit {
   ngOnInit(): void {
     this.roomId = Number(this.route.snapshot.paramMap.get("id"));
     this._authenticateService.loggedUser.subscribe((user) => {
-      console.log(user);
-      console.log(this.roomId);
       if (user !== null && user !== undefined && this.roomId) {
         this.loggedUser = user;
         this._roomService.getIsRoomLive(this.roomId).subscribe((live) => {

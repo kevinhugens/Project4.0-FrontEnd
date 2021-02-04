@@ -1,6 +1,5 @@
 import { Component, Input, NgZone, OnInit } from '@angular/core';
 import { Poll } from 'src/app/shared/models/poll.model';
-import { PollService } from 'src/app/shared/services/poll.service';
 import { SignalRService } from 'src/app/shared/services/signal-r.service';
 import { UserPoll } from 'src/app/shared/models/user-poll.model';
 import { Option } from 'src/app/shared/models/Option.model';

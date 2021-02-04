@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   onSubmit(){
-    //console.log("User wants to login:", this.userLogin);
     this._authenticateService.authenticate(this.userLogin).subscribe(
       result => {
         if (result.token) {

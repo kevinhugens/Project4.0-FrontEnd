@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {Room} from 'src/app/shared/models/room.model'
-import {RoomService} from 'src/app/shared/services/room.service'
-import {UserService} from 'src/app/shared/services/user.service'
-import {UserInRoomService} from 'src/app/shared/services/user-in-room.service'
+import { Room } from 'src/app/shared/models/room.model'
+import { RoomService } from 'src/app/shared/services/room.service'
+import { UserService } from 'src/app/shared/services/user.service'
+import { UserInRoomService } from 'src/app/shared/services/user-in-room.service'
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
 
 @Component({
@@ -14,46 +14,40 @@ import { AuthenticateService } from 'src/app/security/services/authenticate.serv
 export class RoomsCreateComponent implements OnInit {
 
   userId;
-  model : Room;
+  model: Room;
   loading = false;
   submitted = false;
   startTime: String;
   endTime: String;
   linkPattern = "^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$";
-  moderatorEmail ="";
-  presentatorEmail="";
-  isInvalidPresentator=false;
-  isVerifiedPresentator=false;
-  isInvalidModerator=false;
-  isVerifiedModerator=false;
+  moderatorEmail = "";
+  presentatorEmail = "";
+  isInvalidPresentator = false;
+  isVerifiedPresentator = false;
+  isInvalidModerator = false;
+  isVerifiedModerator = false;
 
   constructor(
     private router: Router,
     private _roomService: RoomService,
     private _authenticateService: AuthenticateService,
-    private _userService: UserService,
-    private _userInRoomService: UserInRoomService) {
-     }
+    private _userService: UserService) { }
 
-    
-    ngOnInit(): void {
-      this.model = new Room();
-      this._authenticateService.loggedUser.subscribe(
-        result => {
-          if(result) {
-            this.model.PresentatorID = result.userID;
-            this.userId = result.userID;
-          }
-          
+
+  ngOnInit(): void {
+    this.model = new Room();
+    this._authenticateService.loggedUser.subscribe(
+      result => {
+        if (result) {
+          this.model.PresentatorID = result.userID;
+          this.userId = result.userID;
         }
-      );
-    }
+      }
+    );
+  }
 
-
-
-  onSubmit () {
+  onSubmit() {
     this.submitted = true;
-    //check some stuff
     this.loading = true;
 
     var date = new Date();
@@ -67,44 +61,41 @@ export class RoomsCreateComponent implements OnInit {
     this.model.EndStream = date2;
 
     this._roomService.addRoom(this.model)
-    .subscribe({
-      next: () => {
-        this.router.navigateByUrl("/home");
-      },
-      error: error => {
-        this.loading = false;
-      }}
-    );
-   }
+      .subscribe({
+        next: () => {
+          this.router.navigateByUrl("/home");
+        },
+        error: error => {
+          this.loading = false;
+        }
+      }
+      );
+  }
 
-   onSubmitModerator(){
-    this._userService.getUserByEmail(this.moderatorEmail).subscribe(result=>{
+  onSubmitModerator() {
+    this._userService.getUserByEmail(this.moderatorEmail).subscribe(result => {
       //check if the given email is valid
-      if(result){
-        console.log("found")
+      if (result) {
         this.isVerifiedModerator = true;
         this.isInvalidModerator = false;
-        this.model.ModeratorID = result.userID; 
-      }else{
+        this.model.ModeratorID = result.userID;
+      } else {
         this.isVerifiedModerator = false;
         this.isInvalidModerator = true;
-        console.log("not found")
       }
-    })
-   }
+    });
+  }
 
-   onSubmitPresentator(){
-     this._userService.getUserByEmail(this.presentatorEmail).subscribe(result=>{
-       if(result){
-        this.model.PresentatorID = result.userID
-        console.log("found")
+  onSubmitPresentator() {
+    this._userService.getUserByEmail(this.presentatorEmail).subscribe(result => {
+      if (result) {
+        this.model.PresentatorID = result.userID;
         this.isVerifiedPresentator = true;
         this.isInvalidPresentator = false;
-       }else{
+      } else {
         this.isVerifiedPresentator = false;
         this.isInvalidPresentator = true;
-        console.log("not found")
-       }
-     })
+      }
+    });
   }
 }

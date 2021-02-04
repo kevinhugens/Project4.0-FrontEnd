@@ -2,7 +2,7 @@
     <mat-spinner style="margin-left: auto;margin-right: auto;"></mat-spinner>
 </div>
 <ng-template #result>
-    <div *ngIf="roomExist && isLive && room" class="center">
+    <div *ngIf="room" class="center">
         <div *ngIf="allowed; else notallowed">
             <h2>{{room.name}}</h2>
             <app-polls [roomID]=roomId></app-polls>
@@ -10,14 +10,16 @@
         </div>
     </div>
 </ng-template>
-
-<ng-container *ngIf="!roomExist">
+<ng-container *ngIf="!loggedUser">
+    <h3>Meld aan om de mobile room te joinen!</h3>
+</ng-container>
+<ng-container *ngIf="loggedUser && !roomExist">
     <h3>Deze room bestaat niet!</h3>
 </ng-container>
 <ng-container *ngIf="roomExist && !isLive">
     <h3>Deze room is momenteel niet live!</h3>
 </ng-container>
 <ng-template #notallowed>
-    <h3>Niet toegestaan!</h3>
+    <h3>Vul het wachtwoord in om de room te joinen.</h3>
 </ng-template>
 

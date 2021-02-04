@@ -2,15 +2,12 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder, IHttpConnectionOptions } from '@aspnet/signalr';  
 import {Message} from 'src/app/shared/models/message.model'
 import { environment } from '../../../environments/environment';
-import { AppComponent } from 'src/app/app.component';
 import { Poll } from '../models/poll.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignalRService {
-
-
   apiUrl = environment.apiLink;
   messageReceived = new EventEmitter<Message>();  
   connectionEstablished = new EventEmitter<Boolean>();  
@@ -57,27 +54,22 @@ export class SignalRService {
     this._hubConnection  
       .start()  
       .then(() => {  
-        this.connectionIsEstablished = true;  
-        console.log('Hub connection started');  
+        this.connectionIsEstablished = true;
         this.connectionEstablished.emit(true); 
         
       })  
-      .catch(err => {  
-        console.log('Error while establishing connection, retrying...');  
-        console.log(err);  
+      .catch(err => {
         setTimeout(function () { this.startConnection(); }, 5);  
       });  
   }  
 
   public joinRoom(roomID: number): void{
-    console.log(roomID.toString())
     this._hubConnection.invoke('JoinRoom', roomID.toString()); 
   }
   
   private registerOnServerEvents(): void {  
-    this._hubConnection.on('RecievedCon', (data: any) => {  
-      console.log('verbonden met server...'); 
-      console.log('connectieID: ' + data); //dit is voor te testen, connectieID kan beter niet in frontend gebruikt worden.
+    this._hubConnection.on('RecievedCon', () => {  
+      console.log('Verbonden met live chat groep');
     });  
     this._hubConnection.on('RecieveMessage', (data: any) => {  
       this.messageReceived.emit(data);

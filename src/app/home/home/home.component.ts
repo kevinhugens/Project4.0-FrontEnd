@@ -39,22 +39,14 @@ export class HomeComponent implements OnInit {
     this._router.navigate(["room/edit"]);
 
   }
+
   panel(room: Room) {
     this._router.navigate(["room/presentator/"+room["roomID"]]);
   }
+
   followStream(room: Room) {
     this._roomService.selectedRoom = room;
-    // if (room["password"] !== null && room["password"] !== "") {
-    //   var password = prompt("Geef het stream wachtwoord op");
-    //   if (password == room["password"]) {
-    //     this._router.navigate(["room/watch/"+ room["roomID"]]);
-    //   }
-    //   else {
-    //     alert("Verkeerd wachtwoord!");
-    //   }
-    // } else {
     this._router.navigate(["room/watch/"+ room["roomID"]]);
-    //}
   }
 
   deleteRoom(room: Room) {
@@ -65,6 +57,7 @@ export class HomeComponent implements OnInit {
       });
     }
   }
+
   publishRoom(room:Room) {
     if(room["published"] === true) {
       if (confirm("Room is al gepubliceerd.\nBen je zeker dat je dit ongedaan wil maken?")) {
@@ -84,6 +77,7 @@ export class HomeComponent implements OnInit {
       }
     }
   }
+  
   goLive(room: Room) {
     if(room["live"] === true) {
       if (confirm("Room staat al live.\nBen je zeker dat je deze niet meer als live wil publiceren?")) {

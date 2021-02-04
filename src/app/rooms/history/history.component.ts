@@ -30,7 +30,6 @@ export class HistoryComponent implements OnInit {
     })
   }
   showDetails(roomID: number){
-    console.log(roomID);
     this.router.navigate(["room/detail/" + roomID]);   
   }
 
