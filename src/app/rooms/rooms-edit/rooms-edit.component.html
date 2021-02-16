@@ -1,12 +1,15 @@
 <h1 class="col-md-6">Room wijzigen</h1>
 <div class="row">
-  <form #presentatorForm="ngForm" (ngSubmit)="onSubmitPresentator()" class="col-xs-12 col-md-6">
-    <div>
+  <form #presentatorForm="ngForm" (ngSubmit)="onSubmitPresentator()" class="col-xs-12 col-md-6" >
+    <div *ngIf="!room['live']; else presentatorNoEdit ">
       <mat-form-field class="col-xs-10 col-md-10">
         <input matInput [(ngModel)]="presentatorEmail" name="presentatorEmail" placeholder="email presentator">
       </mat-form-field>
       <button mat-raised-button color="primary" type="submit">Verifieer</button>
     </div>
+    <ng-template #presentatorNoEdit>
+      <h3 style="color: red;">Presentator kan niet gewijzigd worden omdat de room live is.</h3>
+  </ng-template>
   </form>
 
   <div class="col-md-6">
@@ -19,12 +22,15 @@
   </div>
 
   <form #moderatorForm="ngForm" (ngSubmit)="onSubmitModerator()" class="col-xs-12 col-md-6">
-    <div>
+    <div *ngIf="!room['live']; else moderatorNoEdit ">
       <mat-form-field class="col-xd-10 col-md-10">
         <input matInput [(ngModel)]="moderatorEmail" name="moderatorEmail" placeholder="email moderator">
       </mat-form-field>
       <button mat-raised-button color="primary" type="submit">Verifieer</button>
     </div>
+    <ng-template #moderatorNoEdit >
+      <h3 style="color: red;">Moderator kan niet gewijzigd worden omdat de room live is.</h3>
+  </ng-template>
   </form>
 
   <div class="col-md-6">
