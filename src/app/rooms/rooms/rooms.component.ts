@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
@@ -22,7 +23,7 @@ export class RoomsComponent implements OnInit {
   value;
   roomId: number;
   constructor(private route: ActivatedRoute, private router: Router, private _authenticateService: AuthenticateService,
-    private _roomService: RoomService, private _userInRoomService: UserInRoomService, public sanitizer: DomSanitizer) { }
+    private _roomService: RoomService, private _userInRoomService: UserInRoomService, public sanitizer: DomSanitizer, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.roomId = Number(this.route.snapshot.paramMap.get("id"));
@@ -56,7 +57,10 @@ export class RoomsComponent implements OnInit {
               }
             });
           }
-        }, () => { console.log("Room bestaat niet."); });
+        }, () => { 
+          this.snackBar.open("Geen geldige room geselecteerd!", "", { duration: 5000 });
+          this.router.navigate(["home"]); 
+        });
       }
     });
   }

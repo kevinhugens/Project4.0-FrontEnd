@@ -14,16 +14,27 @@
       <div class="card mb-2" [ngClass]="{'published' : !room['live'] && room['published'], 'live' : room['live']}">
         <div class="card-body">
           <div class="row">
-            <h3 class="card-title text-left col-6" style="display: flex;align-items: center;line-height: 100%;">{{room.name}} </h3>
+            <h3 class="card-title text-left col-6" style="display: flex;align-items: center;line-height: 100%;">
+              {{room.name}} </h3>
             <p class="col-6 text-muted text-right">
-              <button mat-icon-button  (click)="publishRoom(room)" [ngClass]="{'pubbtn' : !room['live'] && room['published']}" matTooltip="Publiceren" mat-raised-button>
+              <button mat-icon-button (click)="publishRoom(room)"
+                [ngClass]="{'pubbtn' : !room['live'] && room['published']}" matTooltip="Publiceren" mat-raised-button>
                 <mat-icon>check_circle_outline</mat-icon>
               </button>
-            </p>            
+            </p>
           </div>
-          <h5 class="card-subtitle text-left mb-2 text-muted">{{room.startStream | date:'dd/MM/yyyy HH:mm'}} - {{room.endStream | date:'HH:mm'}} <br>
-            Presentator: <strong>{{room["presentator"]["firstName"]}} {{room["presentator"]["lastName"]}}</strong></h5>
-          <p class="card-text">       
+          <h5 *ngIf="checkDate(room); else titeldatum" class="card-subtitle text-left mb-2 text-muted">
+            {{room.startStream | date:'dd/MM/yyyy HH:mm'}} - {{room.endStream | date:'HH:mm'}} <br>
+            Presentator: <strong>{{room["presentator"]["firstName"]}} {{room["presentator"]["lastName"]}}</strong>
+          </h5>
+          <ng-template #titeldatum>
+            <h5 class="card-subtitle text-left mb-2 text-muted">
+              {{room.startStream | date:'dd/MM/yyyy HH:mm'}} - {{room.endStream | date:'dd/MM/yyyy HH:mm'}} <br>
+              Presentator: <strong>{{room["presentator"]["firstName"]}} {{room["presentator"]["lastName"]}}</strong>
+            </h5>
+          </ng-template>
+
+          <p class="card-text">
             {{room.description}}
           </p>
         </div>
@@ -34,7 +45,8 @@
           <button mat-icon-button class="ml-2" (click)="deleteRoom(room)" matTooltip="Verwijderen">
             <mat-icon>delete_forever</mat-icon>
           </button>
-          <button mat-icon-button class="ml-2" (click)="goLive(room)" [ngClass]="{'livebtn' : room['live']}" matTooltip="Live plaatsen">
+          <button mat-icon-button class="ml-2" (click)="goLive(room)" [ngClass]="{'livebtn' : room['live']}"
+            matTooltip="Live">
             <mat-icon>live_tv</mat-icon>
           </button>
           <button mat-icon-button class="ml-2" (click)="managePolls(room.roomID)" matTooltip="Polls instellen">
@@ -59,8 +71,16 @@
         <div class="card mb-2">
           <div class="card-body">
             <h3 class="card-title text-left">{{room.name}}</h3>
-            <h5 class="card-subtitle text-left mb-2 text-muted">{{room.startStream | date:'dd/MM/yyyy HH:mm'}} - {{room.endStream | date:'HH:mm'}} <br>
-              Presentator: <strong>{{room["presentator"]["firstName"]}} {{room["presentator"]["lastName"]}}</strong></h5>
+            <h5 *ngIf="checkDate(room); else titeldatum" class="card-subtitle text-left mb-2 text-muted">
+              {{room.startStream | date:'dd/MM/yyyy HH:mm'}} - {{room.endStream | date:'HH:mm'}} <br>
+              Presentator: <strong>{{room["presentator"]["firstName"]}} {{room["presentator"]["lastName"]}}</strong>
+            </h5>
+            <ng-template #titeldatum>
+              <h5 class="card-subtitle text-left mb-2 text-muted">
+                {{room.startStream | date:'dd/MM/yyyy HH:mm'}} - {{room.endStream | date:'dd/MM/yyyy HH:mm'}} <br>
+                Presentator: <strong>{{room["presentator"]["firstName"]}} {{room["presentator"]["lastName"]}}</strong>
+              </h5>
+            </ng-template>
             <p class="card-text">{{room.description}}</p>
           </div>
         </div>
@@ -82,8 +102,16 @@
         <div class="card mb-2">
           <div class="card-body">
             <h3 class="card-title text-left">{{room.name}}</h3>
-            <h5 class="card-subtitle text-left mb-2 text-muted">{{room.startStream | date:'dd/MM/yyyy HH:mm'}} - {{room.endStream | date:'HH:mm'}} <br>
-              Presentator: <strong>{{room["presentator"]["firstName"]}} {{room["presentator"]["lastName"]}}</strong></h5>
+            <h5 *ngIf="checkDate(room); else titeldatum" class="card-subtitle text-left mb-2 text-muted">
+              {{room.startStream | date:'dd/MM/yyyy HH:mm'}} - {{room.endStream | date:'HH:mm'}} <br>
+              Presentator: <strong>{{room["presentator"]["firstName"]}} {{room["presentator"]["lastName"]}}</strong>
+            </h5>
+            <ng-template #titeldatum>
+              <h5 class="card-subtitle text-left mb-2 text-muted">
+                {{room.startStream | date:'dd/MM/yyyy HH:mm'}} - {{room.endStream | date:'dd/MM/yyyy HH:mm'}} <br>
+                Presentator: <strong>{{room["presentator"]["firstName"]}} {{room["presentator"]["lastName"]}}</strong>
+              </h5>
+            </ng-template>
             <p class="card-text">{{room.description}}</p>
           </div>
           <div class="card-footer">

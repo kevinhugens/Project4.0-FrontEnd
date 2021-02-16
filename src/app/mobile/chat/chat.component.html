@@ -35,13 +35,13 @@
   </div>
   <div class="type_msg">
     <form (ngSubmit)="sendMessage()">
-      <input type="text" class="input_msg_write" placeholder="Type a message" name="newMessage" [(ngModel)]="txtMessage"
+      <input type="text" class="input_msg_write" placeholder="Schrijf een bericht" name="newMessage" [(ngModel)]="txtMessage"
         (keydown.enter)="sendMessage()" />
       <mat-button-toggle *ngIf="!hideQstButton" class="msg_qst_radio" checked="checked" [checked]="isQuestion"
-        (change)="isQuestion = $event.source.checked" name="questionbox">
+        (change)="isQuestion = $event.source.checked" name="questionbox" matTooltip="Duid aan om een vraag te stellen">
         Vraag
       </mat-button-toggle>
-      <button mat-icon-button class="msg_send_btn ml-3" type="submit">
+      <button mat-icon-button class="msg_send_btn ml-3" type="submit" matTooltip="Verstuur">
         <mat-icon>send</mat-icon>
       </button>
     </form>

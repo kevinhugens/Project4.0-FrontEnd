@@ -1,4 +1,5 @@
 import { Component, NgZone, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
@@ -27,7 +28,7 @@ export class PanelComponent implements OnInit {
   userId;
   username = "";
   constructor(private route: ActivatedRoute, private router: Router, private _authenticateService: AuthenticateService, private _roomService: RoomService,
-    private _pollService: PollService, private _signalRService: SignalRService, private _ngZone: NgZone, public sanitizer: DomSanitizer) { }
+    private _pollService: PollService, private _signalRService: SignalRService, private _ngZone: NgZone, public sanitizer: DomSanitizer, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.roomId = Number(this.route.snapshot.paramMap.get("id"));
@@ -51,8 +52,11 @@ export class PanelComponent implements OnInit {
                   this.router.navigate(["room/watch/" + this.selectedRoom["roomID"]]);
                 }
               }
-            }, () => { console.log("Room bestaat niet."); });
+            })
           }
+        }, () => { 
+          this.snackBar.open("Geen geldige room geselecteerd!", "", { duration: 5000 });
+          this.router.navigate(["home"]); 
         });
       }
     });

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Room } from 'src/app/shared/models/room.model';
 import { RoomService } from 'src/app/shared/services/room.service';
@@ -23,7 +24,8 @@ export class RoomsEditComponent implements OnInit {
   isVerifiedModerator=false;
   constructor(private router: Router,
     private _roomService: RoomService,
-    private _userService: UserService) { }
+    private _userService: UserService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     if(this._roomService.selectedRoom != null) {
@@ -35,6 +37,9 @@ export class RoomsEditComponent implements OnInit {
       var endUur = this.room['endStream'].split("T")[1];
       var res2 = endUur.split(":")[0] + ':' + endUur.split(":")[1];
       this.endTime = res2;
+    } else {
+      this.snackBar.open("Geen room geselecteerd!", "", { duration: 5000 });
+      this.router.navigate(["home"]);
     }
   }
 

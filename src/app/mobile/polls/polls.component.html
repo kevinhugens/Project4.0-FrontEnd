@@ -6,7 +6,7 @@
     </mat-list-option>
   </mat-selection-list>
   <p class="mt-3">
-    <button class="btn btn-info" (click)="saveOption(options.selectedOptions.selected[0]?.value)">Save option</button>
+    <button class="btn btn-info" [disabled]="!options.selectedOptions.selected[0]" (click)="saveOption(options.selectedOptions.selected[0]?.value)" matTooltip="Geef uw stem">Opslaan</button>
   </p>
 </div>
 

@@ -29,6 +29,14 @@ export class HistoryComponent implements OnInit {
       }
     })
   }
+  checkDate(room: Room){
+    var start = new Date(room["startStream"]);
+    var end = new Date(room["endStream"]);
+    if(start.getDate() !== end.getDate()) {
+      return false;
+    }
+    return true;
+  }
   showDetails(roomID: number){
     this.router.navigate(["room/detail/" + roomID]);   
   }

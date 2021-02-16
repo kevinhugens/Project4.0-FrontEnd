@@ -4,7 +4,7 @@
 
 <form (ngSubmit)="addPoll()">
     <mat-form-field>
-        <input matInput name="newoption" placeholder="Question?" [(ngModel)]="newPoll.Question"/>
+        <input matInput name="newoption" placeholder="Vraag?" [(ngModel)]="newPoll.Question"/>
     </mat-form-field>
     
     <button type="submit" class="ml-2" mat-raised-button>
@@ -20,10 +20,10 @@
             <mat-action-list *ngIf="item.options != null && item.options.length > 0; else geenopties">
                 <mat-list-item *ngFor="let option of item.options; let y = index">
                     {{option.content}}
-                    <button mat-icon-button class="ml-5" (click)="editOption(option)">
+                    <button mat-icon-button class="ml-5" (click)="editOption(option)" matTooltip="Wijzigen">
                         <mat-icon>edit</mat-icon>
                     </button>
-                    <button mat-icon-button class="ml-2" (click)="deleteOption(option)">
+                    <button mat-icon-button class="ml-2" (click)="deleteOption(option)" matTooltip="Verwijderen">
                         <mat-icon>delete_forever</mat-icon>
                     </button>
                 </mat-list-item>
@@ -34,8 +34,8 @@
         </mat-card-content>
         
         <mat-card-actions>
-            <button mat-icon-button (click)="addOption(item)"><mat-icon>add_circle</mat-icon></button>
-            <button mat-icon-button class="ml-2" (click)="deletePoll(item)"><mat-icon>delete</mat-icon></button>
+            <button mat-icon-button (click)="addOption(item)" matTooltip="Optie toevoegen"><mat-icon>add_circle</mat-icon></button>
+            <button mat-icon-button class="ml-2" (click)="deletePoll(item)" matTooltip="Poll verwijderen"><mat-icon>delete</mat-icon></button>
         </mat-card-actions>
     </mat-card>
 </div>

@@ -11,10 +11,10 @@
 
   <div class="col-md-6">
     <div class="invalid-feedback col-md-12" *ngIf="isInvalidPresentator" style="display:flex;align-items: center;height: 100%;">
-      <p>Email not found</p>
+      <p>Email niet gevonden</p>
     </div>
     <div class="valid-feedback col-md-12" *ngIf="isVerifiedPresentator" style="display:flex;align-items: center;height: 100%;">
-      <p>Verified</p>
+      <p>Geverifiëerd</p>
     </div>
   </div>
 
@@ -29,10 +29,10 @@
 
   <div class="col-md-6">
     <div class="invalid-feedback col-md-12" *ngIf="isInvalidModerator" style="display:flex;align-items: center;height: 100%;">
-      <p>Email not found</p>
+      <p>Email niet gevonden</p>
     </div>
     <div class="valid-feedback col-md-12" *ngIf="isVerifiedModerator" style="display:flex;align-items: center;height: 100%;">
-      <p>Verified</p>
+      <p>Geverifiëerd</p>
     </div>
   </div>
 
@@ -44,26 +44,26 @@
         <input matInput [(ngModel)]="room['name']" name="name" placeholder="Room naam">
       </mat-form-field>
       <mat-form-field class="col-md-6">
-        <input matInput [(ngModel)]="room['password']" name="password" placeholder="passwoord">
+        <input matInput [(ngModel)]="room['password']" name="password" placeholder="Wachtwoord">
       </mat-form-field>
     </div>
     <div>
       <mat-form-field class="col-md-6">
-        <input matInput [(ngModel)]="room['description']" name="description" placeholder="description">
+        <input matInput [(ngModel)]="room['description']" name="description" placeholder="Beschrijving">
       </mat-form-field>
       <mat-form-field class="col-md-6">
         <input matInput [(ngModel)]="room['linkStream']" name="linkStream" [pattern]="linkPattern"
           placeholder="youtube link" #linkStream="ngModel">
         <mat-error *ngIf="linkStream.errors?.pattern">
-          Not a valid youtube link
+          Geen geldige youtube link
         </mat-error>
       </mat-form-field>
     </div>
     <div>
       <mat-form-field appearance="fill" class="col-md-6">
-        <mat-label>startdate</mat-label>
+        <mat-label>Start datum</mat-label>
         <input matInput required [matDatepicker]="startStream" [(ngModel)]="room['startStream']" name="startStream"
-          placeholder="start datum">
+          placeholder="Start datum">
         <mat-datepicker-toggle matSuffix [for]="startStream"></mat-datepicker-toggle>
         <mat-datepicker #startStream></mat-datepicker>
       </mat-form-field>
@@ -76,9 +76,9 @@
     </div>
     <div>
       <mat-form-field appearance="fill" class="col-md-6">
-        <mat-label>enddate</mat-label>
+        <mat-label>Eind datum</mat-label>
         <input matInput required [matDatepicker]="endStream" [(ngModel)]="room['endStream']" name="endStream"
-          placeholder="eind datum">
+          placeholder="Eind datum">
         <mat-datepicker-toggle matSuffix [for]="endStream"></mat-datepicker-toggle>
         <mat-datepicker #endStream></mat-datepicker>
       </mat-form-field>
@@ -91,7 +91,7 @@
     </div>
     <div class="col-md-6">
       <button mat-raised-button color="primary" type="submit" class="col-md-12"
-      [disabled]="!roomsForm.form.valid">Submit</button>
+      [disabled]="!roomsForm.form.valid">Wijzig</button>
     </div>
     
   </form>

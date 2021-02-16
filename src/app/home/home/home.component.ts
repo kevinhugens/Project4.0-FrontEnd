@@ -30,6 +30,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  checkDate(room: Room){
+    var start = new Date(room["startStream"]);
+    var end = new Date(room["endStream"]);
+    if(start.getDate() !== end.getDate()) {
+      return false;
+    }
+    return true;
+  }
+
   createRoom() {
     this._router.navigate(["room/create"]);
   }
